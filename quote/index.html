@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get a Quote | Shipfront</title>
+    <meta name="description" content="Request a quote for Shipfront fulfillment services.">
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
+    <header role="banner">
+        <nav role="navigation" aria-label="Main navigation">
+            <a href="../" class="logo" aria-label="Shipfront home">
+                <svg width="48" height="48" viewBox="0 0 100 100" aria-hidden="true">
+                    <path d="M30 35 L50 25 L70 35 L70 65 L50 75 L30 65 Z M30 35 L30 65 M50 25 L50 55 M70 35 L50 55 M50 55 L30 65 M50 55 L70 65" 
+                          stroke="#FF6A00" stroke-width="2" fill="none" stroke-linecap="square"/>
+                </svg>
+                <span class="wordmark">SHIPFRONT</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="../#services">Why Shipfront</a></li>
+                <li><a href="../contact/">Contact</a></li>
+                <li><a href="../quote/" class="cta-button" aria-current="page">Get a Quote</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main" role="main">
+        <section class="form-page">
+            <div class="form-container">
+                <h1>GET A QUOTE</h1>
+                <p class="form-intro">Tell us about your fulfillment needs and we will get back to you.</p>
+                
+                <form id="quote-form" class="quote-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">NAME</label>
+                        <input type="text" id="name" name="name" required aria-required="true">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">EMAIL</label>
+                        <input type="email" id="email" name="email" required aria-required="true">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="company">COMPANY</label>
+                        <input type="text" id="company" name="company" required aria-required="true">
+                    </div>
+                    
+                    <button type="submit" class="cta-button">SUBMIT REQUEST</button>
+                </form>
+                
+                <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer role="contentinfo">
+        <p>&copy; 2026 Shipfront. 1933 S. Broadway, Los Angeles, CA 90007</p>
+        <p><a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
+    </footer>
+
+    <script src="../script.js"></script>
+</body>
+</html>
