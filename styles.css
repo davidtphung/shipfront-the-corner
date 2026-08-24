@@ -135,7 +135,7 @@ nav {
     list-style: none;
 }
 
-.nav-links a {
+.nav-links a:not(.cta) {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -148,6 +148,7 @@ nav {
     text-transform: uppercase;
     border: 0;
     background: none;
+    color: var(--white);
 }
 
 .cta,
@@ -253,12 +254,12 @@ button[type="submit"]:active { transform: scale(0.97); }
 
 .hero-cube {
     position: absolute;
-    right: 8%;
-    bottom: -48px;
-    width: min(280px, 42vw);
+    right: 6%;
+    bottom: -160px;
+    width: min(340px, 48vw);
     height: auto;
     pointer-events: none;
-    opacity: 0.9;
+    opacity: 0.88;
 }
 
 .spec-chips {
@@ -744,7 +745,7 @@ footer {
 }
 
 @media (max-width: 768px) {
-    nav { flex-direction: column; align-items: flex-start; }
+    nav { flex-wrap: wrap; }
     .nav-links { flex-wrap: wrap; }
     .pains,
     .how-steps,
