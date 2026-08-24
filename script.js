@@ -1,7 +1,41 @@
 // THE CORNER - Shipfront Terminal
+// Apple Fluid Interface - Critically damped springs only, no bounce
+
+// Critically damped spring (bounce 0, response 0.3-0.4)
+class Spring {
+    constructor(response = 0.35) {
+        this.damping = 1.0; // Critically damped
+        this.response = response;
+        this.velocity = 0;
+        this.value = 0;
+        this.target = 0;
+    }
+
+    update(deltaTime) {
+        const omega = 2 * Math.PI / this.response;
+        const displacement = this.value - this.target;
+        
+        const springForce = -omega * omega * displacement;
+        const dampingForce = -2 * omega * this.velocity;
+        const acceleration = springForce + dampingForce;
+        
+        this.velocity += acceleration * deltaTime;
+        this.value += this.velocity * deltaTime;
+        
+        return Math.abs(this.velocity) > 0.001 || Math.abs(displacement) > 0.001;
+    }
+
+    setTarget(target, velocity = 0) {
+        this.target = target;
+        if (velocity !== 0) {
+            this.velocity = velocity;
+        }
+    }
+}
 
 // Form handling
 document.addEventListener('DOMContentLoaded', function() {
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const quoteForm = document.getElementById('quote-form');
     
     if (quoteForm) {
@@ -30,6 +64,137 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Button press feedback (respond on pointer-down / ON_PRESS)
+    document.querySelectorAll('.cta-button, button[type="submit"]').forEach(button => {
+        button.addEventListener('pointerdown', function(e) {
+            this.classList.add('pressed');
+        });
+
+        button.addEventListener('pointerup', function() {
+            this.classList.remove('pressed');
+        });
+
+        button.addEventListener('pointerleave', function() {
+            this.classList.remove('pressed');
+        });
+
+        button.addEventListener('pointercancel', function() {
+            this.classList.remove('pressed');
+        });
+    });
+
+    // Card interactions with critically damped springs (transform/opacity only)
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach(card => {
+        if (prefersReducedMotion) {
+            // Reduced motion: cross-fade only
+            card.addEventListener('pointerenter', function() {
+                const overlay = this.querySelector('.card-overlay');
+                if (overlay) overlay.style.opacity = '1';
+            });
+
+            card.addEventListener('pointerleave', function() {
+                const overlay = this.querySelector('.card-overlay');
+                if (overlay) overlay.style.opacity = '0';
+            });
+
+            card.addEventListener('focus', function() {
+                const overlay = this.querySelector('.card-overlay');
+                if (overlay) overlay.style.opacity = '1';
+            });
+
+            card.addEventListener('blur', function() {
+                const overlay = this.querySelector('.card-overlay');
+                if (overlay) overlay.style.opacity = '0';
+            });
+        } else {
+            // Full motion: interruptible critically damped springs
+            let isHovered = false;
+            let animationId = null;
+            const opacitySpring = new Spring(0.3);
+            const scaleSpring = new Spring(0.35);
+            
+            opacitySpring.value = 0;
+            scaleSpring.value = 1.0;
+            scaleSpring.target = 1.0;
+
+            function animate() {
+                const deltaTime = 1 / 60;
+
+                let needsUpdate = false;
+                needsUpdate = opacitySpring.update(deltaTime) || needsUpdate;
+                needsUpdate = scaleSpring.update(deltaTime) || needsUpdate;
+
+                const overlay = card.querySelector('.card-overlay');
+                if (overlay) {
+                    overlay.style.opacity = opacitySpring.value;
+                }
+                card.style.transform = `scale(${scaleSpring.value})`;
+
+                if (needsUpdate) {
+                    animationId = requestAnimationFrame(animate);
+                } else {
+                    animationId = null;
+                }
+            }
+
+            function showOverlay() {
+                isHovered = true;
+                opacitySpring.setTarget(1);
+                scaleSpring.setTarget(1.0);
+                if (!animationId) {
+                    animationId = requestAnimationFrame(animate);
+                }
+            }
+
+            function hideOverlay() {
+                isHovered = false;
+                opacitySpring.setTarget(0);
+                scaleSpring.setTarget(1.0);
+                if (!animationId) {
+                    animationId = requestAnimationFrame(animate);
+                }
+            }
+
+            card.addEventListener('pointerenter', showOverlay);
+            card.addEventListener('pointerleave', hideOverlay);
+            card.addEventListener('focus', showOverlay);
+            card.addEventListener('blur', hideOverlay);
+
+            // Pointer-down feedback (ON_PRESS)
+            card.addEventListener('pointerdown', function() {
+                scaleSpring.setTarget(0.98);
+                if (!animationId) {
+                    animationId = requestAnimationFrame(animate);
+                }
+            });
+
+            card.addEventListener('pointerup', function() {
+                scaleSpring.setTarget(1.0);
+                if (!animationId) {
+                    animationId = requestAnimationFrame(animate);
+                }
+            });
+
+            card.addEventListener('pointercancel', function() {
+                scaleSpring.setTarget(1.0);
+            });
+        }
+    });
+
+    // Form input focus feedback
+    const inputs = document.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.addEventListener('focus', function() {
+            this.parentElement.classList.add('focused');
+        });
+
+        input.addEventListener('blur', function() {
+            this.parentElement.classList.remove('focused');
+        });
+    });
 });
 
 // Helper function to escape HTML
@@ -44,7 +209,7 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
-// Smooth scroll with focus management
+// Smooth scroll with velocity handoff
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         const targetId = this.getAttribute('href');
@@ -53,23 +218,15 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(targetId);
         if (target) {
             e.preventDefault();
-            target.scrollIntoView({
-                behavior: 'smooth'
+            
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            target.scrollIntoView({ 
+                behavior: prefersReducedMotion ? 'auto' : 'smooth' 
             });
             
             if (target.hasAttribute('tabindex')) {
                 target.focus();
             }
-        }
-    });
-});
-
-// Card keyboard interaction
-document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('keydown', function(e) {
-        if (e.key === 'Enter' || e.key === ' ') {
-            e.preventDefault();
-            this.classList.toggle('active');
         }
     });
 });

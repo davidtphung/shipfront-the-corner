@@ -1,4 +1,5 @@
 /* THE CORNER - Shipfront Terminal */
+/* Apple Fluid Interface - critically damped, no bounce, no glass on Terminal black */
 
 * {
     margin: 0;
@@ -72,8 +73,13 @@ body {
 }
 
 header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background-color: var(--black);
     border-bottom: 1px solid var(--gray-medium);
     padding: var(--space-20) 6%;
+    transition: background-color 300ms ease;
 }
 
 nav {
@@ -90,6 +96,11 @@ nav {
     gap: var(--space-12);
     text-decoration: none;
     color: var(--white);
+    transition: opacity var(--transition-normal) ease;
+}
+
+.logo:active {
+    opacity: 0.7;
 }
 
 .wordmark {
@@ -114,7 +125,7 @@ nav {
     letter-spacing: 0.05em;
     font-weight: 500;
     font-family: 'Courier New', monospace;
-    transition: color var(--transition-normal);
+    transition: color var(--transition-normal) ease;
 }
 
 .nav-links a:hover {
@@ -125,7 +136,8 @@ nav {
     color: var(--orange);
 }
 
-.cta-button {
+.cta-button,
+button[type="submit"] {
     background-color: var(--orange);
     color: var(--black);
     padding: var(--space-12) var(--space-24);
@@ -136,21 +148,37 @@ nav {
     letter-spacing: 0.05em;
     border: none;
     cursor: pointer;
-    transition: opacity var(--transition-normal);
     display: inline-flex;
     align-items: center;
     justify-content: center;
     font-family: 'Courier New', monospace;
     min-height: 44px;
     min-width: 44px;
+    transition: transform 100ms ease-out, opacity 200ms ease;
+    will-change: transform;
 }
 
-.cta-button:hover {
+.cta-button.pressed,
+button[type="submit"].pressed {
+    transform: scale(0.97);
+}
+
+.cta-button:hover,
+button[type="submit"]:hover {
     opacity: 0.9;
 }
 
-.cta-button:active {
-    opacity: 0.8;
+@media (prefers-reduced-motion: reduce) {
+    .cta-button,
+    button[type="submit"] {
+        transition: opacity 200ms ease;
+    }
+    
+    .cta-button.pressed,
+    button[type="submit"].pressed {
+        transform: none;
+        opacity: 0.85;
+    }
 }
 
 main {
@@ -231,6 +259,8 @@ main {
     min-height: 44px;
     min-width: 44px;
     aspect-ratio: 1 / 1.35;
+    transition: transform 300ms ease, opacity 200ms ease;
+    will-change: transform;
 }
 
 .card-tall {
@@ -271,20 +301,7 @@ main {
     flex-direction: column;
     justify-content: flex-end;
     opacity: 0;
-    transition: opacity var(--transition-fast);
     pointer-events: none;
-}
-
-.card:hover .card-overlay,
-.card:focus .card-overlay {
-    opacity: 1;
-    pointer-events: auto;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .card-overlay {
-        transition: none;
-    }
 }
 
 .card-scrim {
@@ -316,6 +333,16 @@ main {
     opacity: 0.95;
 }
 
+@media (prefers-reduced-motion: reduce) {
+    .card {
+        transition: opacity 200ms ease;
+    }
+    
+    .card-overlay {
+        transition: opacity 200ms ease;
+    }
+}
+
 .value-chain {
     padding: 80px 6%;
 }
@@ -339,6 +366,7 @@ main {
     border: 1px solid var(--gray-medium);
     min-width: 140px;
     text-align: center;
+    transition: border-color 200ms ease, background-color 200ms ease;
 }
 
 .chain-step-active {
@@ -392,7 +420,7 @@ main {
     padding: var(--space-24);
     border: 1px solid var(--gray-medium);
     opacity: 0.5;
-    transition: opacity var(--transition-normal);
+    transition: opacity var(--transition-normal) ease;
 }
 
 .study-cell:hover {
@@ -455,6 +483,17 @@ main {
     display: flex;
     flex-direction: column;
     gap: 8px;
+    transition: transform 200ms ease;
+}
+
+.form-group.focused {
+    transform: translateY(-2px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .form-group.focused {
+        transform: none;
+    }
 }
 
 .form-group label {
@@ -463,6 +502,11 @@ main {
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
+    transition: color 200ms ease;
+}
+
+.form-group.focused label {
+    color: var(--orange);
 }
 
 .form-group input {
@@ -472,11 +516,13 @@ main {
     padding: 16px;
     font-size: 16px;
     font-family: inherit;
-    transition: border-color var(--transition-normal);
+    transition: border-color 200ms ease, background-color 200ms ease;
 }
 
 .form-group input:focus {
     border-color: var(--orange);
+    background-color: #1a1a1a;
+    outline: none;
 }
 
 .form-group input:invalid:not(:placeholder-shown) {
@@ -488,10 +534,13 @@ main {
     margin-top: var(--space-24);
     border: 1px solid var(--gray-medium);
     display: none;
+    opacity: 0;
+    transition: opacity 300ms ease;
 }
 
 .form-message.show {
     display: block;
+    opacity: 1;
 }
 
 .form-message.success {
@@ -526,7 +575,7 @@ main {
     color: var(--white);
     text-decoration: none;
     border-bottom: 1px solid var(--orange);
-    transition: color var(--transition-normal);
+    transition: color var(--transition-normal) ease;
 }
 
 .contact-section a:hover {
@@ -560,7 +609,7 @@ footer a {
     color: #999;
     text-decoration: none;
     border-bottom: 1px solid transparent;
-    transition: all var(--transition-normal);
+    transition: all var(--transition-normal) ease;
 }
 
 footer a:hover {
