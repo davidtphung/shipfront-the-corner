@@ -7,17 +7,19 @@
     <meta name="description" content="Request a quote for Shipfront fulfillment services.">
     <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles.css">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
-    
+
     <header role="banner">
         <nav role="navigation" aria-label="Main navigation">
             <a href="../" class="logo" aria-label="Shipfront home">
-                <svg width="48" height="48" viewBox="0 0 120 140" aria-hidden="true">
-                    <!-- 2G YAW: Vertex isometric yawed wire cube -->
-                    <g stroke="#FF6A00" stroke-width="2" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+                <svg class="mark" width="20" height="23" viewBox="25 25 70 100" aria-hidden="true">
+                    <g stroke="#FF6A00" stroke-width="1.25" fill="none" stroke-linecap="square" stroke-linejoin="miter">
                         <path d="M30,45 L60,30 L90,45 L90,75 L60,90 L30,75 Z"/>
                         <path d="M30,75 L30,105"/>
                         <path d="M60,90 L60,120"/>
@@ -35,7 +37,7 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a href="../#services">Why Shipfront</a></li>
+                <li><a href="../#why">Why Shipfront</a></li>
                 <li><a href="../contact/">Contact</a></li>
                 <li><a href="../quote/" class="cta-button" aria-current="page">Get a Quote</a></li>
             </ul>
@@ -45,36 +47,36 @@
     <main id="main" role="main">
         <section class="form-page">
             <div class="form-container">
+                <p class="eyebrow">QUOTE</p>
                 <h1>GET A QUOTE</h1>
-                <p class="form-intro">Tell us about your fulfillment needs and we will get back to you.</p>
-                
+                <p class="form-intro">Name, email, and company. This preview does not send. Use info@myshipfront.com if you want the note to land.</p>
+
                 <form id="quote-form" class="quote-form" novalidate>
                     <div class="form-group">
                         <label for="name">NAME</label>
                         <input type="text" id="name" name="name" required aria-required="true">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="email">EMAIL</label>
                         <input type="email" id="email" name="email" required aria-required="true">
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="company">COMPANY</label>
                         <input type="text" id="company" name="company" required aria-required="true">
                     </div>
-                    
+
                     <button type="submit" class="cta-button">SUBMIT REQUEST</button>
                 </form>
-                
+
                 <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
             </div>
         </section>
     </main>
 
     <footer role="contentinfo">
-        <p>&copy; 2026 Shipfront. 1933 S. Broadway, Los Angeles, CA 90007</p>
-        <p><a href="mailto:info@myshipfront.com">info@myshipfront.com</a></p>
+        <p>Built by David T Phung</p>
     </footer>
 
     <script src="../script.js"></script>
