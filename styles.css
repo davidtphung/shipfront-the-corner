@@ -1,5 +1,5 @@
 /* THE CORNER - Shipfront Terminal */
-/* Apple Fluid Interface - critically damped, no bounce, no glass on Terminal black */
+/* Rho craft map: critically damped springs, 80ms card focus, no glass, no bounce */
 
 * {
     margin: 0;
@@ -41,7 +41,7 @@ html {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
     background-color: var(--black);
     color: var(--white);
     line-height: 1.6;
@@ -79,7 +79,12 @@ header {
     background-color: var(--black);
     border-bottom: 1px solid var(--gray-medium);
     padding: var(--space-20) 6%;
-    transition: background-color 300ms ease;
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    header {
+        background-color: var(--black);
+    }
 }
 
 nav {
@@ -154,31 +159,12 @@ button[type="submit"] {
     font-family: 'Courier New', monospace;
     min-height: 44px;
     min-width: 44px;
-    transition: transform 100ms ease-out, opacity 200ms ease;
     will-change: transform;
-}
-
-.cta-button.pressed,
-button[type="submit"].pressed {
-    transform: scale(0.97);
 }
 
 .cta-button:hover,
 button[type="submit"]:hover {
     opacity: 0.9;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    .cta-button,
-    button[type="submit"] {
-        transition: opacity 200ms ease;
-    }
-    
-    .cta-button.pressed,
-    button[type="submit"].pressed {
-        transform: none;
-        opacity: 0.85;
-    }
 }
 
 main {
@@ -259,8 +245,6 @@ main {
     min-height: 44px;
     min-width: 44px;
     aspect-ratio: 1 / 1.35;
-    transition: transform 300ms ease, opacity 200ms ease;
-    will-change: transform;
 }
 
 .card-tall {
@@ -302,6 +286,7 @@ main {
     justify-content: flex-end;
     opacity: 0;
     pointer-events: none;
+    transition: opacity 80ms ease;
 }
 
 .card-scrim {
@@ -311,6 +296,12 @@ main {
     right: 0;
     height: 60%;
     background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .card-scrim {
+        background: linear-gradient(to top, #000000 0%, rgba(0, 0, 0, 0.9) 50%, transparent 100%);
+    }
 }
 
 .card-content {
@@ -334,10 +325,6 @@ main {
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .card {
-        transition: opacity 200ms ease;
-    }
-    
     .card-overlay {
         transition: opacity 200ms ease;
     }
@@ -546,6 +533,12 @@ main {
 .form-message.success {
     border-color: var(--orange);
     background-color: rgba(255, 106, 0, 0.1);
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .form-message.success {
+        background-color: rgba(255, 106, 0, 0.2);
+    }
 }
 
 .contact-grid {
