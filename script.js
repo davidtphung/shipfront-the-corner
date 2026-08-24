@@ -1,15 +1,7 @@
-// THE CORNER - 80ms rest-is-image. Scroll reveal. No spring.
+// THE CORNER - 80ms rest-is-image. Section enter once. No spring. No GSAP.
 
 document.addEventListener("DOMContentLoaded", function () {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-    const close = document.querySelector("[data-announce-close]");
-    if (close) {
-        close.addEventListener("click", function () {
-            const bar = this.closest(".announce");
-            if (bar) bar.remove();
-        });
-    }
 
     const form = document.getElementById("quote-form");
     if (form) {
@@ -44,12 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const nodes = document.querySelectorAll(".reveal");
-    if (reduce) {
-        nodes.forEach(function (node) { node.classList.add("is-in"); });
-        return;
-    }
-
-    if (!("IntersectionObserver" in window)) {
+    if (reduce || !("IntersectionObserver" in window)) {
         nodes.forEach(function (node) { node.classList.add("is-in"); });
         return;
     }
