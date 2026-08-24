@@ -67,7 +67,9 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         if (!target) return;
         e.preventDefault();
         const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        const top = target.getBoundingClientRect().top + window.scrollY;
+        const header = document.querySelector(".site-head");
+        const offset = header ? header.offsetHeight : 0;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
         if (reduce || id !== "#why") {
             window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
             return;
