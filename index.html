@@ -16,26 +16,19 @@
         <nav role="navigation" aria-label="Main navigation">
             <a href="./" class="logo" aria-label="Shipfront home">
                 <svg width="48" height="48" viewBox="0 0 120 140" aria-hidden="true">
-                    <!-- 2G YAW: Vertex isometric yawed wire cube -->
                     <g stroke="#FF6A00" stroke-width="2" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-                        <!-- Front face -->
                         <path d="M30,45 L60,30 L90,45 L90,75 L60,90 L30,75 Z"/>
-                        <!-- Back face vertical edges -->
                         <path d="M30,75 L30,105"/>
                         <path d="M60,90 L60,120"/>
                         <path d="M90,75 L90,105"/>
-                        <!-- Back face horizontals -->
                         <path d="M30,105 L60,120"/>
                         <path d="M60,120 L90,105"/>
                         <path d="M90,105 L30,105"/>
-                        <!-- Connecting front to back -->
                         <path d="M30,45 L30,75"/>
                         <path d="M60,30 L60,90"/>
                         <path d="M90,45 L90,75"/>
-                        <!-- Internal cross structure -->
                         <path d="M30,75 L60,90"/>
                         <path d="M60,90 L90,75"/>
-                        <path d="M60,90 L60,120"/>
                     </g>
                 </svg>
                 <span class="wordmark">SHIPFRONT</span>
@@ -52,26 +45,19 @@
         <section class="hero">
             <div class="hero-content">
                 <svg class="hero-logo" width="120" height="140" viewBox="0 0 120 140" aria-hidden="true">
-                    <!-- 2G YAW: Vertex isometric yawed wire cube -->
                     <g stroke="#FF6A00" stroke-width="2.5" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-                        <!-- Front face -->
                         <path d="M30,45 L60,30 L90,45 L90,75 L60,90 L30,75 Z"/>
-                        <!-- Back face vertical edges -->
                         <path d="M30,75 L30,105"/>
                         <path d="M60,90 L60,120"/>
                         <path d="M90,75 L90,105"/>
-                        <!-- Back face horizontals -->
                         <path d="M30,105 L60,120"/>
                         <path d="M60,120 L90,105"/>
                         <path d="M90,105 L30,105"/>
-                        <!-- Connecting front to back -->
                         <path d="M30,45 L30,75"/>
                         <path d="M60,30 L60,90"/>
                         <path d="M90,45 L90,75"/>
-                        <!-- Internal cross structure -->
                         <path d="M30,75 L60,90"/>
                         <path d="M60,90 L90,75"/>
-                        <path d="M60,90 L60,120"/>
                     </g>
                 </svg>
                 <h1 class="hero-title">SHIPFRONT</h1>
@@ -81,150 +67,168 @@
         </section>
 
         <section id="services" class="services">
-            <h2 class="section-label">WHY SHIPFRONT</h2>
-            <div class="card-grid">
-                <article class="card" tabindex="0">
-                    <div class="card-image" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);" role="img" aria-label="Inbound pallet at loading dock"></div>
-                    <div class="card-overlay">
-                        <h3 class="card-title">PROCUREMENT</h3>
-                        <p class="card-body">They buy. We receive at 1933 S. Broadway.</p>
-                    </div>
-                </article>
-                
-                <article class="card" tabindex="0">
-                    <div class="card-image" style="background: linear-gradient(135deg, #252525 0%, #3a3a3a 100%);" role="img" aria-label="White trailer at dock door"></div>
-                    <div class="card-overlay">
-                        <h3 class="card-title">LOGISTICS</h3>
-                        <p class="card-body">Freight arrives. We do not run the truck.</p>
-                    </div>
-                </article>
-                
-                <article class="card" tabindex="0">
-                    <div class="card-image" style="background: linear-gradient(135deg, #2a2a2a 0%, #404040 100%);" role="img" aria-label="Warehouse racking and pick aisle"></div>
-                    <div class="card-overlay">
-                        <h3 class="card-title">FULFILLMENT</h3>
-                        <p class="card-body">Pick, pack, dock on our floor.</p>
-                    </div>
-                </article>
-                
-                <article class="card" tabindex="0">
-                    <div class="card-image" style="background: linear-gradient(135deg, #1f1f1f 0%, #353535 100%);" role="img" aria-label="Handheld scanner in warehouse"></div>
-                    <div class="card-overlay">
-                        <h3 class="card-title">INTEGRATION</h3>
-                        <p class="card-body">The store talks to the floor.</p>
-                    </div>
-                </article>
+            <div class="services-container">
+                <p class="eyebrow">WHY SHIPFRONT</p>
+                <h2 class="section-headline">We handle the floor. You handle the storefront.</h2>
+                <div class="card-grid">
+                    <article class="card card-tall" tabindex="0" aria-label="Procurement">
+                        <div class="card-image" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);" role="img" aria-label="Inbound pallet at loading dock"></div>
+                        <div class="card-overlay">
+                            <div class="card-scrim"></div>
+                            <div class="card-content">
+                                <h3 class="card-title">PROCUREMENT</h3>
+                                <p class="card-body">They buy. We receive at 1933 S. Broadway.</p>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="card" tabindex="0" aria-label="Logistics">
+                        <div class="card-image" style="background: linear-gradient(135deg, #252525 0%, #3a3a3a 100%);" role="img" aria-label="White trailer at dock door"></div>
+                        <div class="card-overlay">
+                            <div class="card-scrim"></div>
+                            <div class="card-content">
+                                <h3 class="card-title">LOGISTICS</h3>
+                                <p class="card-body">Freight arrives. We do not run the truck.</p>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="card card-tall" tabindex="0" aria-label="Fulfillment">
+                        <div class="card-image" style="background: linear-gradient(135deg, #2a2a2a 0%, #404040 100%);" role="img" aria-label="Warehouse racking and pick aisle"></div>
+                        <div class="card-overlay">
+                            <div class="card-scrim"></div>
+                            <div class="card-content">
+                                <h3 class="card-title">FULFILLMENT</h3>
+                                <p class="card-body">Pick, pack, dock on our floor.</p>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <article class="card" tabindex="0" aria-label="Integration">
+                        <div class="card-image" style="background: linear-gradient(135deg, #1f1f1f 0%, #353535 100%);" role="img" aria-label="Handheld scanner in warehouse"></div>
+                        <div class="card-overlay">
+                            <div class="card-scrim"></div>
+                            <div class="card-content">
+                                <h3 class="card-title">INTEGRATION</h3>
+                                <p class="card-body">The store talks to the floor.</p>
+                            </div>
+                        </div>
+                    </article>
+                </div>
             </div>
         </section>
 
         <section class="value-chain">
-            <h2 class="section-label">WHERE WE FIT</h2>
-            <div class="chain-flow">
-                <div class="chain-step">
-                    <span class="step-label">PORT</span>
+            <div class="value-container">
+                <p class="eyebrow">WHERE WE FIT</p>
+                <div class="chain-flow">
+                    <div class="chain-step">
+                        <span class="step-label">PORT</span>
+                    </div>
+                    <div class="chain-arrow">→</div>
+                    <div class="chain-step">
+                        <span class="step-label">FREIGHT</span>
+                    </div>
+                    <div class="chain-arrow">→</div>
+                    <div class="chain-step chain-step-active">
+                        <span class="step-label">WAREHOUSE</span>
+                    </div>
+                    <div class="chain-arrow">→</div>
+                    <div class="chain-step">
+                        <span class="step-label">CUSTOMER</span>
+                    </div>
                 </div>
-                <div class="chain-arrow">→</div>
-                <div class="chain-step">
-                    <span class="step-label">FREIGHT</span>
-                </div>
-                <div class="chain-arrow">→</div>
-                <div class="chain-step chain-step-active">
-                    <span class="step-label">WAREHOUSE</span>
-                </div>
-                <div class="chain-arrow">→</div>
-                <div class="chain-step">
-                    <span class="step-label">CUSTOMER</span>
-                </div>
+                <p class="chain-note">Shipfront operates at the warehouse and integration layer.</p>
             </div>
-            <p class="chain-note">Shipfront operates at the warehouse and integration layer.</p>
         </section>
 
         <section class="logo-studies">
-            <h2 class="section-label">STUDIES</h2>
-            <div class="studies-grid">
-                <div class="study-cell">
-                    <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
-                        <rect x="30" y="35" width="40" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                        <rect x="30" y="50" width="40" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span class="study-label">2A</span>
-                </div>
-                <div class="study-cell">
-                    <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
-                        <rect x="30" y="30" width="40" height="20" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                        <rect x="30" y="50" width="40" height="20" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span class="study-label">2B</span>
-                </div>
-                <div class="study-cell">
-                    <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
-                        <path d="M30 35 L50 25 L70 35 L70 50 L50 60 L30 50 Z M30 50 L30 65 L50 75 L70 65 L70 50" 
-                              stroke="#FF6A00" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span class="study-label">2C</span>
-                </div>
-                <div class="study-cell">
-                    <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
-                        <rect x="35" y="30" width="30" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                        <rect x="35" y="45" width="30" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                        <rect x="35" y="60" width="30" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span class="study-label">2D</span>
-                </div>
-                <div class="study-cell">
-                    <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
-                        <rect x="25" y="35" width="50" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                        <rect x="25" y="50" width="50" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span class="study-label">2E</span>
-                </div>
-                <div class="study-cell">
-                    <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
-                        <rect x="40" y="35" width="20" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                        <rect x="40" y="50" width="20" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span class="study-label">2F</span>
-                </div>
-                <div class="study-cell study-cell-current">
-                    <svg width="60" height="70" viewBox="0 0 120 140" aria-hidden="true">
-                        <!-- 2G YAW: Vertex isometric yawed wire cube - LIVE MARK -->
-                        <g stroke="#FF6A00" stroke-width="2" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-                            <path d="M30,45 L60,30 L90,45 L90,75 L60,90 L30,75 Z"/>
-                            <path d="M30,75 L30,105"/>
-                            <path d="M60,90 L60,120"/>
-                            <path d="M90,75 L90,105"/>
-                            <path d="M30,105 L60,120"/>
-                            <path d="M60,120 L90,105"/>
-                            <path d="M90,105 L30,105"/>
-                            <path d="M30,45 L30,75"/>
-                            <path d="M60,30 L60,90"/>
-                            <path d="M90,45 L90,75"/>
-                            <path d="M30,75 L60,90"/>
-                            <path d="M60,90 L90,75"/>
-                        </g>
-                    </svg>
-                    <span class="study-label">2G<span class="current-badge">CURRENT</span></span>
-                </div>
-                <div class="study-cell">
-                    <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
-                        <path d="M40 30 L50 25 L60 30 L60 45 L50 50 L40 45 Z M40 45 L40 60 L50 65 L60 60 L60 45 M50 50 L50 65" 
-                              stroke="#FF6A00" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span class="study-label">2H</span>
-                </div>
-                <div class="study-cell">
-                    <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
-                        <path d="M35 40 L50 32 L65 40 L65 60 L50 68 L35 60 Z" 
-                              stroke="#FF6A00" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span class="study-label">2I</span>
-                </div>
-                <div class="study-cell">
-                    <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
-                        <path d="M30 40 L50 30 L70 40 L70 60 L50 70 L30 60 Z M50 30 L50 50 M30 40 L50 50 M70 40 L50 50" 
-                              stroke="#FF6A00" stroke-width="2" fill="none"/>
-                    </svg>
-                    <span class="study-label">2J</span>
+            <div class="studies-container">
+                <p class="eyebrow">STUDIES</p>
+                <div class="studies-grid">
+                    <div class="study-cell">
+                        <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+                            <rect x="30" y="35" width="40" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                            <rect x="30" y="50" width="40" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="study-label">2A</span>
+                    </div>
+                    <div class="study-cell">
+                        <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+                            <rect x="30" y="30" width="40" height="20" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                            <rect x="30" y="50" width="40" height="20" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="study-label">2B</span>
+                    </div>
+                    <div class="study-cell">
+                        <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+                            <path d="M30 35 L50 25 L70 35 L70 50 L50 60 L30 50 Z M30 50 L30 65 L50 75 L70 65 L70 50" 
+                                  stroke="#FF6A00" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="study-label">2C</span>
+                    </div>
+                    <div class="study-cell">
+                        <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+                            <rect x="35" y="30" width="30" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                            <rect x="35" y="45" width="30" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                            <rect x="35" y="60" width="30" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="study-label">2D</span>
+                    </div>
+                    <div class="study-cell">
+                        <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+                            <rect x="25" y="35" width="50" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                            <rect x="25" y="50" width="50" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="study-label">2E</span>
+                    </div>
+                    <div class="study-cell">
+                        <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+                            <rect x="40" y="35" width="20" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                            <rect x="40" y="50" width="20" height="15" stroke="#FF6A00" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="study-label">2F</span>
+                    </div>
+                    <div class="study-cell study-cell-current">
+                        <svg width="60" height="70" viewBox="0 0 120 140" aria-hidden="true">
+                            <g stroke="#FF6A00" stroke-width="2" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+                                <path d="M30,45 L60,30 L90,45 L90,75 L60,90 L30,75 Z"/>
+                                <path d="M30,75 L30,105"/>
+                                <path d="M60,90 L60,120"/>
+                                <path d="M90,75 L90,105"/>
+                                <path d="M30,105 L60,120"/>
+                                <path d="M60,120 L90,105"/>
+                                <path d="M90,105 L30,105"/>
+                                <path d="M30,45 L30,75"/>
+                                <path d="M60,30 L60,90"/>
+                                <path d="M90,45 L90,75"/>
+                                <path d="M30,75 L60,90"/>
+                                <path d="M60,90 L90,75"/>
+                            </g>
+                        </svg>
+                        <span class="study-label">2G<span class="current-badge">CURRENT</span></span>
+                    </div>
+                    <div class="study-cell">
+                        <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+                            <path d="M40 30 L50 25 L60 30 L60 45 L50 50 L40 45 Z M40 45 L40 60 L50 65 L60 60 L60 45 M50 50 L50 65" 
+                                  stroke="#FF6A00" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="study-label">2H</span>
+                    </div>
+                    <div class="study-cell">
+                        <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+                            <path d="M35 40 L50 32 L65 40 L65 60 L50 68 L35 60 Z" 
+                                  stroke="#FF6A00" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="study-label">2I</span>
+                    </div>
+                    <div class="study-cell">
+                        <svg width="60" height="60" viewBox="0 0 100 100" aria-hidden="true">
+                            <path d="M30 40 L50 30 L70 40 L70 60 L50 70 L30 60 Z M50 30 L50 50 M30 40 L50 50 M70 40 L50 50" 
+                                  stroke="#FF6A00" stroke-width="2" fill="none"/>
+                        </svg>
+                        <span class="study-label">2J</span>
+                    </div>
                 </div>
             </div>
         </section>
