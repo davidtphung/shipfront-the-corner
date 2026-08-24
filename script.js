@@ -80,6 +80,20 @@ document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
         if (!target) return;
         e.preventDefault();
         const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-        target.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+        const top = target.getBoundingClientRect().top + window.scrollY;
+        if (reduce || id !== "#why") {
+            window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+            return;
+        }
+        const start = window.scrollY;
+        const dist = top - start;
+        const dur = 200;
+        const t0 = performance.now();
+        function step(now) {
+            const t = Math.min(1, (now - t0) / dur);
+            window.scrollTo(0, start + dist * t);
+            if (t < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
     });
 });

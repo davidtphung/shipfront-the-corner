@@ -31,7 +31,7 @@ html { scroll-behavior: smooth; }
         transition-duration: 0.01ms !important;
     }
     .reveal { opacity: 1 !important; transform: none !important; }
-    .cta:active, .card:active { transform: none; }
+    .cta:active, button[type="submit"]:active, .card:active { transform: none; }
     .cta:hover .cta-arrow { transform: none; }
 }
 
@@ -505,6 +505,81 @@ button[type="submit"]:active { transform: scale(0.97); }
     color: #d0d0d0;
 }
 
+.why-rule {
+    border: 0;
+    height: 2px;
+    background: #FF6A00;
+    margin: var(--space-48) 0 var(--space-32);
+}
+
+.why-rows-title {
+    max-width: none;
+    margin: 0 0 var(--space-48);
+}
+
+.why-row {
+    display: grid;
+    grid-template-columns: 592px 1fr;
+    gap: var(--space-32);
+    align-items: center;
+    margin-bottom: var(--space-48);
+}
+
+.why-row-flip {
+    grid-template-columns: 1fr 592px;
+}
+
+.why-row-flip .why-still { order: 2; }
+.why-row-flip .why-copy { order: 1; }
+
+.why-row-text {
+    grid-template-columns: 1fr;
+}
+
+.why-still {
+    width: 592px;
+    max-width: 100%;
+    height: 280px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.why-copy h3 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    margin-bottom: var(--space-20);
+}
+
+.why-copy p {
+    font-size: 18px;
+    font-weight: 400;
+    max-width: 36em;
+}
+
+.chips {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: var(--space-20);
+}
+
+.chips li {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--rule);
+    padding: 8px 12px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+}
+
+.why-cta { margin-top: var(--space-12); }
+
 .how-steps {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -694,6 +769,20 @@ footer {
     .card:nth-child(2),
     .card:nth-child(3),
     .card:nth-child(4) { grid-column: 1; grid-row: auto; }
+
+    .why-row,
+    .why-row-flip {
+        grid-template-columns: 1fr;
+    }
+
+    .why-row-flip .why-still,
+    .why-row-flip .why-copy { order: 0; }
+
+    .why-still {
+        width: 100%;
+        height: auto;
+        aspect-ratio: 592 / 280;
+    }
     .hero h1, .band h2 { max-width: none; }
     .waybill { flex-direction: column; }
 }
