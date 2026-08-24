@@ -10,12 +10,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css?v=sit4">
+    <link rel="stylesheet" href="./styles.css?v=kraig1">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
+    <div class="ground-grid" aria-hidden="true"></div>
+    <div class="accent-tick" aria-hidden="true"></div>
 
-    <header role="banner">
+    <header class="hud-frame" role="banner">
+        <div class="hud-stamps" aria-hidden="true">
+            <span>1933 S. BROADWAY</span>
+            <span>LOS ANGELES</span>
+            <span>3PL</span>
+        </div>
         <nav aria-label="Main navigation">
             <a href="./" class="logo" aria-label="Shipfront home">
                 <svg width="20" height="23" viewBox="25 25 70 100" aria-hidden="true">
@@ -41,7 +48,10 @@
         <section class="hero">
             <div class="hero-copy reveal">
                 <p class="eyebrow">Warehousing and fulfillment</p>
-                <h1>You Sell. We Ship.</h1>
+                <h1>
+                    <span class="h1-solid">You Sell.</span>
+                    <span class="h1-mask">We Ship.</span>
+                </h1>
                 <p class="hero-lead">You sell. We run the floor. Shipfront helps eCommerce merchants scale by taking care of their logistics needs, so they can focus on growing their business.</p>
                 <ul class="spec-chips">
                     <li>Warehousing</li>
@@ -51,15 +61,17 @@
                 </ul>
                 <a class="cta" href="./quote/">Get a Quote</a>
             </div>
-            <svg class="hero-cube" width="220" height="256" viewBox="25 25 70 100" aria-hidden="true">
-                <g stroke="#FF6A00" stroke-width="1.25" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-                    <path d="M30,45 L60,30 L90,45 L90,75 L60,90 L30,75 Z"/>
-                    <path d="M30,75 L30,105"/><path d="M60,90 L60,120"/><path d="M90,75 L90,105"/>
-                    <path d="M30,105 L60,120"/><path d="M60,120 L90,105"/><path d="M90,105 L30,105"/>
-                    <path d="M30,45 L30,75"/><path d="M60,30 L60,90"/><path d="M90,45 L90,75"/>
-                    <path d="M30,75 L60,90"/><path d="M60,90 L90,75"/>
-                </g>
-            </svg>
+            <div class="hero-cube-wrap" aria-hidden="true">
+                <svg class="hero-cube" width="220" height="256" viewBox="25 25 70 100">
+                    <g stroke="#FF6A00" stroke-width="1.25" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+                        <path d="M30,45 L60,30 L90,45 L90,75 L60,90 L30,75 Z"/>
+                        <path d="M30,75 L30,105"/><path d="M60,90 L60,120"/><path d="M90,75 L90,105"/>
+                        <path d="M30,105 L60,120"/><path d="M60,120 L90,105"/><path d="M90,105 L30,105"/>
+                        <path d="M30,45 L30,75"/><path d="M60,30 L60,90"/><path d="M90,45 L90,75"/>
+                        <path d="M30,75 L60,90"/><path d="M60,90 L90,75"/>
+                    </g>
+                </svg>
+            </div>
         </section>
 
         <section class="band ink-band" id="gap">
@@ -102,48 +114,56 @@
                     <p class="waybill-note">Not the crane. Not the van. Warehouse and integration only.</p>
                 </div>
                 <div class="card-grid">
-                    <article class="card" tabindex="0" aria-label="01 Procurement">
-                        <img class="card-image" src="./images/procurement.jpg" width="592" height="360" alt="Warehouse interior with orange rack and shrink-wrapped pallets">
-                        <div class="card-overlay">
-                            <div class="card-scrim"></div>
-                            <div class="card-content">
-                                <p class="card-step">01</p>
-                                <h3 class="card-title">PROCUREMENT</h3>
-                                <p class="card-body">Inbound at 1933 S. Broadway. They buy. Freight arrives at our floor.</p>
+                    <article class="card plate" tabindex="0" aria-label="01 Procurement">
+                        <div class="card-clip grain">
+                            <img class="card-image" src="./images/procurement.jpg" width="592" height="360" alt="Warehouse interior with orange rack and shrink-wrapped pallets">
+                            <div class="card-overlay">
+                                <div class="card-scrim"></div>
+                                <div class="card-content">
+                                    <p class="card-step">01</p>
+                                    <h3 class="card-title">PROCUREMENT</h3>
+                                    <p class="card-body">Inbound at 1933 S. Broadway. They buy. Freight arrives at our floor.</p>
+                                </div>
                             </div>
                         </div>
                     </article>
-                    <article class="card" tabindex="0" aria-label="02 Logistics">
-                        <img class="card-image" src="./images/logistics-usa.jpg" width="592" height="360" alt="USA long-hood freight truck, unmarked, no European cab brand">
-                        <div class="card-overlay">
-                            <div class="card-scrim"></div>
-                            <div class="card-content">
-                                <p class="card-step">02</p>
-                                <h3 class="card-title">LOGISTICS</h3>
-                                <p class="card-body">Freight is coordinated. We do not run the truck.</p>
+                    <article class="card plate" tabindex="0" aria-label="02 Logistics">
+                        <div class="card-clip grain">
+                            <img class="card-image" src="./images/logistics-usa.jpg" width="592" height="360" alt="USA long-hood freight truck, unmarked, no European cab brand">
+                            <div class="card-overlay">
+                                <div class="card-scrim"></div>
+                                <div class="card-content">
+                                    <p class="card-step">02</p>
+                                    <h3 class="card-title">LOGISTICS</h3>
+                                    <p class="card-body">Freight is coordinated. We do not run the truck.</p>
+                                </div>
                             </div>
                         </div>
                     </article>
-                    <article class="card" tabindex="0" aria-label="03 Fulfillment">
-                        <img class="card-image" src="./images/fulfillment.jpg" width="592" height="360" alt="High-angle pick floor with yellow bins">
-                        <div class="card-overlay">
-                            <div class="card-scrim"></div>
-                            <div class="card-content">
-                                <p class="card-step">03</p>
-                                <h3 class="card-title">FULFILLMENT</h3>
-                                <p class="card-body">Pick, pack, label, dock on our floor.</p>
-                                <p class="card-meta">Inbound | Kitting | Storage | FBA Prep | Outbound | Last-Mile | Same-Day</p>
+                    <article class="card plate" tabindex="0" aria-label="03 Fulfillment">
+                        <div class="card-clip grain">
+                            <img class="card-image" src="./images/fulfillment.jpg" width="592" height="360" alt="High-angle pick floor with yellow bins">
+                            <div class="card-overlay">
+                                <div class="card-scrim"></div>
+                                <div class="card-content">
+                                    <p class="card-step">03</p>
+                                    <h3 class="card-title">FULFILLMENT</h3>
+                                    <p class="card-body">Pick, pack, label, dock on our floor.</p>
+                                    <p class="card-meta">Inbound | Kitting | Storage | FBA Prep | Outbound | Last-Mile | Same-Day</p>
+                                </div>
                             </div>
                         </div>
                     </article>
-                    <article class="card" tabindex="0" aria-label="04 Integration">
-                        <img class="card-image" src="./images/integration.jpg" width="592" height="360" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
-                        <div class="card-overlay">
-                            <div class="card-scrim"></div>
-                            <div class="card-content">
-                                <p class="card-step">04</p>
-                                <h3 class="card-title">INTEGRATION</h3>
-                                <p class="card-body">The store talks to the floor. eCommerce integrations keep the aisle in the same conversation as the cart.</p>
+                    <article class="card plate" tabindex="0" aria-label="04 Integration">
+                        <div class="card-clip grain">
+                            <img class="card-image" src="./images/integration.jpg" width="592" height="360" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
+                            <div class="card-overlay">
+                                <div class="card-scrim"></div>
+                                <div class="card-content">
+                                    <p class="card-step">04</p>
+                                    <h3 class="card-title">INTEGRATION</h3>
+                                    <p class="card-body">The store talks to the floor. eCommerce integrations keep the aisle in the same conversation as the cart.</p>
+                                </div>
                             </div>
                         </div>
                     </article>
@@ -159,7 +179,9 @@
                     <h2 class="why-rows-title">Why Shipfront</h2>
 
                     <article class="why-row">
-                        <img class="why-still" src="./images/procurement.jpg" width="592" height="280" alt="Warehouse interior with orange rack and shrink-wrapped pallets">
+                        <figure class="still-plate plate grain">
+                            <img class="why-still" src="./images/procurement.jpg" width="592" height="280" alt="Warehouse interior with orange rack and shrink-wrapped pallets">
+                        </figure>
                         <div class="why-copy">
                             <h3>Warehousing</h3>
                             <p>Our warehouses provide the necessary space, security, temperature-control, and FDA compliant capabilities to store your products before shipping them to customers.</p>
@@ -167,7 +189,9 @@
                     </article>
 
                     <article class="why-row why-row-flip">
-                        <img class="why-still" src="./images/fulfillment.jpg" width="592" height="280" alt="High-angle pick floor with yellow bins">
+                        <figure class="still-plate plate grain">
+                            <img class="why-still" src="./images/fulfillment.jpg" width="592" height="280" alt="High-angle pick floor with yellow bins">
+                        </figure>
                         <div class="why-copy">
                             <h3>Fulfillment</h3>
                             <p>We build custom workflows to pick, pack, label, and ship your products exactly how you would like.</p>
@@ -184,7 +208,9 @@
                     </article>
 
                     <article class="why-row">
-                        <img class="why-still" src="./images/integration.jpg" width="592" height="280" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
+                        <figure class="still-plate plate grain">
+                            <img class="why-still" src="./images/integration.jpg" width="592" height="280" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
+                        </figure>
                         <div class="why-copy">
                             <h3>eCommerce Integrations</h3>
                             <p>The stack you already sell on.</p>
