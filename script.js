@@ -1,72 +1,85 @@
-// THE CORNER - Shipfront Terminal
-// 80ms rest-is-image. Cubic-bezier press 0.97 / 50ms. No spring.
+// THE CORNER - 80ms rest-is-image. Scroll reveal. No spring.
 
-document.addEventListener('DOMContentLoaded', function() {
-    const quoteForm = document.getElementById('quote-form');
+document.addEventListener("DOMContentLoaded", function () {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (quoteForm) {
-        quoteForm.addEventListener('submit', function(e) {
+    const close = document.querySelector("[data-announce-close]");
+    if (close) {
+        close.addEventListener("click", function () {
+            const bar = this.closest(".announce");
+            if (bar) bar.remove();
+        });
+    }
+
+    const form = document.getElementById("quote-form");
+    if (form) {
+        form.addEventListener("submit", function (e) {
             e.preventDefault();
-
-            const formMessage = document.getElementById('form-message');
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const company = document.getElementById('company').value;
+            const box = document.getElementById("form-message");
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const company = document.getElementById("company").value;
 
             if (name && email && company) {
-                formMessage.className = 'form-message show success';
-                formMessage.innerHTML = `
-                    <strong>This preview does not send.</strong><br><br>
-                    Your request would be sent to <a href="mailto:info@myshipfront.com" style="color: #FF6A00;">info@myshipfront.com</a> with the following details:<br><br>
-                    Name: ${escapeHtml(name)}<br>
-                    Email: ${escapeHtml(email)}<br>
-                    Company: ${escapeHtml(company)}
-                `;
-
-                quoteForm.reset();
+                box.className = "form-message show success";
+                box.innerHTML =
+                    "<strong>This preview does not send.</strong><br><br>" +
+                    "Your request would go to <a href=\"mailto:info@myshipfront.com\">info@myshipfront.com</a> with Name: " +
+                    escapeHtml(name) + ", Email: " + escapeHtml(email) + ", Company: " + escapeHtml(company) + ".";
+                form.reset();
             } else {
-                formMessage.className = 'form-message show';
-                formMessage.innerHTML = '<strong>Please fill out all fields.</strong>';
+                box.className = "form-message show";
+                box.innerHTML = "<strong>Please fill out all fields.</strong>";
             }
         });
     }
 
-    const inputs = document.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
+    document.querySelectorAll("input").forEach(function (input) {
+        input.addEventListener("focus", function () {
+            this.parentElement.classList.add("focused");
         });
-
-        input.addEventListener('blur', function() {
-            this.parentElement.classList.remove('focused');
+        input.addEventListener("blur", function () {
+            this.parentElement.classList.remove("focused");
         });
     });
+
+    const nodes = document.querySelectorAll(".reveal");
+    if (reduce) {
+        nodes.forEach(function (node) { node.classList.add("is-in"); });
+        return;
+    }
+
+    if (!("IntersectionObserver" in window)) {
+        nodes.forEach(function (node) { node.classList.add("is-in"); });
+        return;
+    }
+
+    const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-in");
+                io.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.16 });
+
+    nodes.forEach(function (node) { io.observe(node); });
 });
 
 function escapeHtml(text) {
-    const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-    };
-    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+    return text.replace(/[&<>"']/g, function (m) {
+        return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[m];
+    });
 }
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
-
-        const target = document.querySelector(targetId);
-        if (target) {
-            e.preventDefault();
-
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            target.scrollIntoView({
-                behavior: prefersReducedMotion ? 'auto' : 'smooth'
-            });
-        }
+document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener("click", function (e) {
+        const id = this.getAttribute("href");
+        if (id === "#") return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        target.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
     });
 });
