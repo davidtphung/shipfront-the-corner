@@ -580,6 +580,19 @@ button[type="submit"]:active { transform: scale(0.97); }
 
 .why-cta { margin-top: var(--space-12); }
 
+.why-cta .cta {
+    color: #000;
+    background: #FF6A00;
+    border-color: #FF6A00;
+    border-radius: 999px;
+    min-height: 44px;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: transform 0.12s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.12s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.why-cta .cta:active { transform: scale(0.97); }
+
 .how-steps {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
