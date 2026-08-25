@@ -183,7 +183,17 @@ nav {
     text-decoration: none;
 }
 
-.logo svg { display: block; width: 20px; height: 20px; flex: 0 0 20px; }
+.logo svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    transition: transform 180ms ease-out;
+}
+
+/* Nav mark answers with a short yaw. No spin circus. */
+.logo:hover svg,
+.logo:focus-visible svg { transform: rotate(12deg); }
 
 .wordmark {
     font-weight: 700;
@@ -343,11 +353,26 @@ button[type="submit"]:active { transform: scale(0.97); }
     position: absolute;
     right: 7%;
     top: 50%;
+    z-index: 2;
     width: min(260px, 34vw);
-    pointer-events: none;
     transform-origin: 50% 50%;
     margin-top: -130px;
-    animation: yaw 132s linear infinite;
+    transform: rotate(0deg);
+}
+
+/* CORNER's move: the cube rocks on its yaw. It never completes a spin. */
+.js-motion .hero-cube-wrap {
+    animation: yaw-rock 16s linear infinite alternate;
+}
+
+.js-motion .hero-cube-wrap:hover,
+.js-motion .hero-cube-wrap:focus-within {
+    animation-duration: 4s;
+}
+
+@keyframes yaw-rock {
+    from { transform: rotate(-8deg); }
+    to { transform: rotate(8deg); }
 }
 
 /* Same paths, same accent. Thin stroke so the large instance reads as wire, not slab. */
@@ -357,13 +382,38 @@ button[type="submit"]:active { transform: scale(0.97); }
     height: auto;
     display: block;
     opacity: 0.92;
+    transition: opacity 220ms ease-out;
 }
 
 .hero-cube g { stroke-width: 0.4; }
 
-@keyframes yaw {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+.hero-cube-wrap:hover .hero-cube,
+.hero-cube-wrap:focus-within .hero-cube { opacity: 1; }
+
+/* The stroke draws itself in on load, then holds. */
+.logo svg g path,
+.hero-cube g path {
+    stroke-dasharray: 60;
+    stroke-dashoffset: 0;
+}
+
+.js-motion .logo svg g path,
+.js-motion .hero-cube g path {
+    animation: mark-draw 1.1s ease-out backwards;
+}
+
+.js-motion .logo svg g path:nth-child(2),
+.js-motion .hero-cube g path:nth-child(2) { animation-delay: 110ms; }
+
+.js-motion .logo svg g path:nth-child(3),
+.js-motion .hero-cube g path:nth-child(3) { animation-delay: 200ms; }
+
+.js-motion .logo svg g path:nth-child(4),
+.js-motion .hero-cube g path:nth-child(4) { animation-delay: 280ms; }
+
+@keyframes mark-draw {
+    from { stroke-dashoffset: 60; }
+    to { stroke-dashoffset: 0; }
 }
 
 .band-lead,
@@ -430,6 +480,20 @@ button[type="submit"]:active { transform: scale(0.97); }
     font-weight: 700;
     letter-spacing: 0.14em;
     color: var(--text);
+}
+
+/* Track-list rule: catalog code, then a hairline running out to the edge. */
+.card-step {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.card-step::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--hair);
 }
 
 .pain h3,
@@ -523,6 +587,17 @@ button[type="submit"]:active { transform: scale(0.97); }
 
 .crop-coord-tl { top: -22px; left: 14px; }
 .crop-coord-br { bottom: -22px; right: 14px; }
+
+/* Sleeve index: the floor reads as a catalog of four cuts, not a card grid. */
+.floor-index {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 400;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 14px;
+}
 
 .floor-title {
     max-width: none;
@@ -1215,6 +1290,16 @@ footer {
 
     .hero-cube-wrap,
     .ground-grid { animation: none; }
+
+    /* Static drawn cube. */
+    .logo svg,
+    .logo svg g path,
+    .hero-cube,
+    .hero-cube g path {
+        animation: none !important;
+        transform: none !important;
+        stroke-dashoffset: 0 !important;
+    }
 
     .reveal > *,
     .bento-tile,
