@@ -10,7 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css?v=bento1">
+    <link rel="stylesheet" href="../styles.css?v=a11y1">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
@@ -31,6 +33,7 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
+                <li><a href="../#floor">The floor</a></li>
                 <li><a href="../#why">Why Shipfront</a></li>
                 <li><a href="../contact/" aria-current="page">Contact</a></li>
                 <li><a href="../quote/" class="cta">Get a Quote</a></li>
@@ -38,7 +41,7 @@
         </nav>
     </header>
 
-    <main id="main" class="page-shell">
+    <main id="main" class="page-shell" tabindex="-1">
         <div class="page-head">
             <div class="band-inner reveal">
                 <p class="eyebrow">Location</p>
@@ -59,8 +62,8 @@
                 <article class="contact-cell">
                     <h2>HOURS</h2>
                     <p>
-                        Monday - Friday: 9 am - 5 pm<br>
-                        Saturday - Sunday: Appointment only
+                        Monday through Friday, 9 am to 5 pm.<br>
+                        Saturday and Sunday, appointment only.
                     </p>
                 </article>
                 <article class="contact-cell">
@@ -94,6 +97,6 @@
         </div>
         <p class="footer-credit">Built by David T Phung</p>
     </footer>
-    <script src="../script.js?v=bento1"></script>
+    <script src="../script.js?v=a11y1"></script>
 </body>
 </html>

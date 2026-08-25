@@ -10,7 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css?v=bento1">
+    <link rel="stylesheet" href="./styles.css?v=a11y1">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
@@ -31,6 +33,7 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
+                <li><a href="#floor">The floor</a></li>
                 <li><a href="#why">Why Shipfront</a></li>
                 <li><a href="./contact/">Contact</a></li>
                 <li><a href="./quote/" class="cta">Get a Quote</a></li>
@@ -38,10 +41,10 @@
         </nav>
     </header>
 
-    <main id="main">
-        <section class="hero">
+    <main id="main" tabindex="-1">
+        <section class="hero" aria-labelledby="hero-title">
             <div class="hero-copy reveal">
-                <h1>You Sell. We Ship.</h1>
+                <h1 id="hero-title">You Sell. We Ship.</h1>
                 <p class="hero-lead">A person at Shipfront replies. The warehouse is at 1933 S. Broadway.</p>
                 <p class="hero-support">You sell. We run the floor. Shipfront helps eCommerce merchants scale by taking care of their logistics needs, so they can focus on growing their business.</p>
                 <a class="cta" href="./quote/">Get a Quote</a>
@@ -58,9 +61,9 @@
             </div>
         </section>
 
-        <section class="band chain-band" id="floor">
+        <section class="band chain-band" id="floor" aria-labelledby="floor-title">
             <div class="band-inner">
-                <h2 class="floor-title">The floor.</h2>
+                <h2 class="floor-title" id="floor-title">The floor.</h2>
                 <div class="frame-2x2">
                     <span class="crop-mark crop-tl" aria-hidden="true"></span>
                     <span class="crop-mark crop-tr" aria-hidden="true"></span>
@@ -69,21 +72,21 @@
                     <span class="crop-coord crop-coord-tl" aria-hidden="true">128, 321</span>
                     <span class="crop-coord crop-coord-br" aria-hidden="true">1328, 1057</span>
                     <div class="bento">
-                        <article class="bento-tile bento-photo bento-logistics" tabindex="0" style="--i:0" aria-label="02 Logistics">
+                        <article class="bento-tile bento-photo bento-logistics" style="--i:0">
                             <img class="bento-image" src="./images/logistics-usa.jpg" width="592" height="360" alt="USA long-hood freight truck, unmarked, no European cab brand">
-                            <div class="bento-overlay">
+                            <div class="bento-caption">
                                 <p class="card-step">02</p>
                                 <h3 class="card-title">Logistics</h3>
                                 <p class="card-body">Freight is coordinated. We do not run the truck.</p>
                             </div>
                         </article>
                         <article class="bento-tile bento-text bento-location" style="--i:1">
-                            <p class="card-step">Location</p>
-                            <h3 class="card-title">1933 S. Broadway</h3>
+                            <p class="card-step">Address</p>
+                            <h3 class="card-title">Location</h3>
                             <p class="card-body">1933 S. Broadway, Los Angeles CA 90007. Downtown L.A., next to the 10, 110, and 101.</p>
                         </article>
                         <article class="bento-tile bento-small bento-proc" style="--i:2">
-                            <img class="bento-thumb" src="./images/procurement.jpg" width="72" height="72" alt="Warehouse interior with orange rack and shrink-wrapped pallets">
+                            <img class="bento-thumb" src="./images/procurement.jpg" width="72" height="72" alt="">
                             <div>
                                 <p class="card-step">01</p>
                                 <h3 class="card-title">Procurement</h3>
@@ -94,7 +97,7 @@
                             <p class="card-step">03</p>
                             <h3 class="card-title">Fulfillment</h3>
                             <p class="card-body">Pick, pack, label, dock on our floor.</p>
-                            <ul class="chips">
+                            <ul class="chips" aria-label="Fulfillment services">
                                 <li>Inbound</li>
                                 <li>Kitting</li>
                                 <li>Storage</li>
@@ -108,9 +111,9 @@
                             <h3 class="card-title">You sell. We run the floor.</h3>
                             <p class="card-body">Shipfront sits in warehouse and integration.</p>
                         </article>
-                        <article class="bento-tile bento-photo bento-integration" tabindex="0" style="--i:5" aria-label="04 Integration">
+                        <article class="bento-tile bento-photo bento-integration" style="--i:5">
                             <img class="bento-image" src="./images/integration.jpg" width="592" height="360" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
-                            <div class="bento-overlay">
+                            <div class="bento-caption">
                                 <p class="card-step">04</p>
                                 <h3 class="card-title">Integration</h3>
                                 <p class="card-body">The store talks to the floor.</p>
@@ -119,7 +122,7 @@
                         <article class="bento-tile bento-cloud" style="--i:6">
                             <p class="card-step">Fulfillment</p>
                             <h3 class="card-title">Integration</h3>
-                            <ul class="chips">
+                            <ul class="chips" aria-label="Fulfillment services">
                                 <li>Inbound</li>
                                 <li>Kitting</li>
                                 <li>Storage</li>
@@ -146,9 +149,9 @@
             </div>
         </section>
 
-        <section class="band" id="why">
+        <section class="band" id="why" aria-labelledby="why-title">
             <div class="band-inner">
-                    <h2 class="why-rows-title">Why Shipfront</h2>
+                    <h2 class="why-rows-title" id="why-title">Why Shipfront</h2>
 
                     <article class="why-row">
                         <figure class="still-plate grain">
@@ -167,7 +170,7 @@
                         <div class="why-copy">
                             <h3>Fulfillment</h3>
                             <p>We build custom workflows to pick, pack, label, and ship your products exactly how you would like.</p>
-                            <ul class="chips">
+                            <ul class="chips" aria-label="Fulfillment services">
                                 <li>Inbound</li>
                                 <li>Kitting</li>
                                 <li>Storage</li>
@@ -204,8 +207,13 @@
     </main>
 
     <footer role="contentinfo">
+        <nav class="footer-nav" aria-label="Footer">
+            <a href="./">Home</a>
+            <a href="./quote/">Get a Quote</a>
+            <a href="./contact/">Contact</a>
+        </nav>
         <p class="footer-credit">Built by David T Phung</p>
     </footer>
-    <script src="./script.js?v=bento1"></script>
+    <script src="./script.js?v=a11y1"></script>
 </body>
 </html>

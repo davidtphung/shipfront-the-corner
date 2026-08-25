@@ -10,7 +10,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css?v=bento1">
+    <link rel="stylesheet" href="../styles.css?v=a11y1">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
@@ -31,6 +33,7 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
+                <li><a href="../#floor">The floor</a></li>
                 <li><a href="../#why">Why Shipfront</a></li>
                 <li><a href="../contact/">Contact</a></li>
                 <li><a href="../quote/" class="cta" aria-current="page">Get a Quote</a></li>
@@ -38,7 +41,7 @@
         </nav>
     </header>
 
-    <main id="main" class="page-shell">
+    <main id="main" class="page-shell" tabindex="-1">
         <div class="page-head">
             <div class="band-inner reveal">
                 <p class="eyebrow">Quote</p>
@@ -49,20 +52,23 @@
         <div class="page-panel">
             <form id="quote-form" class="quote-form" novalidate>
                 <div class="form-group">
-                    <label for="name">NAME</label>
-                    <input id="name" name="name" type="text" required aria-required="true">
+                    <label for="name">Name</label>
+                    <input id="name" name="name" type="text" required aria-required="true" autocomplete="name" spellcheck="false" aria-describedby="name-error">
+                    <p id="name-error" class="field-error"></p>
                 </div>
                 <div class="form-group">
-                    <label for="email">EMAIL</label>
-                    <input id="email" name="email" type="email" required aria-required="true">
+                    <label for="email">Email</label>
+                    <input id="email" name="email" type="email" required aria-required="true" autocomplete="email" spellcheck="false" inputmode="email" aria-describedby="email-error">
+                    <p id="email-error" class="field-error"></p>
                 </div>
                 <div class="form-group">
-                    <label for="company">COMPANY</label>
-                    <input id="company" name="company" type="text" required aria-required="true">
+                    <label for="company">Company</label>
+                    <input id="company" name="company" type="text" required aria-required="true" autocomplete="organization" spellcheck="false" aria-describedby="company-error">
+                    <p id="company-error" class="field-error"></p>
                 </div>
                 <div class="form-pin">
                     <button type="submit" class="cta">Submit request <span class="cta-arrow" aria-hidden="true">→</span></button>
-                    <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
+                    <div id="form-message" class="form-message" tabindex="-1"></div>
                 </div>
             </form>
         </div>
@@ -88,6 +94,6 @@
         </div>
         <p class="footer-credit">Built by David T Phung</p>
     </footer>
-    <script src="../script.js?v=bento1"></script>
+    <script src="../script.js?v=a11y1"></script>
 </body>
 </html>
