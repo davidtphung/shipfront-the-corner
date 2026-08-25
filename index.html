@@ -9,8 +9,8 @@
     <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css?v=disco2">
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;700&family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css?v=mira3">
     <meta name="theme-color" content="#000000">
     <meta name="color-scheme" content="dark">
 </head>
@@ -72,67 +72,50 @@
                     <span class="crop-mark crop-br" aria-hidden="true"></span>
                     <span class="crop-coord crop-coord-tl" aria-hidden="true">128, 321</span>
                     <span class="crop-coord crop-coord-br" aria-hidden="true">1328, 1057</span>
-                    <div class="bento">
-                        <article class="bento-tile bento-photo bento-logistics" style="--i:0">
-                            <img class="bento-image" src="./images/logistics-usa.jpg" width="592" height="360" alt="USA long-hood freight truck, unmarked, no European cab brand">
-                            <div class="bento-caption">
-                                <p class="card-step">SF-02</p>
-                                <h3 class="card-title">Logistics</h3>
-                                <p class="card-body">Freight is coordinated. We do not run the truck.</p>
-                            </div>
-                        </article>
-                        <article class="bento-tile bento-text bento-location" style="--i:1">
-                            <p class="card-step">Address</p>
-                            <h3 class="card-title">Location</h3>
-                            <p class="card-body">1933 S. Broadway, Los Angeles CA 90007. Downtown L.A., next to the 10, 110, and 101.</p>
-                        </article>
-                        <article class="bento-tile bento-small bento-proc" style="--i:2">
-                            <img class="bento-thumb" src="./images/procurement.jpg" width="72" height="72" alt="">
-                            <div>
+                    <div class="card-grid">
+                        <article class="card" tabindex="0" aria-label="SF-01 Procurement">
+                            <img class="card-image" src="./images/procurement.jpg" width="592" height="360" alt="Warehouse interior with orange rack and shrink-wrapped pallets">
+                            <div class="card-overlay">
                                 <p class="card-step">SF-01</p>
                                 <h3 class="card-title">Procurement</h3>
                                 <p class="card-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
                             </div>
                         </article>
-                        <article class="bento-tile bento-small bento-fulfill" style="--i:3">
-                            <p class="card-step">SF-03</p>
-                            <h3 class="card-title">Fulfillment</h3>
-                            <p class="card-body">Pick, pack, label, dock on our floor.</p>
-                            <ul class="chips" aria-label="Fulfillment services">
-                                <li>Inbound</li>
-                                <li>Kitting</li>
-                                <li>Storage</li>
-                                <li>FBA Prep</li>
-                                <li>Outbound</li>
-                                <li>Last-Mile Delivery</li>
-                                <li>Same-Day Delivery</li>
-                            </ul>
+                        <article class="card" tabindex="0" aria-label="SF-02 Logistics">
+                            <img class="card-image" src="./images/logistics-usa.jpg" width="592" height="360" alt="USA long-hood freight truck, unmarked, no European cab brand">
+                            <div class="card-overlay">
+                                <p class="card-step">SF-02</p>
+                                <h3 class="card-title">Logistics</h3>
+                                <p class="card-body">Freight is coordinated. We do not run the truck.</p>
+                            </div>
                         </article>
-                        <article class="bento-tile bento-pop" style="--i:4">
-                            <h3 class="card-title">You sell. We run the floor.</h3>
-                            <p class="card-body">Shipfront sits in warehouse and integration.</p>
+                        <article class="card" tabindex="0" aria-label="SF-03 Fulfillment">
+                            <img class="card-image" src="./images/fulfillment.jpg" width="592" height="360" alt="High-angle pick floor with yellow bins">
+                            <div class="card-overlay">
+                                <p class="card-step">SF-03</p>
+                                <h3 class="card-title">Fulfillment</h3>
+                                <p class="card-body">Pick, pack, label, dock on our floor.</p>
+                                <div class="chip-fold" data-chip-fold>
+                                    <ul class="chips" aria-label="Fulfillment services">
+                                        <li>Inbound</li>
+                                        <li>Kitting</li>
+                                        <li>Storage</li>
+                                        <li data-extra hidden>FBA Prep</li>
+                                        <li data-extra hidden>Outbound</li>
+                                        <li data-extra hidden>Last-Mile Delivery</li>
+                                        <li data-extra hidden>Same-Day Delivery</li>
+                                    </ul>
+                                    <button type="button" class="chip-toggle" aria-expanded="false">More</button>
+                                </div>
+                            </div>
                         </article>
-                        <article class="bento-tile bento-photo bento-integration" style="--i:5">
-                            <img class="bento-image" src="./images/integration.jpg" width="592" height="360" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
-                            <div class="bento-caption">
+                        <article class="card" tabindex="0" aria-label="SF-04 Integration">
+                            <img class="card-image" src="./images/integration.jpg" width="592" height="360" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
+                            <div class="card-overlay">
                                 <p class="card-step">SF-04</p>
                                 <h3 class="card-title">Integration</h3>
                                 <p class="card-body">The store talks to the floor.</p>
                             </div>
-                        </article>
-                        <article class="bento-tile bento-cloud" style="--i:6">
-                            <p class="card-step">Fulfillment</p>
-                            <h3 class="card-title">Integration</h3>
-                            <ul class="chips" aria-label="Fulfillment services">
-                                <li>Inbound</li>
-                                <li>Kitting</li>
-                                <li>Storage</li>
-                                <li>FBA Prep</li>
-                                <li>Outbound</li>
-                                <li>Last-Mile Delivery</li>
-                                <li>Same-Day Delivery</li>
-                            </ul>
-                            <p class="card-body">The stack you already sell on.</p>
                         </article>
                     </div>
                 </div>
@@ -140,10 +123,16 @@
                     <h2>Port to customer. We sit in warehouse and integration.</h2>
                     <p class="band-lead">You Sell. We Ship. Shipfront sits in warehouse and integration. Not the port. Not the van.</p>
                     <ol class="waybill" aria-label="Value chain">
-                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">PORT</span></li>
-                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">FREIGHT</span></li>
-                        <li class="waybill-step waybill-ours"><span class="waybill-num">OURS</span><span class="waybill-name">WAREHOUSE</span></li>
-                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">CUSTOMER</span></li>
+                        <li class="waybill-step waybill-ours">
+                            <span class="waybill-num">OURS</span>
+                            <span class="waybill-name">HOLD</span>
+                            <p class="waybill-body">Warehouse. Space, security, pick and pack on our floor.</p>
+                        </li>
+                        <li class="waybill-step waybill-ours">
+                            <span class="waybill-num">OURS</span>
+                            <span class="waybill-name">CONNECT</span>
+                            <p class="waybill-body">The store talks to the floor.</p>
+                        </li>
                     </ol>
                     <p class="waybill-note">Not the crane. Not the van. Warehouse and integration only.</p>
                 </div>
@@ -159,53 +148,40 @@
                             <img class="why-still" src="./images/procurement.jpg" width="592" height="280" alt="Warehouse interior with orange rack and shrink-wrapped pallets">
                         </figure>
                         <div class="why-copy">
-                            <h3>Warehousing</h3>
-                            <p>Our warehouses provide the necessary space, security, temperature-control, and FDA compliant capabilities to store your products before shipping them to customers.</p>
+                            <h3>Hold</h3>
+                            <p>Our warehouses provide the necessary space, security, temperature-control, and FDA compliant capabilities to store your products before shipping them to customers. We build custom workflows to pick, pack, label, and ship your products exactly how you would like.</p>
+                            <div class="chip-fold" data-chip-fold>
+                                <ul class="chips" aria-label="Fulfillment services">
+                                    <li>Inbound</li>
+                                    <li>Kitting</li>
+                                    <li>Storage</li>
+                                    <li data-extra hidden>FBA Prep</li>
+                                    <li data-extra hidden>Outbound</li>
+                                    <li data-extra hidden>Last-Mile Delivery</li>
+                                    <li data-extra hidden>Same-Day Delivery</li>
+                                </ul>
+                                <button type="button" class="chip-toggle" aria-expanded="false">More</button>
+                            </div>
                         </div>
                     </article>
 
                     <article class="why-row why-row-flip">
                         <figure class="still-plate grain">
-                            <img class="why-still" src="./images/fulfillment.jpg" width="592" height="280" alt="High-angle pick floor with yellow bins">
-                        </figure>
-                        <div class="why-copy">
-                            <h3>Fulfillment</h3>
-                            <p>We build custom workflows to pick, pack, label, and ship your products exactly how you would like.</p>
-                            <ul class="chips" aria-label="Fulfillment services">
-                                <li>Inbound</li>
-                                <li>Kitting</li>
-                                <li>Storage</li>
-                                <li>FBA Prep</li>
-                                <li>Outbound</li>
-                                <li>Last-Mile Delivery</li>
-                                <li>Same-Day Delivery</li>
-                            </ul>
-                        </div>
-                    </article>
-
-                    <article class="why-row">
-                        <figure class="still-plate grain">
                             <img class="why-still" src="./images/integration.jpg" width="592" height="280" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
                         </figure>
                         <div class="why-copy">
-                            <h3>eCommerce Integrations</h3>
-                            <p>The stack you already sell on.</p>
+                            <h3>Connect</h3>
+                            <p>The stack you already sell on. The store talks to the floor.</p>
                         </div>
                     </article>
-
-                    <article class="why-row why-row-text">
-                        <div class="why-copy">
-                            <h3>Location</h3>
-                            <p>1933 S. Broadway, Los Angeles CA 90007. Downtown L.A., next to the 10, 110, and 101.</p>
-                        </div>
-                    </article>
-
-                    <div class="why-cta">
-                        <a class="cta" href="./quote/">Get a Quote</a>
-                    </div>
             </div>
         </section>
     </main>
+
+    <aside class="persist-bar" aria-label="Get a quote">
+        <p class="persist-copy">A person at Shipfront replies.</p>
+        <a class="cta" href="./quote/">Get a Quote</a>
+    </aside>
 
     <footer role="contentinfo">
         <nav class="footer-nav" aria-label="Footer">
@@ -215,6 +191,6 @@
         </nav>
         <p class="footer-credit">Built by David T Phung</p>
     </footer>
-    <script src="./script.js?v=disco2"></script>
+    <script src="./script.js?v=mira3"></script>
 </body>
 </html>
