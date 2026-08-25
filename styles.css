@@ -168,7 +168,7 @@ nav {
     text-decoration: none;
 }
 
-.logo svg { display: block; width: 20px; height: 23px; flex: 0 0 20px; }
+.logo svg { display: block; width: 20px; height: 20px; flex: 0 0 20px; }
 
 .wordmark {
     font-weight: 700;
@@ -248,7 +248,7 @@ button[type="submit"]:active { transform: scale(0.97); }
 
 .hero {
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     min-height: 0;
     padding: 48px var(--gutter) 40px;
     background: transparent;
@@ -311,6 +311,28 @@ button[type="submit"]:active { transform: scale(0.97); }
 .hero-support {
     color: #9a9a97;
     margin-bottom: 28px;
+}
+
+.hero-cube-wrap {
+    position: absolute;
+    right: 6%;
+    top: 50%;
+    width: min(220px, 36vw);
+    pointer-events: none;
+    transform-origin: 50% 50%;
+    margin-top: -110px;
+    animation: yaw 72s linear infinite;
+}
+
+.hero-cube {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@keyframes yaw {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .band-lead,
@@ -882,6 +904,13 @@ footer {
         font-size: clamp(40px, 11vw, 88px);
         line-height: 1;
     }
+    .hero-cube-wrap {
+        width: min(140px, 42vw);
+        right: 4%;
+        top: auto;
+        bottom: -12px;
+        margin-top: 0;
+    }
     .pains,
     .how-steps,
     .contact-stack,
@@ -919,6 +948,7 @@ footer {
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
 
+    .hero-cube-wrap,
     .ground-grid { animation: none; }
 
     .reveal > *,
