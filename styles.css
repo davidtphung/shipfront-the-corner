@@ -1124,8 +1124,11 @@ footer {
 }
 
 @media (max-width: 768px) {
-    nav { flex-wrap: wrap; }
-    .nav-links { flex-wrap: wrap; }
+    /* Logo and the CTA hold the first line. Section links drop to the second. */
+    nav { flex-wrap: wrap; row-gap: 2px; }
+    .nav-links { display: contents; }
+    .nav-links li:last-child { order: 1; margin-left: auto; }
+    .nav-links li:not(:last-child) { order: 2; }
     .hero h1 {
         font-size: clamp(40px, 11vw, 88px);
         line-height: 1;
