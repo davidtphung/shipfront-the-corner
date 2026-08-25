@@ -69,8 +69,21 @@ document.addEventListener("DOMContentLoaded", function () {
         window.addEventListener("scroll", setStuck, { passive: true });
     }
 
+    document.querySelectorAll("[data-chip-fold]").forEach(function (fold) {
+        const extras = fold.querySelectorAll("[data-extra]");
+        const btn = fold.querySelector(".chip-toggle");
+        if (!btn || !extras.length) return;
+        btn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            const open = btn.getAttribute("aria-expanded") === "true";
+            btn.setAttribute("aria-expanded", open ? "false" : "true");
+            btn.textContent = open ? "More" : "Less";
+            extras.forEach(function (item) { item.hidden = open; });
+        });
+    });
+
     const nodes = document.querySelectorAll(".reveal");
-    const tiles = document.querySelectorAll(".bento-tile");
+    const tiles = document.querySelectorAll(".card");
     const rows = document.querySelectorAll(".why-row");
 
     if (reduce || !("IntersectionObserver" in window)) {
