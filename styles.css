@@ -1,5 +1,6 @@
-/* THE CORNER - Shipfront Terminal */
-/* Space Grotesk 400/700. JetBrains Mono for meta / waybill / step numbers. No spring. */
+/* THE CORNER - Shipfront Terminal Black motion clock */
+/* Rho lock 25 Aug 2026. Opacity + transform only. No spring. No HUD 280/180. */
+/* Space Grotesk 400/700. JetBrains Mono for meta / waybill / step numbers. */
 
 * {
     margin: 0;
@@ -15,8 +16,14 @@
     --gray-medium: #333333;
     --face: "Space Grotesk", sans-serif;
     --mono: "JetBrains Mono", monospace;
-    --transition-fast: 80ms;
-    --press: 50ms cubic-bezier(0.2, 0, 0, 1);
+    --dissolve-ms: 80;
+    --venice-ms: 220;
+    --press-scale: 0.97;
+    --zoom-end: 1.06;
+    --scrim-opacity: 0.60;
+    --blur: 0;
+    --radius: 4px;
+    --ease-dissolve: linear;
     --space-12: 12px;
     --space-20: 20px;
     --space-24: 24px;
@@ -27,26 +34,6 @@
 
 html {
     scroll-behavior: smooth;
-}
-
-@media (prefers-reduced-motion: reduce) {
-    html {
-        scroll-behavior: auto;
-    }
-
-    *,
-    *::before,
-    *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 80ms !important;
-    }
-
-    .cta-button:active,
-    button[type="submit"]:active,
-    .card:active {
-        transform: none;
-    }
 }
 
 body {
@@ -144,7 +131,7 @@ nav {
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    transition: color var(--transition-fast) ease;
+    transition: color calc(var(--dissolve-ms) * 1ms) var(--ease-dissolve);
 }
 
 .nav-links a:hover {
@@ -173,17 +160,24 @@ button[type="submit"] {
     justify-content: center;
     min-height: 44px;
     min-width: 44px;
-    transition: transform var(--press), opacity var(--transition-fast) ease;
+    border-radius: 0;
+    filter: blur(calc(var(--blur) * 1px));
+    backdrop-filter: none;
+    transition: transform calc(var(--dissolve-ms) * 1ms) var(--ease-dissolve),
+        opacity calc(var(--dissolve-ms) * 1ms) var(--ease-dissolve);
 }
 
 .cta-button:hover,
-button[type="submit"]:hover {
+button[type="submit"]:hover,
+.chip:hover {
     opacity: 0.92;
 }
 
 .cta-button:active,
-button[type="submit"]:active {
-    transform: scale(0.97);
+.cta-button:hover:active,
+button[type="submit"]:active,
+.chip:active {
+    transform: scale(var(--press-scale));
 }
 
 main {
@@ -319,7 +313,8 @@ main {
 
 .waybill-ours {
     background: var(--black);
-    box-shadow: inset 0 -2px 0 var(--orange);
+    box-shadow: none;
+    border-bottom: 1px solid var(--orange);
 }
 
 .waybill-ours .waybill-num,
@@ -355,12 +350,26 @@ main {
     position: relative;
     overflow: hidden;
     cursor: pointer;
-    border-radius: 8px;
+    border-radius: var(--radius);
     width: 100%;
     height: 100%;
     min-height: 44px;
     min-width: 44px;
-    transition: transform var(--press);
+    filter: blur(calc(var(--blur) * 1px));
+    backdrop-filter: none;
+    transition: transform calc(var(--dissolve-ms) * 1ms) var(--ease-dissolve);
+}
+
+.card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 1px;
+    background: var(--orange);
+    pointer-events: none;
+    z-index: 2;
 }
 
 .card:nth-child(1) { grid-column: 1; grid-row: 1; }
@@ -369,7 +378,7 @@ main {
 .card:nth-child(4) { grid-column: 2; grid-row: 2; }
 
 .card:active {
-    transform: scale(0.97);
+    transform: scale(var(--press-scale));
 }
 
 .card-image {
@@ -377,6 +386,16 @@ main {
     height: 100%;
     object-fit: cover;
     display: block;
+    transform: scale(1);
+    transition: transform calc(var(--venice-ms) * 1ms) var(--ease-dissolve);
+}
+
+.card:hover .card-image,
+.card:focus .card-image,
+.card:focus-visible .card-image,
+.card:focus-within .card-image,
+.card:active .card-image {
+    transform: scale(var(--zoom-end));
 }
 
 .card-overlay {
@@ -387,23 +406,23 @@ main {
     justify-content: flex-end;
     opacity: 0;
     pointer-events: none;
-    transition: opacity var(--transition-fast) ease;
+    filter: blur(calc(var(--blur) * 1px));
+    backdrop-filter: none;
+    transition: opacity calc(var(--dissolve-ms) * 1ms) var(--ease-dissolve);
 }
 
 .card:hover .card-overlay,
 .card:focus .card-overlay,
 .card:focus-visible .card-overlay,
+.card:focus-within .card-overlay,
 .card:active .card-overlay {
     opacity: 1;
 }
 
 .card-scrim {
     position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70%;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.7) 50%, transparent 100%);
+    inset: 0;
+    background: rgba(0, 0, 0, var(--scrim-opacity));
 }
 
 @media (prefers-reduced-transparency: reduce) {
@@ -512,12 +531,18 @@ main {
     font-size: 16px;
     font-family: var(--face);
     font-weight: 400;
-    transition: border-color var(--transition-fast) ease;
+    border-radius: 0;
+    transform: none;
+    transition: border-color calc(var(--dissolve-ms) * 1ms) var(--ease-dissolve),
+        outline-color calc(var(--dissolve-ms) * 1ms) var(--ease-dissolve);
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group input:focus-visible {
     border-color: var(--orange);
-    outline: none;
+    outline: 1px solid var(--orange);
+    outline-offset: 0;
+    transform: none;
 }
 
 .form-group input:invalid:not(:placeholder-shown) {
@@ -525,19 +550,31 @@ main {
 }
 
 .form-message {
+    display: none;
     padding: 16px;
     margin-top: var(--space-24);
     border: 1px solid var(--gray-medium);
-    display: none;
     font-weight: 400;
+    opacity: 0;
+    transform: none;
 }
 
 .form-message.show {
     display: block;
+    animation: sent-in calc(var(--dissolve-ms) * 1ms) var(--ease-dissolve) forwards;
 }
 
 .form-message.success {
     border-color: var(--orange);
+}
+
+.form-message.error {
+    border-color: #cc0000;
+}
+
+@keyframes sent-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
 .contact-grid {
@@ -669,6 +706,10 @@ footer {
         border-bottom: 1px solid var(--gray-medium);
     }
 
+    .waybill-step.waybill-ours {
+        border-bottom: 1px solid var(--orange);
+    }
+
     .waybill-step:last-child {
         border-bottom: none;
     }
@@ -682,5 +723,46 @@ footer {
     .nav-links {
         flex-direction: column;
         gap: var(--space-12);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+
+    .card-overlay,
+    .card:hover .card-overlay,
+    .card:focus .card-overlay,
+    .card:focus-visible .card-overlay,
+    .card:focus-within .card-overlay,
+    .card:active .card-overlay {
+        opacity: 1;
+        transition: none;
+    }
+
+    .card-image,
+    .card:hover .card-image,
+    .card:focus .card-image,
+    .card:focus-visible .card-image,
+    .card:focus-within .card-image,
+    .card:active .card-image {
+        transform: none;
+        transition: none;
+    }
+
+    .cta-button:active,
+    .cta-button:hover:active,
+    button[type="submit"]:active,
+    .chip:active,
+    .card:active {
+        transform: scale(1);
+    }
+
+    .form-message,
+    .form-message.show {
+        animation: none;
+        opacity: 1;
+        transform: none;
     }
 }

@@ -1,5 +1,6 @@
-// THE CORNER - Shipfront Terminal
-// 80ms rest-is-image. Cubic-bezier press 0.97 / 50ms. No spring.
+// THE CORNER - Shipfront Terminal Black
+// Rho lock 25 Aug 2026: 80ms dissolve / 220ms venice / press 0.97 in CSS.
+// No spring. No HUD 280/180. CTA press is CSS transform, not JS Spring.
 
 document.addEventListener('DOMContentLoaded', function() {
     const quoteForm = document.getElementById('quote-form');
@@ -25,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
                 quoteForm.reset();
             } else {
-                formMessage.className = 'form-message show';
+                formMessage.className = 'form-message show error';
                 formMessage.innerHTML = '<strong>Please fill out all fields.</strong>';
             }
         });
