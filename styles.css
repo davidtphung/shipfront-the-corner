@@ -852,6 +852,8 @@ button[type="submit"]:active { transform: scale(0.97); }
     align-items: center;
 }
 
+.chips li[hidden] { display: none; }
+
 .chip-toggle {
     cursor: pointer;
     background: transparent;
@@ -1179,14 +1181,21 @@ footer {
 }
 
 @media (max-width: 768px) {
-    /* Logo and the CTA hold the first line. Section links drop to the second. */
-    nav { flex-wrap: wrap; row-gap: 2px; }
+    :root { --head: 112px; }
+    /* Logo and the CTA hold the first line. Section links stay on the second. */
+    nav { flex-wrap: wrap; row-gap: 0; padding: 8px var(--gutter) 8px; }
     .nav-links { display: contents; }
     .nav-links li:last-child { order: 1; margin-left: auto; }
     .nav-links li:not(:last-child) { order: 2; }
+    .nav-links a:not(.cta) {
+        font-size: 11px;
+        padding: 0 6px;
+        letter-spacing: 0.04em;
+    }
     .hero h1 {
-        font-size: clamp(40px, 11vw, 88px);
+        font-size: clamp(36px, 10vw, 64px);
         line-height: 1;
+        margin-bottom: 16px;
     }
     .hero-cube-wrap {
         width: min(140px, 42vw);
@@ -1203,9 +1212,11 @@ footer {
         grid-template-columns: 1fr;
     }
     .hero {
-        max-height: none;
+        max-height: calc(100svh - var(--head) - var(--persist));
         min-height: calc(100svh - var(--head) - var(--persist));
+        padding: 20px var(--gutter);
     }
+    .hero-support { margin-bottom: 20px; }
 
     .why-row,
     .why-row-flip {
@@ -1297,9 +1308,3 @@ footer {
     :focus-visible { outline-width: 4px; }
 }
 
-@media (max-width: 768px) {
-    .nav-links a:not(.cta) {
-        font-size: 12px;
-        padding: 0 8px;
-    }
-}
