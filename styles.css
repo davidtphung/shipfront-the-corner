@@ -9,6 +9,7 @@
     --text: #f2f2f0;
     --rule: rgba(255, 255, 255, 0.16);
     --hair: rgba(255, 255, 255, 0.1);
+    --hair-lift: rgba(255, 255, 255, 0.18);
     --face: "Space Grotesk", sans-serif;
     --mono: "JetBrains Mono", monospace;
     --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -53,37 +54,22 @@ button, input { font: inherit; }
     pointer-events: none;
 }
 
-/* Atmosphere: one soft light source, never a wash that fights the black. */
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 0;
-    pointer-events: none;
-    background:
-        radial-gradient(80vw 60vh at 72% -10%, rgba(255, 106, 0, 0.07), transparent 70%),
-        radial-gradient(60vw 50vh at 8% 12%, rgba(255, 255, 255, 0.035), transparent 68%),
-        radial-gradient(90vw 70vh at 50% 108%, rgba(255, 106, 0, 0.045), transparent 72%);
-}
-
 .ground-grid {
     position: fixed;
     inset: 0;
     z-index: 0;
     background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.042) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.042) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
     background-size: var(--grid) var(--grid);
     opacity: 1;
-    mask-image: radial-gradient(120vw 120vh at 50% 30%, #000 35%, transparent 92%);
-    -webkit-mask-image: radial-gradient(120vw 120vh at 50% 30%, #000 35%, transparent 92%);
 }
 
 .canvas-grain {
     position: fixed;
     inset: 0;
     z-index: 1;
-    opacity: 0.085;
+    opacity: 0.1;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 180px 180px;
@@ -131,21 +117,12 @@ main:focus-visible { outline: none; }
     z-index: 50;
     background: transparent;
     border-bottom: 1px solid transparent;
-    transition:
-        background-color var(--hover),
-        border-color var(--hover),
-        backdrop-filter var(--hover);
+    transition: background-color var(--hover), border-color var(--hover);
 }
 
 .site-head.is-stuck {
-    background: rgba(0, 0, 0, 0.82);
+    background: #000;
     border-bottom-color: var(--hair);
-    backdrop-filter: blur(14px) saturate(120%);
-    -webkit-backdrop-filter: blur(14px) saturate(120%);
-}
-
-@supports not (backdrop-filter: blur(1px)) {
-    .site-head.is-stuck { background: #000; }
 }
 
 .eyebrow {
@@ -373,14 +350,7 @@ button[type="submit"]:active { transform: scale(0.97); }
     animation: yaw 132s linear infinite;
 }
 
-.hero-cube-wrap::before {
-    content: "";
-    position: absolute;
-    inset: -46%;
-    border-radius: 50%;
-    background: radial-gradient(closest-side, rgba(255, 106, 0, 0.11), transparent 72%);
-}
-
+/* Same paths, same accent. Thin stroke so the large instance reads as wire, not slab. */
 .hero-cube {
     position: relative;
     width: 100%;
@@ -388,6 +358,8 @@ button[type="submit"]:active { transform: scale(0.97); }
     display: block;
     opacity: 0.92;
 }
+
+.hero-cube g { stroke-width: 0.4; }
 
 @keyframes yaw {
     from { transform: rotate(0deg); }
@@ -472,7 +444,7 @@ button[type="submit"]:active { transform: scale(0.97); }
     list-style: none;
     display: flex;
     background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--hair);
     border-radius: 20px;
     overflow: hidden;
     margin: var(--space-32) 0 var(--space-20);
@@ -486,7 +458,7 @@ button[type="submit"]:active { transform: scale(0.97); }
     gap: 8px;
 }
 
-.waybill-step + .waybill-step { border-left: 1px solid rgba(255, 255, 255, 0.08); }
+.waybill-step + .waybill-step { border-left: 1px solid var(--hair); }
 
 .waybill-num,
 .waybill-name {
@@ -516,8 +488,8 @@ button[type="submit"]:active { transform: scale(0.97); }
 
 .frame-2x2 {
     position: relative;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 28px;
+    border: 1px solid var(--hair);
+    border-radius: 24px;
     padding: 20px;
     margin: 40px 0 0;
 }
@@ -567,19 +539,16 @@ button[type="submit"]:active { transform: scale(0.97); }
 }
 
 .bento-tile {
-    --rx: 0deg;
-    --ry: 0deg;
     position: relative;
     min-height: 44px;
     min-width: 44px;
     padding: 26px;
     background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--hair);
     border-radius: 24px;
     overflow: hidden;
     opacity: 1;
     transform: none;
-    transform-style: preserve-3d;
     transition:
         opacity var(--cine),
         transform var(--cine),
@@ -595,14 +564,14 @@ button[type="submit"]:active { transform: scale(0.97); }
 
 .bento-tile.is-in {
     opacity: 1;
-    transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry));
+    transform: none;
     transition-duration: var(--hover);
 }
 
 .bento-tile.is-in:hover,
 .bento-tile.is-in:focus-visible {
-    transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(-5px);
-    border-color: rgba(255, 255, 255, 0.16);
+    transform: translateY(-5px);
+    border-color: var(--hair-lift);
     box-shadow: 0 22px 60px rgba(0, 0, 0, 0.55);
 }
 
@@ -667,14 +636,16 @@ button[type="submit"]:active { transform: scale(0.97); }
     border-radius: 12px;
 }
 
+/* The one accent tile. Orange stays a corner light, not a full field. */
 .bento-pop {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    border-color: rgba(255, 106, 0, 0.28);
+    border-color: rgba(255, 106, 0, 0.2);
     background:
-        radial-gradient(120% 80% at 18% 6%, rgba(255, 106, 0, 0.95), transparent 62%),
-        linear-gradient(168deg, #d24d00 0%, #3d1600 46%, #050505 84%);
+        radial-gradient(78% 50% at 10% 0%, rgba(255, 106, 0, 0.78), transparent 70%),
+        linear-gradient(170deg, rgba(255, 106, 0, 0.14) 0%, rgba(5, 5, 5, 0) 46%);
+    background-color: #050505;
 }
 
 .bento-pop .card-title {
@@ -703,8 +674,8 @@ button[type="submit"]:active { transform: scale(0.97); }
 
 .bento-pop.is-in:hover,
 .bento-pop.is-in:focus-visible {
-    border-color: rgba(255, 106, 0, 0.44);
-    box-shadow: 0 22px 70px rgba(255, 106, 0, 0.14);
+    border-color: rgba(255, 106, 0, 0.34);
+    box-shadow: 0 22px 60px rgba(0, 0, 0, 0.55);
 }
 
 .bento-cloud .chips { margin-top: 12px; margin-bottom: 12px; }
@@ -770,7 +741,7 @@ button[type="submit"]:active { transform: scale(0.97); }
     max-width: 100%;
     margin: 0;
     overflow: hidden;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border: 1px solid var(--hair);
     border-radius: 18px;
 }
 
@@ -828,6 +799,7 @@ button[type="submit"]:active { transform: scale(0.97); }
     margin-top: var(--space-20);
 }
 
+/* Pill is reserved for the CTA. Chips are square-shouldered meta. */
 .chips li {
     font-family: var(--mono);
     font-size: 11px;
@@ -836,8 +808,8 @@ button[type="submit"]:active { transform: scale(0.97); }
     text-transform: uppercase;
     color: #e6e6e3;
     background: rgba(255, 255, 255, 0.035);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    border-radius: 999px;
+    border: 1px solid var(--hair);
+    border-radius: 10px;
     padding: 9px 14px;
     min-height: 34px;
     display: inline-flex;
@@ -893,10 +865,10 @@ button[type="submit"]:active { transform: scale(0.97); }
 
 .page-panel {
     flex: 1;
-    max-width: var(--measure);
+    max-width: calc(var(--measure) + var(--gutter) * 2);
     width: 100%;
     margin: 0 auto;
-    padding: 0 var(--gutter) var(--space-48);
+    padding: 0 var(--gutter) clamp(56px, 9vh, 112px);
     display: flex;
     flex-direction: column;
 }
@@ -929,15 +901,15 @@ button[type="submit"]:active { transform: scale(0.97); }
 .form-group input {
     height: 60px;
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border: 1px solid var(--hair);
     color: var(--white);
     padding: 0 18px;
     font-weight: 400;
-    border-radius: 14px;
+    border-radius: 16px;
     transition: border-color var(--hover), background-color var(--hover);
 }
 
-.form-group input:hover { border-color: rgba(255, 255, 255, 0.26); }
+.form-group input:hover { border-color: var(--hair-lift); }
 
 .form-group input:focus,
 .form-group input:focus-visible {
@@ -966,7 +938,7 @@ button[type="submit"]:active { transform: scale(0.97); }
     margin-top: var(--space-24);
     padding: var(--space-24);
     background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    border: 1px solid var(--hair);
     border-radius: 18px;
 }
 
@@ -986,7 +958,7 @@ button[type="submit"]:active { transform: scale(0.97); }
     min-height: 200px;
     padding: 32px;
     background: var(--panel);
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    border: 1px solid var(--hair);
     border-radius: 24px;
     display: flex;
     flex-direction: column;
@@ -996,7 +968,7 @@ button[type="submit"]:active { transform: scale(0.97); }
 }
 
 .contact-cell:hover {
-    border-color: rgba(255, 255, 255, 0.16);
+    border-color: var(--hair-lift);
     transform: translateY(-4px);
 }
 

@@ -2,7 +2,6 @@
 
 document.addEventListener("DOMContentLoaded", function () {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const finePointer = window.matchMedia("(pointer: fine)").matches;
 
     if (!reduce) {
         document.documentElement.classList.add("js-motion");
@@ -101,24 +100,6 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    if (!finePointer) return;
-
-    // Tilt stays under 2deg so the grid never visibly skews.
-    tiles.forEach(function (tile) {
-        tile.addEventListener("pointermove", function (e) {
-            const box = tile.getBoundingClientRect();
-            const x = (e.clientX - box.left) / box.width;
-            const y = (e.clientY - box.top) / box.height;
-            const ry = Math.max(-2, Math.min(2, (x - 0.5) * 4));
-            const rx = Math.max(-2, Math.min(2, (0.5 - y) * 4));
-            tile.style.setProperty("--ry", ry + "deg");
-            tile.style.setProperty("--rx", rx + "deg");
-        });
-        tile.addEventListener("pointerleave", function () {
-            tile.style.setProperty("--rx", "0deg");
-            tile.style.setProperty("--ry", "0deg");
-        });
-    });
 });
 
 function setFieldError(input, message) {
