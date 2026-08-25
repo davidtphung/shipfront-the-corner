@@ -142,6 +142,14 @@ nav {
     color: var(--orange);
 }
 
+.nav-links a.cta-button,
+.nav-links a.cta-button:hover,
+.nav-links a.cta-button[aria-current="page"] {
+    color: #000000;
+    transition: transform calc(var(--dissolve-ms) * 1ms) var(--ease-dissolve),
+        opacity calc(var(--dissolve-ms) * 1ms) var(--ease-dissolve);
+}
+
 .cta-button,
 button[type="submit"] {
     background-color: var(--orange);
