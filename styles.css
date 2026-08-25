@@ -550,29 +550,43 @@ button[type="submit"]:active { transform: scale(0.97); }
     opacity: 1;
     transform: none;
     transition:
-        opacity var(--cine),
-        transform var(--cine),
-        border-color var(--hover),
-        box-shadow var(--hover);
+        transform 220ms ease-out,
+        border-color 220ms ease-out,
+        box-shadow 220ms ease-out;
 }
 
-.js-motion .bento-tile:not(.is-in) {
-    opacity: 0;
-    transform: translateY(18px);
-    transition-delay: calc(var(--i, 0) * 70ms);
+/* Enter runs as an animation so hover and press keep their own timing. */
+.js-motion .bento-tile:not(.is-in) { opacity: 0; }
+
+.js-motion .bento-tile.is-in {
+    animation: tile-in 0.8s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+    animation-delay: calc(var(--i, 0) * 70ms);
 }
 
-.bento-tile.is-in {
-    opacity: 1;
-    transform: none;
-    transition-duration: var(--hover);
+@keyframes tile-in {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: none; }
 }
 
-.bento-tile.is-in:hover,
-.bento-tile.is-in:focus-visible {
+.bento-tile:not(.bento-photo):hover,
+.bento-tile:not(.bento-photo):focus-visible {
     transform: translateY(-5px);
     border-color: var(--hair-lift);
     box-shadow: 0 22px 60px rgba(0, 0, 0, 0.55);
+}
+
+.bento-photo:hover,
+.bento-photo:focus-visible,
+.bento-photo:focus-within,
+.still-plate:hover,
+.still-plate:focus-within {
+    border-color: var(--accent);
+}
+
+.bento-photo:active,
+.still-plate:active {
+    transform: scale(0.97);
+    transition-duration: 120ms;
 }
 
 .bento-logistics { grid-column: 1; grid-row: 1 / 4; padding: 0; }
@@ -583,6 +597,7 @@ button[type="submit"]:active { transform: scale(0.97); }
 .bento-integration { grid-column: 3; grid-row: 1 / 4; padding: 0; }
 .bento-cloud { grid-column: 3; grid-row: 4; }
 
+/* Asimov card set: image-only at rest, zoom clipped to the card, copy on a solid bar. */
 .bento-photo .bento-image {
     position: absolute;
     inset: 0;
@@ -590,19 +605,15 @@ button[type="submit"]:active { transform: scale(0.97); }
     height: 100%;
     object-fit: cover;
     display: block;
-    transform: scale(1.02);
-    animation: ken 22s ease-out forwards paused;
+    transform: none;
+    transition: transform 220ms ease-out;
 }
 
-.bento-photo.is-in:hover .bento-image,
-.bento-photo.is-in:focus-within .bento-image {
-    animation-play-state: running;
-}
+.bento-photo:hover .bento-image,
+.bento-photo:focus-visible .bento-image,
+.bento-photo:focus-within .bento-image { transform: scale(1.06); }
 
-@keyframes ken {
-    from { transform: scale(1.02); }
-    to { transform: scale(1.075); }
-}
+.bento-photo:focus-within .bento-image { transition-duration: 80ms; }
 
 .bento-caption {
     position: absolute;
@@ -610,11 +621,12 @@ button[type="submit"]:active { transform: scale(0.97); }
     right: 0;
     bottom: 0;
     z-index: 1;
-    padding: 28px;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.92) 0%, rgba(0, 0, 0, 0.68) 42%, rgba(0, 0, 0, 0.2) 78%, transparent 100%);
+    padding: 24px;
+    background: rgba(0, 0, 0, 0.82);
 }
 
 .bento-caption .card-body { color: #e8e8e5; }
+.bento-caption .card-title { margin: 8px 0 10px; }
 
 .bento-small {
     display: flex;
@@ -743,6 +755,7 @@ button[type="submit"]:active { transform: scale(0.97); }
     overflow: hidden;
     border: 1px solid var(--hair);
     border-radius: 18px;
+    transition: transform 220ms ease-out, border-color 220ms ease-out;
 }
 
 .why-still {
@@ -750,7 +763,11 @@ button[type="submit"]:active { transform: scale(0.97); }
     height: 320px;
     object-fit: cover;
     border-radius: 0;
+    transition: transform 220ms ease-out;
 }
+
+.still-plate:hover .why-still,
+.still-plate:focus-within .why-still { transform: scale(1.06); }
 
 /* Cinematic clip reveal: the still wipes open, the frame stays put. */
 .js-motion .why-row .still-plate {
@@ -769,6 +786,13 @@ button[type="submit"]:active { transform: scale(0.97); }
 
 .js-motion .why-row.is-in .why-still {
     transform: scale(1);
+}
+
+/* Once the still has settled, hover owns the zoom at card-set timing. */
+.js-motion .why-row.is-in .still-plate:hover .why-still,
+.js-motion .why-row.is-in .still-plate:focus-within .why-still {
+    transform: scale(1.06);
+    transition-duration: 220ms;
 }
 
 .js-motion .why-row .why-copy {
@@ -1196,10 +1220,15 @@ footer {
     .bento-tile,
     .bento-caption,
     .bento-image,
+    .bento-photo:active,
     .contact-cell,
+    .still-plate,
+    .still-plate:active,
     .why-row .still-plate,
     .why-row .why-still,
     .why-row .why-copy,
+    .still-plate:hover .why-still,
+    .bento-photo:hover .bento-image,
     .why-cta .cta,
     .cta,
     button[type="submit"] {
