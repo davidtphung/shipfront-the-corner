@@ -54,7 +54,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }, { threshold: 0.01, rootMargin: "0px 0px -8% 0px" });
 
     nodes.forEach(function (node) { io.observe(node); });
-    tiles.forEach(function (tile) { io.observe(tile); });
+    tiles.forEach(function (tile) {
+        io.observe(tile);
+        const box = tile.getBoundingClientRect();
+        if (box.top < window.innerHeight && box.bottom > 0) {
+            tile.classList.add("is-in");
+            io.unobserve(tile);
+        }
+    });
 
     tiles.forEach(function (tile) {
         tile.addEventListener("pointermove", function (e) {
