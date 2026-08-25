@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css?v=yaw2g">
+    <link rel="stylesheet" href="./styles.css?v=bento1">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
@@ -58,8 +58,9 @@
             </div>
         </section>
 
-        <section class="band chain-band" id="chain">
+        <section class="band chain-band" id="floor">
             <div class="band-inner">
+                <h2 class="floor-title">The floor.</h2>
                 <div class="frame-2x2">
                     <span class="crop-mark crop-tl" aria-hidden="true"></span>
                     <span class="crop-mark crop-tr" aria-hidden="true"></span>
@@ -67,60 +68,68 @@
                     <span class="crop-mark crop-br" aria-hidden="true"></span>
                     <span class="crop-coord crop-coord-tl" aria-hidden="true">128, 321</span>
                     <span class="crop-coord crop-coord-br" aria-hidden="true">1328, 1057</span>
-                    <div class="card-grid">
-                    <article class="card" tabindex="0" aria-label="01 Procurement">
-                        <div class="card-clip grain">
-                            <img class="card-image" src="./images/procurement.jpg" width="592" height="360" alt="Warehouse interior with orange rack and shrink-wrapped pallets">
-                            <div class="card-overlay">
-                                <div class="card-scrim"></div>
-                                <div class="card-content">
-                                    <p class="card-step">01</p>
-                                    <h3 class="card-title">PROCUREMENT</h3>
-                                    <p class="card-body">Inbound at 1933 S. Broadway. They buy. Freight arrives at our floor.</p>
-                                </div>
+                    <div class="bento">
+                        <article class="bento-tile bento-photo bento-logistics" tabindex="0" style="--i:0" aria-label="02 Logistics">
+                            <img class="bento-image" src="./images/logistics-usa.jpg" width="592" height="360" alt="USA long-hood freight truck, unmarked, no European cab brand">
+                            <div class="bento-overlay">
+                                <p class="card-step">02</p>
+                                <h3 class="card-title">Logistics</h3>
+                                <p class="card-body">Freight is coordinated. We do not run the truck.</p>
                             </div>
-                        </div>
-                    </article>
-                    <article class="card" tabindex="0" aria-label="02 Logistics">
-                        <div class="card-clip grain">
-                            <img class="card-image" src="./images/logistics-usa.jpg" width="592" height="360" alt="USA long-hood freight truck, unmarked, no European cab brand">
-                            <div class="card-overlay">
-                                <div class="card-scrim"></div>
-                                <div class="card-content">
-                                    <p class="card-step">02</p>
-                                    <h3 class="card-title">LOGISTICS</h3>
-                                    <p class="card-body">Freight is coordinated. We do not run the truck.</p>
-                                </div>
+                        </article>
+                        <article class="bento-tile bento-text bento-location" style="--i:1">
+                            <p class="card-step">Location</p>
+                            <h3 class="card-title">1933 S. Broadway</h3>
+                            <p class="card-body">1933 S. Broadway, Los Angeles CA 90007. Downtown L.A., next to the 10, 110, and 101.</p>
+                        </article>
+                        <article class="bento-tile bento-small bento-proc" style="--i:2">
+                            <img class="bento-thumb" src="./images/procurement.jpg" width="72" height="72" alt="Warehouse interior with orange rack and shrink-wrapped pallets">
+                            <div>
+                                <p class="card-step">01</p>
+                                <h3 class="card-title">Procurement</h3>
+                                <p class="card-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
                             </div>
-                        </div>
-                    </article>
-                    <article class="card" tabindex="0" aria-label="03 Fulfillment">
-                        <div class="card-clip grain">
-                            <img class="card-image" src="./images/fulfillment.jpg" width="592" height="360" alt="High-angle pick floor with yellow bins">
-                            <div class="card-overlay">
-                                <div class="card-scrim"></div>
-                                <div class="card-content">
-                                    <p class="card-step">03</p>
-                                    <h3 class="card-title">FULFILLMENT</h3>
-                                    <p class="card-body">Pick, pack, label, dock on our floor.</p>
-                                    <p class="card-meta">Inbound | Kitting | Storage | FBA Prep | Outbound | Last-Mile | Same-Day</p>
-                                </div>
+                        </article>
+                        <article class="bento-tile bento-small bento-fulfill" style="--i:3">
+                            <p class="card-step">03</p>
+                            <h3 class="card-title">Fulfillment</h3>
+                            <p class="card-body">Pick, pack, label, dock on our floor.</p>
+                            <ul class="chips">
+                                <li>Inbound</li>
+                                <li>Kitting</li>
+                                <li>Storage</li>
+                                <li>FBA Prep</li>
+                                <li>Outbound</li>
+                                <li>Last-Mile Delivery</li>
+                                <li>Same-Day Delivery</li>
+                            </ul>
+                        </article>
+                        <article class="bento-tile bento-pop" style="--i:4">
+                            <h3 class="card-title">You sell. We run the floor.</h3>
+                            <p class="card-body">Shipfront sits in warehouse and integration.</p>
+                        </article>
+                        <article class="bento-tile bento-photo bento-integration" tabindex="0" style="--i:5" aria-label="04 Integration">
+                            <img class="bento-image" src="./images/integration.jpg" width="592" height="360" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
+                            <div class="bento-overlay">
+                                <p class="card-step">04</p>
+                                <h3 class="card-title">Integration</h3>
+                                <p class="card-body">The store talks to the floor.</p>
                             </div>
-                        </div>
-                    </article>
-                    <article class="card" tabindex="0" aria-label="04 Integration">
-                        <div class="card-clip grain">
-                            <img class="card-image" src="./images/integration.jpg" width="592" height="360" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
-                            <div class="card-overlay">
-                                <div class="card-scrim"></div>
-                                <div class="card-content">
-                                    <p class="card-step">04</p>
-                                    <h3 class="card-title">INTEGRATION</h3>
-                                    <p class="card-body">The store talks to the floor. eCommerce integrations keep the aisle in the same conversation as the cart.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </article>
+                        </article>
+                        <article class="bento-tile bento-cloud" style="--i:6">
+                            <p class="card-step">Fulfillment</p>
+                            <h3 class="card-title">Integration</h3>
+                            <ul class="chips">
+                                <li>Inbound</li>
+                                <li>Kitting</li>
+                                <li>Storage</li>
+                                <li>FBA Prep</li>
+                                <li>Outbound</li>
+                                <li>Last-Mile Delivery</li>
+                                <li>Same-Day Delivery</li>
+                            </ul>
+                            <p class="card-body">The stack you already sell on.</p>
+                        </article>
                     </div>
                 </div>
                 <div class="reveal chain-copy">

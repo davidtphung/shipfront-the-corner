@@ -36,8 +36,11 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     const nodes = document.querySelectorAll(".reveal");
+    const tiles = document.querySelectorAll(".bento-tile");
+
     if (reduce || !("IntersectionObserver" in window)) {
         nodes.forEach(function (node) { node.classList.add("is-in"); });
+        tiles.forEach(function (tile) { tile.classList.add("is-in"); });
         return;
     }
 
@@ -51,6 +54,23 @@ document.addEventListener("DOMContentLoaded", function () {
     }, { threshold: 0.01, rootMargin: "0px 0px -8% 0px" });
 
     nodes.forEach(function (node) { io.observe(node); });
+    tiles.forEach(function (tile) { io.observe(tile); });
+
+    tiles.forEach(function (tile) {
+        tile.addEventListener("pointermove", function (e) {
+            const box = tile.getBoundingClientRect();
+            const x = (e.clientX - box.left) / box.width;
+            const y = (e.clientY - box.top) / box.height;
+            const ry = Math.max(-4, Math.min(4, (x - 0.5) * 8));
+            const rx = Math.max(-4, Math.min(4, (0.5 - y) * 8));
+            tile.style.setProperty("--ry", ry + "deg");
+            tile.style.setProperty("--rx", rx + "deg");
+        });
+        tile.addEventListener("pointerleave", function () {
+            tile.style.setProperty("--rx", "0deg");
+            tile.style.setProperty("--ry", "0deg");
+        });
+    });
 });
 
 function escapeHtml(text) {
