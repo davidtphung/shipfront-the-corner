@@ -61,12 +61,23 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    const head = document.querySelector(".site-head");
+    if (head) {
+        const setStuck = function () {
+            head.classList.toggle("is-stuck", window.scrollY > 24);
+        };
+        setStuck();
+        window.addEventListener("scroll", setStuck, { passive: true });
+    }
+
     const nodes = document.querySelectorAll(".reveal");
     const tiles = document.querySelectorAll(".bento-tile");
+    const rows = document.querySelectorAll(".why-row");
 
     if (reduce || !("IntersectionObserver" in window)) {
         nodes.forEach(function (node) { node.classList.add("is-in"); });
         tiles.forEach(function (tile) { tile.classList.add("is-in"); });
+        rows.forEach(function (row) { row.classList.add("is-in"); });
         return;
     }
 
@@ -80,6 +91,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }, { threshold: 0.01, rootMargin: "0px 0px -8% 0px" });
 
     nodes.forEach(function (node) { io.observe(node); });
+    rows.forEach(function (row) { io.observe(row); });
     tiles.forEach(function (tile) {
         io.observe(tile);
         const box = tile.getBoundingClientRect();
@@ -91,13 +103,14 @@ document.addEventListener("DOMContentLoaded", function () {
 
     if (!finePointer) return;
 
+    // Tilt stays under 2deg so the grid never visibly skews.
     tiles.forEach(function (tile) {
         tile.addEventListener("pointermove", function (e) {
             const box = tile.getBoundingClientRect();
             const x = (e.clientX - box.left) / box.width;
             const y = (e.clientY - box.top) / box.height;
-            const ry = Math.max(-4, Math.min(4, (x - 0.5) * 8));
-            const rx = Math.max(-4, Math.min(4, (0.5 - y) * 8));
+            const ry = Math.max(-2, Math.min(2, (x - 0.5) * 4));
+            const rx = Math.max(-2, Math.min(2, (0.5 - y) * 4));
             tile.style.setProperty("--ry", ry + "deg");
             tile.style.setProperty("--rx", rx + "deg");
         });
