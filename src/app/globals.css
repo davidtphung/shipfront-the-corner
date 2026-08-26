@@ -62,7 +62,7 @@ body {
   color: var(--text-primary);
 }
 
-a { color: inherit; }
+a:not([class]) { color: inherit; }
 
 :focus-visible {
   outline: 2px solid var(--cyan);
