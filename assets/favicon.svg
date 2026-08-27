@@ -1,18 +1,13 @@
-<svg width="32" height="32" viewBox="0 0 120 140" xmlns="http://www.w3.org/2000/svg">
-    <rect width="120" height="140" fill="#000000"/>
-    <!-- 2G YAW: Vertex isometric yawed wire cube -->
-    <g stroke="#FF6A00" stroke-width="3" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-        <path d="M30,45 L60,30 L90,45 L90,75 L60,90 L30,75 Z"/>
-        <path d="M30,75 L30,105"/>
-        <path d="M60,90 L60,120"/>
-        <path d="M90,75 L90,105"/>
-        <path d="M30,105 L60,120"/>
-        <path d="M60,120 L90,105"/>
-        <path d="M90,105 L30,105"/>
-        <path d="M30,45 L30,75"/>
-        <path d="M60,30 L60,90"/>
-        <path d="M90,45 L90,75"/>
-        <path d="M30,75 L60,90"/>
-        <path d="M60,90 L90,75"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+    <rect width="32" height="32" fill="#000000"/>
+    <g class="iso-fill">
+        <polygon fill="#000000" points="16,7 23.794,11.5 16,16 8.206,11.5"/>
+        <polygon fill="#000000" points="8.206,11.5 16,16 16,25 8.206,20.5"/>
+        <polygon fill="#000000" points="23.794,11.5 16,16 16,25 23.794,20.5"/>
+    </g>
+    <g class="iso-stroke" stroke="#FF6A00" stroke-width="1.25" fill="none" stroke-linecap="square" stroke-linejoin="miter">
+        <path d="M16,7 L23.794,11.5 L23.794,20.5 L16,25 L8.206,20.5 L8.206,11.5 Z"/>
+        <path d="M8.206,11.5 L16,16 L23.794,11.5"/>
+        <path d="M16,16 L16,25"/>
     </g>
 </svg>
