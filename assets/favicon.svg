@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-    <!-- True 2G YAW: unit cube, orthographic, yaw 32 pitch 28. 12 equal 3D edges, three parallel families, right angles in 3D. No plate. -->
+    <!-- True 2G YAW: unit cube, orthographic, yaw 37 pitch 31. X and Y match, Z recedes. 12 edges, three parallel families, right angles in 3D. No plate. -->
     <g stroke="#FF6A00" stroke-width="1.25" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-        <path d="M3.173 5.387 L14.038 2.2 L20.827 7.301 L20.827 18.613 L9.962 21.8 L3.173 16.699 Z"/>
-        <path d="M9.962 10.488 L3.173 5.387 M9.962 10.488 L9.962 21.8 M9.962 10.488 L20.827 7.301"/>
-        <path d="M14.038 13.512 L3.173 16.699 M14.038 13.512 L14.038 2.2 M14.038 13.512 L20.827 18.613"/>
+        <path d="M3.305 6.049 L13.222 2.2 L20.695 7.308 L20.695 17.951 L10.778 21.8 L3.305 16.692 Z"/>
+        <path d="M10.778 11.156 L3.305 6.049 M10.778 11.156 L10.778 21.8 M10.778 11.156 L20.695 7.308"/>
+        <path d="M13.222 12.844 L3.305 16.692 M13.222 12.844 L13.222 2.2 M13.222 12.844 L20.695 17.951"/>
     </g>
 </svg>
