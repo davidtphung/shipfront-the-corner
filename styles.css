@@ -463,15 +463,15 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
 .hero-cube-wrap {
     display: none;
     position: absolute;
-    right: 7%;
+    right: 4%;
     top: 50%;
     z-index: 2;
-    width: min(280px, 34vw);
-    margin-top: -140px;
+    width: min(220px, 24vw);
+    margin-top: -110px;
 }
 
-@media (min-width: 1280px) {
-    /* 1440 sit: H1 glyphs end well left of the cube. Hide below this so type wins. */
+@media (min-width: 1400px) {
+    /* 1440 sit: cube stays right of You Sell. We Ship. Drop it on smaller widths. */
     .hero-cube-wrap { display: block; }
 }
 
