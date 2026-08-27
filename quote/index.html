@@ -9,8 +9,8 @@
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css?v=disco2">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css?v=recut1">
     <meta name="theme-color" content="#000000">
     <meta name="color-scheme" content="dark">
 </head>
@@ -33,10 +33,9 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a href="../#floor">The floor</a></li>
-                <li><a href="../#why">Why Shipfront</a></li>
-                <li><a href="../contact/">Contact</a></li>
+                <li><a href="../">Home</a></li>
                 <li><a href="../quote/" class="cta" aria-current="page">Get a Quote</a></li>
+                <li><a href="../contact/">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -46,31 +45,52 @@
             <div class="band-inner reveal">
                 <p class="eyebrow">Quote</p>
                 <h1>Get a quote</h1>
-                <p class="band-lead">Name, email, and company. This preview does not send. Use info@myshipfront.com if you want the note to land.</p>
+                <p class="band-lead">Name, email, and company. That is the whole ask. A person at Shipfront replies.</p>
             </div>
         </div>
         <div class="page-panel">
-            <form id="quote-form" class="quote-form" novalidate>
-                <div class="form-group">
-                    <label for="name">Name</label>
-                    <input id="name" name="name" type="text" required aria-required="true" autocomplete="name" spellcheck="false" aria-describedby="name-error">
-                    <p id="name-error" class="field-error"></p>
-                </div>
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input id="email" name="email" type="email" required aria-required="true" autocomplete="email" spellcheck="false" inputmode="email" aria-describedby="email-error">
-                    <p id="email-error" class="field-error"></p>
-                </div>
-                <div class="form-group">
-                    <label for="company">Company</label>
-                    <input id="company" name="company" type="text" required aria-required="true" autocomplete="organization" spellcheck="false" aria-describedby="company-error">
-                    <p id="company-error" class="field-error"></p>
-                </div>
-                <div class="form-pin">
-                    <button type="submit" class="cta">Submit request <span class="cta-arrow" aria-hidden="true">→</span></button>
-                    <div id="form-message" class="form-message" tabindex="-1"></div>
-                </div>
-            </form>
+            <div class="page-split">
+                <form id="quote-form" class="quote-form" novalidate>
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" required aria-required="true" autocomplete="name" spellcheck="false" aria-describedby="name-error">
+                        <p id="name-error" class="field-error"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" required aria-required="true" autocomplete="email" spellcheck="false" inputmode="email" aria-describedby="email-error">
+                        <p id="email-error" class="field-error"></p>
+                    </div>
+                    <div class="form-group">
+                        <label for="company">Company</label>
+                        <input id="company" name="company" type="text" required aria-required="true" autocomplete="organization" spellcheck="false" aria-describedby="company-error">
+                        <p id="company-error" class="field-error"></p>
+                    </div>
+                    <div class="form-pin">
+                        <button type="submit" class="cta">Submit request <span class="cta-arrow" aria-hidden="true">&rarr;</span></button>
+                        <div id="form-message" class="form-message" tabindex="-1"></div>
+                    </div>
+                </form>
+
+                <aside class="aside-rail" aria-label="Before you send">
+                    <div class="aside-item">
+                        <h2>Where it lands</h2>
+                        <p>This preview does not send. Use <a href="mailto:info@myshipfront.com">info@myshipfront.com</a> if you want the note to arrive.</p>
+                    </div>
+                    <div class="aside-item">
+                        <h2>The floor</h2>
+                        <address>1933 S. Broadway<br>Los Angeles, CA 90007</address>
+                    </div>
+                    <div class="aside-item">
+                        <h2>Hours</h2>
+                        <p>Monday through Friday, 9 am to 5 pm. Saturday and Sunday, appointment only.</p>
+                    </div>
+                    <div class="aside-item">
+                        <h2>Scope</h2>
+                        <p>Warehousing, fulfillment, and eCommerce integrations. Not the port. Not the van.</p>
+                    </div>
+                </aside>
+            </div>
         </div>
     </main>
 
@@ -79,21 +99,24 @@
             <p class="footer-mark">SHIPFRONT</p>
             <div class="footer-cols">
                 <div class="footer-col">
-                    <h3>Home</h3>
+                    <h2>Site</h2>
                     <a href="../">Home</a>
-                </div>
-                <div class="footer-col">
-                    <h3>Quote</h3>
                     <a href="../quote/">Get a Quote</a>
+                    <a href="../contact/">Contact</a>
                 </div>
                 <div class="footer-col">
-                    <h3>Contact</h3>
-                    <a href="../contact/">Contact</a>
+                    <h2>Visit</h2>
+                    <p class="footer-note">1933 S. Broadway<br>Los Angeles, CA 90007</p>
+                    <p class="footer-note">Monday through Friday, 9 am to 5 pm.</p>
+                </div>
+                <div class="footer-col">
+                    <h2>Contact</h2>
+                    <a href="mailto:info@myshipfront.com">info@myshipfront.com</a>
                 </div>
             </div>
         </div>
         <p class="footer-credit">Built by David T Phung</p>
     </footer>
-    <script src="../script.js?v=disco2"></script>
+    <script src="../script.js?v=recut1"></script>
 </body>
 </html>

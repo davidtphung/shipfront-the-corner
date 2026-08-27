@@ -9,8 +9,8 @@
     <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css?v=disco2">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css?v=recut1">
     <meta name="theme-color" content="#000000">
     <meta name="color-scheme" content="dark">
 </head>
@@ -21,7 +21,7 @@
 
     <header class="site-head" role="banner">
         <nav aria-label="Main navigation">
-            <a href="./" class="logo" aria-label="Shipfront home" aria-current="page">
+            <a href="./" class="logo" aria-label="Shipfront home">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                     <g stroke="#FF6A00" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter">
                         <path d="M8 8 L15 5 L20 10 L20 16 L13 19 L8 14 Z"/>
@@ -33,10 +33,9 @@
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a href="#floor">The floor</a></li>
-                <li><a href="#why">Why Shipfront</a></li>
-                <li><a href="./contact/">Contact</a></li>
+                <li><a href="./" aria-current="page">Home</a></li>
                 <li><a href="./quote/" class="cta">Get a Quote</a></li>
+                <li><a href="./contact/">Contact</a></li>
             </ul>
         </nav>
     </header>
@@ -44,10 +43,14 @@
     <main id="main" tabindex="-1">
         <section class="hero" aria-labelledby="hero-title">
             <div class="hero-copy reveal">
+                <p class="eyebrow">Warehousing and fulfillment. Los Angeles.</p>
                 <h1 id="hero-title">You Sell. We Ship.</h1>
                 <p class="hero-lead">A person at Shipfront replies. The warehouse is at 1933 S. Broadway.</p>
                 <p class="hero-support">You sell. We run the floor. Shipfront helps eCommerce merchants scale by taking care of their logistics needs, so they can focus on growing their business.</p>
-                <a class="cta" href="./quote/">Get a Quote</a>
+                <div class="hero-actions">
+                    <a class="cta" href="./quote/">Get a Quote <span class="cta-arrow" aria-hidden="true">&rarr;</span></a>
+                    <a class="text-link" href="./contact/">Visit the floor</a>
+                </div>
             </div>
             <div class="hero-cube-wrap" aria-hidden="true">
                 <svg class="hero-cube" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,10 +64,59 @@
             </div>
         </section>
 
+        <section class="band pitch-band" aria-labelledby="pitch-title">
+            <div class="band-inner">
+                <h2 class="visually-hidden" id="pitch-title">What Shipfront takes off your plate</h2>
+                <ul class="pitch-grid">
+                    <li class="pitch-item" style="--i:0"><strong>Space that holds.</strong> Security and temperature control while product waits to ship.</li>
+                    <li class="pitch-item" style="--i:1"><strong>Workflows built to order.</strong> Pick, pack, label, and ship exactly how you would like.</li>
+                    <li class="pitch-item" style="--i:2"><strong>The stack you already sell on.</strong> Integration means the store talks to the floor.</li>
+                    <li class="pitch-item" style="--i:3"><strong>Freight coordinated.</strong> Inbound lands at our dock. We do not run the truck.</li>
+                    <li class="pitch-item" style="--i:4"><strong>Inbound to outbound.</strong> Kitting, storage, FBA prep, and last-mile handoff on one floor.</li>
+                    <li class="pitch-item" style="--i:5"><strong>Downtown L.A.</strong> 1933 S. Broadway, next to the 10, 110, and 101.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="band how-band" id="how" aria-labelledby="how-title">
+            <div class="band-inner">
+                <div class="section-head reveal">
+                    <p class="eyebrow">How it works</p>
+                    <h2 id="how-title">Freight arrives. Orders leave.</h2>
+                    <p class="band-lead">Four moves, in order. Shipfront sits in warehouse and integration.</p>
+                </div>
+                <ol class="how-rail" aria-label="How it works, in order">
+                    <li class="how-cell" style="--i:0">
+                        <p class="how-num">01</p>
+                        <h3>Procurement</h3>
+                        <p>They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
+                    </li>
+                    <li class="how-cell" style="--i:1">
+                        <p class="how-num">02</p>
+                        <h3>Logistics</h3>
+                        <p>Freight is coordinated. We do not run the truck.</p>
+                    </li>
+                    <li class="how-cell is-ours" style="--i:2">
+                        <p class="how-num">03</p>
+                        <h3>Fulfillment</h3>
+                        <p>Pick, pack, label, dock on our floor.</p>
+                    </li>
+                    <li class="how-cell is-ours" style="--i:3">
+                        <p class="how-num">04</p>
+                        <h3>Integration</h3>
+                        <p>The store talks to the floor.</p>
+                    </li>
+                </ol>
+            </div>
+        </section>
+
         <section class="band chain-band" id="floor" aria-labelledby="floor-title">
             <div class="band-inner">
-                <p class="floor-index" aria-hidden="true">SF-01 to SF-04</p>
-                <h2 class="floor-title" id="floor-title">The floor.</h2>
+                <div class="section-head reveal">
+                    <p class="floor-index" aria-hidden="true">SF-01 to SF-04</p>
+                    <h2 class="floor-title" id="floor-title">The floor.</h2>
+                    <p class="band-lead">Procurement, logistics, fulfillment, integration. One address, one crew.</p>
+                </div>
                 <div class="frame-2x2">
                     <span class="crop-mark crop-tl" aria-hidden="true"></span>
                     <span class="crop-mark crop-tr" aria-hidden="true"></span>
@@ -113,7 +165,7 @@
                             <p class="card-body">Shipfront sits in warehouse and integration.</p>
                         </article>
                         <article class="bento-tile bento-photo bento-integration" style="--i:5">
-                            <img class="bento-image" src="./images/integration.jpg" width="592" height="360" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
+                            <img class="bento-image" src="./images/integration.jpg" width="592" height="360" alt="Aerial view of trailers parked in two rows at a freight yard beside a highway">
                             <div class="bento-caption">
                                 <p class="card-step">SF-04</p>
                                 <h3 class="card-title">Integration</h3>
@@ -136,38 +188,32 @@
                         </article>
                     </div>
                 </div>
-                <div class="reveal chain-copy">
-                    <h2>Port to customer. We sit in warehouse and integration.</h2>
-                    <p class="band-lead">You Sell. We Ship. Shipfront sits in warehouse and integration. Not the port. Not the van.</p>
-                    <ol class="waybill" aria-label="Value chain">
-                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">PORT</span></li>
-                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">FREIGHT</span></li>
-                        <li class="waybill-step waybill-ours"><span class="waybill-num">OURS</span><span class="waybill-name">WAREHOUSE</span></li>
-                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">CUSTOMER</span></li>
-                    </ol>
-                    <p class="waybill-note">Not the crane. Not the van. Warehouse and integration only.</p>
-                </div>
             </div>
         </section>
 
-        <section class="band" id="why" aria-labelledby="why-title">
+        <section class="band why-band" id="why" aria-labelledby="why-title">
             <div class="band-inner">
+                <div class="why-head reveal">
+                    <p class="eyebrow">Warehouse and integration</p>
                     <h2 class="why-rows-title" id="why-title">Why Shipfront</h2>
+                    <p class="why-deck">You sell. We run the floor. Shipfront sits in warehouse and integration. Not the port. Not the van.</p>
+                </div>
 
-                    <article class="why-row">
-                        <figure class="still-plate grain">
-                            <img class="why-still" src="./images/procurement.jpg" width="592" height="280" alt="Warehouse interior with orange rack and shrink-wrapped pallets">
-                        </figure>
+                <div class="why-rows">
+                    <article class="why-row" style="--i:0">
+                        <p class="why-num" aria-hidden="true">01</p>
                         <div class="why-copy">
                             <h3>Warehousing</h3>
                             <p>Our warehouses provide the necessary space, security, temperature-control, and FDA compliant capabilities to store your products before shipping them to customers.</p>
+                            <p class="why-out">Product waits on a rack, not on a dock.</p>
                         </div>
+                        <figure class="still-plate grain">
+                            <img class="why-still" src="./images/procurement.jpg" width="592" height="280" alt="Warehouse interior with orange racking, rows of yellow picking bins, and stacked cartons">
+                        </figure>
                     </article>
 
-                    <article class="why-row why-row-flip">
-                        <figure class="still-plate grain">
-                            <img class="why-still" src="./images/fulfillment.jpg" width="592" height="280" alt="High-angle pick floor with yellow bins">
-                        </figure>
+                    <article class="why-row why-row-flip" style="--i:1">
+                        <p class="why-num" aria-hidden="true">02</p>
                         <div class="why-copy">
                             <h3>Fulfillment</h3>
                             <p>We build custom workflows to pick, pack, label, and ship your products exactly how you would like.</p>
@@ -180,41 +226,84 @@
                                 <li>Last-Mile Delivery</li>
                                 <li>Same-Day Delivery</li>
                             </ul>
+                            <p class="why-out">Your packing slip, your box, your rules.</p>
                         </div>
+                        <figure class="still-plate grain">
+                            <img class="why-still" src="./images/fulfillment.jpg" width="592" height="280" alt="Storage aisle running between tall pallet racks stacked with cartons">
+                        </figure>
                     </article>
 
-                    <article class="why-row">
-                        <figure class="still-plate grain">
-                            <img class="why-still" src="./images/integration.jpg" width="592" height="280" alt="Warehouse aisle with a worker on a pallet jack and two workers on a tablet">
-                        </figure>
+                    <article class="why-row" style="--i:2">
+                        <p class="why-num" aria-hidden="true">03</p>
                         <div class="why-copy">
                             <h3>eCommerce Integrations</h3>
-                            <p>The stack you already sell on.</p>
+                            <p>The stack you already sell on. Orders land on the floor the way they land in your store, so nobody rekeys them.</p>
+                            <p class="why-out">The store talks to the floor.</p>
                         </div>
+                        <figure class="still-plate grain">
+                            <img class="why-still" src="./images/integration.jpg" width="592" height="280" alt="Aerial view of trailers parked in two rows at a freight yard beside a highway">
+                        </figure>
                     </article>
 
-                    <article class="why-row why-row-text">
+                    <article class="why-row why-row-text" style="--i:3">
+                        <p class="why-num" aria-hidden="true">04</p>
                         <div class="why-copy">
                             <h3>Location</h3>
                             <p>1933 S. Broadway, Los Angeles CA 90007. Downtown L.A., next to the 10, 110, and 101.</p>
+                            <p class="why-out">One address. Freight in, orders out.</p>
                         </div>
                     </article>
+                </div>
 
-                    <div class="why-cta">
-                        <a class="cta" href="./quote/">Get a Quote</a>
-                    </div>
+                <div class="why-scope reveal">
+                    <h3 class="scope-title">Port to customer. We sit in warehouse and integration.</h3>
+                    <ol class="waybill" aria-label="Value chain">
+                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">PORT</span></li>
+                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">FREIGHT</span></li>
+                        <li class="waybill-step waybill-ours"><span class="waybill-num">OURS</span><span class="waybill-name">WAREHOUSE</span></li>
+                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">CUSTOMER</span></li>
+                    </ol>
+                    <p class="waybill-note">Not the crane. Not the van. Warehouse and integration only.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="band close-band" id="start" aria-labelledby="close-title">
+            <div class="band-inner reveal">
+                <p class="eyebrow">Get started</p>
+                <h2 class="close-title" id="close-title">You sell. We run the floor.</h2>
+                <p class="band-lead">Name, email, and company is all it takes to start. A person at Shipfront replies.</p>
+                <div class="close-actions">
+                    <a class="cta" href="./quote/">Get a Quote <span class="cta-arrow" aria-hidden="true">&rarr;</span></a>
+                    <a class="text-link" href="./contact/">1933 S. Broadway</a>
+                </div>
             </div>
         </section>
     </main>
 
     <footer role="contentinfo">
-        <nav class="footer-nav" aria-label="Footer">
-            <a href="./">Home</a>
-            <a href="./quote/">Get a Quote</a>
-            <a href="./contact/">Contact</a>
-        </nav>
+        <div class="footer-inner">
+            <p class="footer-mark">SHIPFRONT</p>
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <h2>Site</h2>
+                    <a href="./">Home</a>
+                    <a href="./quote/">Get a Quote</a>
+                    <a href="./contact/">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h2>Visit</h2>
+                    <p class="footer-note">1933 S. Broadway<br>Los Angeles, CA 90007</p>
+                    <p class="footer-note">Monday through Friday, 9 am to 5 pm.</p>
+                </div>
+                <div class="footer-col">
+                    <h2>Contact</h2>
+                    <a href="mailto:info@myshipfront.com">info@myshipfront.com</a>
+                </div>
+            </div>
+        </div>
         <p class="footer-credit">Built by David T Phung</p>
     </footer>
-    <script src="./script.js?v=disco2"></script>
+    <script src="./script.js?v=recut1"></script>
 </body>
 </html>

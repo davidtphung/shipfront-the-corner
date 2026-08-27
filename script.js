@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const nodes = document.querySelectorAll(".reveal");
-    const tiles = document.querySelectorAll(".bento-tile");
+    const tiles = document.querySelectorAll(".bento-tile, .pitch-item, .how-cell");
     const rows = document.querySelectorAll(".why-row");
 
     if (reduce || !("IntersectionObserver" in window)) {
