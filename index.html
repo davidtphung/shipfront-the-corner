@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css?v=recut1">
+    <link rel="stylesheet" href="./styles.css?v=cap1">
     <meta name="theme-color" content="#000000">
     <meta name="color-scheme" content="dark">
 </head>
@@ -44,7 +44,7 @@
         <section class="hero" aria-labelledby="hero-title">
             <div class="hero-copy reveal">
                 <p class="eyebrow">Warehousing and fulfillment. Los Angeles.</p>
-                <h1 id="hero-title">You Sell. We Ship.</h1>
+                <h1 class="clip-line" id="hero-title"><span class="clip"><span class="clip-in">You Sell. We Ship.</span></span></h1>
                 <p class="hero-lead">A person at Shipfront replies. The warehouse is at 1933 S. Broadway.</p>
                 <p class="hero-support">You sell. We run the floor. Shipfront helps eCommerce merchants scale by taking care of their logistics needs, so they can focus on growing their business.</p>
                 <div class="hero-actions">
@@ -78,113 +78,76 @@
             </div>
         </section>
 
-        <section class="band how-band" id="how" aria-labelledby="how-title">
+        <section class="band floor-band" id="floor" aria-labelledby="floor-title">
             <div class="band-inner">
                 <div class="section-head reveal">
-                    <p class="eyebrow">How it works</p>
-                    <h2 id="how-title">Freight arrives. Orders leave.</h2>
-                    <p class="band-lead">Four moves, in order. Shipfront sits in warehouse and integration.</p>
+                    <p class="eyebrow">The floor</p>
+                    <p class="floor-index" aria-hidden="true">SF-01 / SF-04</p>
+                    <h2 class="floor-title clip-line" id="floor-title"><span class="clip"><span class="clip-in">Freight arrives. Orders leave.</span></span></h2>
+                    <p class="band-lead">Procurement, logistics, fulfillment, integration. One address, one crew. Every card ends at the same place, a quote.</p>
                 </div>
-                <ol class="how-rail" aria-label="How it works, in order">
-                    <li class="how-cell" style="--i:0">
-                        <p class="how-num">01</p>
-                        <h3>Procurement</h3>
-                        <p>They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
-                    </li>
-                    <li class="how-cell" style="--i:1">
-                        <p class="how-num">02</p>
-                        <h3>Logistics</h3>
-                        <p>Freight is coordinated. We do not run the truck.</p>
-                    </li>
-                    <li class="how-cell is-ours" style="--i:2">
-                        <p class="how-num">03</p>
-                        <h3>Fulfillment</h3>
-                        <p>Pick, pack, label, dock on our floor.</p>
-                    </li>
-                    <li class="how-cell is-ours" style="--i:3">
-                        <p class="how-num">04</p>
-                        <h3>Integration</h3>
-                        <p>The store talks to the floor.</p>
-                    </li>
-                </ol>
-            </div>
-        </section>
 
-        <section class="band chain-band" id="floor" aria-labelledby="floor-title">
-            <div class="band-inner">
-                <div class="section-head reveal">
-                    <p class="floor-index" aria-hidden="true">SF-01 to SF-04</p>
-                    <h2 class="floor-title" id="floor-title">The floor.</h2>
-                    <p class="band-lead">Procurement, logistics, fulfillment, integration. One address, one crew.</p>
-                </div>
-                <div class="frame-2x2">
+                <div class="floor-frame">
                     <span class="crop-mark crop-tl" aria-hidden="true"></span>
                     <span class="crop-mark crop-tr" aria-hidden="true"></span>
                     <span class="crop-mark crop-bl" aria-hidden="true"></span>
                     <span class="crop-mark crop-br" aria-hidden="true"></span>
                     <span class="crop-coord crop-coord-tl" aria-hidden="true">128, 321</span>
                     <span class="crop-coord crop-coord-br" aria-hidden="true">1328, 1057</span>
-                    <div class="bento">
-                        <article class="bento-tile bento-photo bento-logistics" style="--i:0">
-                            <img class="bento-image" src="./images/logistics-usa.jpg" width="592" height="360" alt="USA long-hood freight truck, unmarked, no European cab brand">
-                            <div class="bento-caption">
-                                <p class="card-step">SF-02</p>
-                                <h3 class="card-title">Logistics</h3>
-                                <p class="card-body">Freight is coordinated. We do not run the truck.</p>
+
+                    <div class="cap-grid">
+                        <article class="cap-tile cap-photo cap-procurement" style="--i:0">
+                            <img class="cap-still" src="./images/procurement.jpg" width="800" height="1080" loading="lazy" decoding="async" alt="Warehouse interior with orange racking, rows of yellow picking bins, and stacked cartons">
+                            <span class="cap-veil" aria-hidden="true"></span>
+                            <div class="cap-plate">
+                                <p class="cap-code" aria-hidden="true">SF-01</p>
+                                <h3 class="cap-title">Procurement</h3>
+                                <p class="cap-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
+                                <p class="cap-act" aria-hidden="true"><span class="cap-chip">Get a Quote <span class="cap-arrow">&rarr;</span></span></p>
+                            </div>
+                            <a class="cap-hit" href="./quote/"><span class="visually-hidden">Procurement. Get a Quote.</span></a>
+                        </article>
+
+                        <article class="cap-tile cap-photo cap-logistics" style="--i:1">
+                            <img class="cap-still" src="./images/logistics-usa.jpg" width="2400" height="1596" loading="lazy" decoding="async" alt="USA long-hood freight truck, unmarked, no European cab brand">
+                            <span class="cap-veil" aria-hidden="true"></span>
+                            <div class="cap-plate">
+                                <p class="cap-code" aria-hidden="true">SF-02</p>
+                                <h3 class="cap-title">Logistics</h3>
+                                <p class="cap-body">Freight is coordinated. We do not run the truck.</p>
+                                <p class="cap-act" aria-hidden="true"><span class="cap-chip">Get a Quote <span class="cap-arrow">&rarr;</span></span></p>
+                            </div>
+                            <a class="cap-hit" href="./quote/"><span class="visually-hidden">Logistics. Get a Quote.</span></a>
+                        </article>
+
+                        <article class="cap-tile cap-photo cap-fulfillment" style="--i:2">
+                            <img class="cap-still" src="./images/fulfillment.jpg" width="800" height="1080" loading="lazy" decoding="async" alt="Storage aisle running between tall pallet racks stacked with cartons">
+                            <span class="cap-veil" aria-hidden="true"></span>
+                            <div class="cap-plate">
+                                <p class="cap-code" aria-hidden="true">SF-03</p>
+                                <h3 class="cap-title">Fulfillment</h3>
+                                <p class="cap-body">Pick, pack, label, dock on our floor.</p>
+                                <p class="cap-act" aria-hidden="true"><span class="cap-chip">Get a Quote <span class="cap-arrow">&rarr;</span></span></p>
+                            </div>
+                            <a class="cap-hit" href="./quote/"><span class="visually-hidden">Fulfillment. Get a Quote.</span></a>
+                        </article>
+
+                        <article class="cap-tile cap-note" style="--i:3">
+                            <div class="cap-plate">
+                                <span class="note-rule" aria-hidden="true"></span>
+                                <h3 class="note-title">You sell. We run the floor.</h3>
+                                <p class="cap-body">One address. Freight in, orders out. Shipfront sits in warehouse and integration.</p>
                             </div>
                         </article>
-                        <article class="bento-tile bento-text bento-location" style="--i:1">
-                            <p class="card-step">Address</p>
-                            <h3 class="card-title">Location</h3>
-                            <p class="card-body">1933 S. Broadway, Los Angeles CA 90007. Downtown L.A., next to the 10, 110, and 101.</p>
-                        </article>
-                        <article class="bento-tile bento-small bento-proc" style="--i:2">
-                            <img class="bento-thumb" src="./images/procurement.jpg" width="72" height="72" alt="">
-                            <div>
-                                <p class="card-step">SF-01</p>
-                                <h3 class="card-title">Procurement</h3>
-                                <p class="card-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
+
+                        <article class="cap-tile cap-type cap-integration" style="--i:4">
+                            <div class="cap-plate">
+                                <p class="cap-code" aria-hidden="true">SF-04</p>
+                                <h3 class="cap-title">Integration</h3>
+                                <p class="cap-body">The store talks to the floor. Nobody rekeys an order.</p>
+                                <p class="cap-act" aria-hidden="true"><span class="cap-chip">Get a Quote <span class="cap-arrow">&rarr;</span></span></p>
                             </div>
-                        </article>
-                        <article class="bento-tile bento-small bento-fulfill" style="--i:3">
-                            <p class="card-step">SF-03</p>
-                            <h3 class="card-title">Fulfillment</h3>
-                            <p class="card-body">Pick, pack, label, dock on our floor.</p>
-                            <ul class="chips" aria-label="Fulfillment services">
-                                <li>Inbound</li>
-                                <li>Kitting</li>
-                                <li>Storage</li>
-                                <li>FBA Prep</li>
-                                <li>Outbound</li>
-                                <li>Last-Mile Delivery</li>
-                                <li>Same-Day Delivery</li>
-                            </ul>
-                        </article>
-                        <article class="bento-tile bento-pop" style="--i:4">
-                            <h3 class="card-title">You sell. We run the floor.</h3>
-                            <p class="card-body">Shipfront sits in warehouse and integration.</p>
-                        </article>
-                        <article class="bento-tile bento-photo bento-integration" style="--i:5">
-                            <img class="bento-image" src="./images/integration.jpg" width="592" height="360" alt="Aerial view of trailers parked in two rows at a freight yard beside a highway">
-                            <div class="bento-caption">
-                                <p class="card-step">SF-04</p>
-                                <h3 class="card-title">Integration</h3>
-                                <p class="card-body">The store talks to the floor.</p>
-                            </div>
-                        </article>
-                        <article class="bento-tile bento-cloud" style="--i:6">
-                            <p class="card-step">Fulfillment</p>
-                            <h3 class="card-title">Integration</h3>
-                            <ul class="chips" aria-label="Fulfillment services">
-                                <li>Inbound</li>
-                                <li>Kitting</li>
-                                <li>Storage</li>
-                                <li>FBA Prep</li>
-                                <li>Outbound</li>
-                                <li>Last-Mile Delivery</li>
-                                <li>Same-Day Delivery</li>
-                            </ul>
-                            <p class="card-body">The stack you already sell on.</p>
+                            <a class="cap-hit" href="./quote/"><span class="visually-hidden">Integration. Get a Quote.</span></a>
                         </article>
                     </div>
                 </div>
@@ -195,7 +158,7 @@
             <div class="band-inner">
                 <div class="why-head reveal">
                     <p class="eyebrow">Warehouse and integration</p>
-                    <h2 class="why-rows-title" id="why-title">Why Shipfront</h2>
+                    <h2 class="why-rows-title clip-line" id="why-title"><span class="clip"><span class="clip-in">Why Shipfront</span></span></h2>
                     <p class="why-deck">You sell. We run the floor. Shipfront sits in warehouse and integration. Not the port. Not the van.</p>
                 </div>
 
@@ -208,7 +171,7 @@
                             <p class="why-out">Product waits on a rack, not on a dock.</p>
                         </div>
                         <figure class="still-plate grain">
-                            <img class="why-still" src="./images/procurement.jpg" width="592" height="280" alt="Warehouse interior with orange racking, rows of yellow picking bins, and stacked cartons">
+                            <img class="why-still" src="./images/procurement.jpg" width="592" height="280" loading="lazy" decoding="async" alt="Warehouse interior with orange racking, rows of yellow picking bins, and stacked cartons">
                         </figure>
                     </article>
 
@@ -229,7 +192,7 @@
                             <p class="why-out">Your packing slip, your box, your rules.</p>
                         </div>
                         <figure class="still-plate grain">
-                            <img class="why-still" src="./images/fulfillment.jpg" width="592" height="280" alt="Storage aisle running between tall pallet racks stacked with cartons">
+                            <img class="why-still" src="./images/fulfillment.jpg" width="592" height="280" loading="lazy" decoding="async" alt="Storage aisle running between tall pallet racks stacked with cartons">
                         </figure>
                     </article>
 
@@ -241,7 +204,7 @@
                             <p class="why-out">The store talks to the floor.</p>
                         </div>
                         <figure class="still-plate grain">
-                            <img class="why-still" src="./images/integration.jpg" width="592" height="280" alt="Aerial view of trailers parked in two rows at a freight yard beside a highway">
+                            <img class="why-still" src="./images/integration.jpg" width="592" height="280" loading="lazy" decoding="async" alt="Aerial view of trailers parked in two rows at a freight yard beside a highway">
                         </figure>
                     </article>
 
@@ -271,7 +234,7 @@
         <section class="band close-band" id="start" aria-labelledby="close-title">
             <div class="band-inner reveal">
                 <p class="eyebrow">Get started</p>
-                <h2 class="close-title" id="close-title">You sell. We run the floor.</h2>
+                <h2 class="close-title clip-line" id="close-title"><span class="clip"><span class="clip-in">You sell. We run the floor.</span></span></h2>
                 <p class="band-lead">Name, email, and company is all it takes to start. A person at Shipfront replies.</p>
                 <div class="close-actions">
                     <a class="cta" href="./quote/">Get a Quote <span class="cta-arrow" aria-hidden="true">&rarr;</span></a>
@@ -304,6 +267,6 @@
         </div>
         <p class="footer-credit">Built by David T Phung</p>
     </footer>
-    <script src="./script.js?v=recut1"></script>
+    <script src="./script.js?v=cap1"></script>
 </body>
 </html>

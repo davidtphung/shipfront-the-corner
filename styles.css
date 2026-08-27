@@ -1,4 +1,4 @@
-/* THE CORNER - editorial recut. Black, white type, one accent. Space Grotesk 400/500/700. JetBrains Mono for meta. */
+/* THE CORNER - capability-tile recut. Black, white type, one accent. Space Grotesk 400/500/700. JetBrains Mono for meta. */
 
 :root {
     --black: #000000;
@@ -6,11 +6,15 @@
     --accent: #FF6A00;
     --panel: #050505;
     --panel-lift: #0c0c0c;
-    --text: #f2f2f0;
-    --muted: #b9b9b4;
-    --dim: #d4d4d1;
+
+    /* Type is white. The greys step down in neutral, never into oat. */
+    --text: #ffffff;
+    --muted: #b4b4b4;
+    --dim: #d6d6d6;
+    --near: #ebebeb;
     --rule: rgba(255, 255, 255, 0.14);
     --hair: rgba(255, 255, 255, 0.1);
+    --hairline: rgba(255, 255, 255, 0.07);
     --hair-lift: rgba(255, 255, 255, 0.26);
 
     --face: "Space Grotesk", sans-serif;
@@ -20,6 +24,14 @@
     --hover: 220ms ease-out;
     --press: 120ms cubic-bezier(0.22, 1, 0.36, 1);
     --cine: 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+
+    /* Card focus dissolve. One number, everywhere a label appears over a still. */
+    --dissolve: 80ms;
+
+    /* Pointer-down bite, then a critically damped settle. Bounce 0, response 0.35s,
+       sampled off x(t) = 1 - (1 + wt)e^-wt so the release never overshoots. */
+    --press-in: 100ms cubic-bezier(0.2, 0, 0, 1);
+    --settle: 480ms linear(0, 0.07, 0.2135, 0.3705, 0.514, 0.6341, 0.7297, 0.8032, 0.8584, 0.899, 0.9286, 0.9498, 0.9649, 0.9756, 0.9831, 0.9884, 0.992, 0.9945, 0.9962, 0.9974, 1);
 
     /* 0 to 4. Nothing rounder. */
     --r: 2px;
@@ -151,10 +163,9 @@ main:focus-visible { outline: none; }
     transition: background-color var(--hover), border-color var(--hover);
 }
 
+/* The nav settles onto solid ground. Terminal is never frosted. */
 .site-head.is-stuck {
-    background: rgba(0, 0, 0, 0.92);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
+    background: var(--black);
     border-bottom-color: var(--rule);
 }
 
@@ -255,6 +266,36 @@ h1, h2, h3 {
     line-height: 1.04;
     text-transform: none;
     text-wrap: balance;
+}
+
+/* Clipped headline. The mask holds still, the type rises into it. Transform only,
+   so an interrupted reveal picks up from wherever the line currently sits. */
+.clip {
+    display: block;
+    overflow: hidden;
+    padding-bottom: 0.14em;
+    margin-bottom: -0.14em;
+}
+
+.clip-in {
+    display: block;
+    transform: translateY(0);
+}
+
+.js-motion .clip-in {
+    transition: transform 760ms var(--ease);
+}
+
+.js-motion .reveal:not(.is-in) .clip-in {
+    transform: translateY(118%);
+}
+
+/* The headline owns its own reveal, so the generic stagger leaves it alone. */
+.js-motion .reveal > .clip-line,
+.js-motion .reveal:not(.is-in) > .clip-line {
+    opacity: 1;
+    transform: none;
+    transition: none;
 }
 
 .band h2,
@@ -375,14 +416,21 @@ button[type="submit"] {
     text-transform: uppercase;
     text-decoration: none;
     cursor: pointer;
-    transition: transform var(--press), opacity var(--hover);
+    transform: scale(1);
+    transition: transform var(--settle), opacity var(--hover);
 }
 
 .cta:hover,
 button[type="submit"]:hover { opacity: 0.9; }
 
+/* Feedback lands on pointer-down. Release hands the live scale to the settle. */
+.cta.is-press,
+button[type="submit"].is-press,
 .cta:active,
-button[type="submit"]:active { transform: scale(0.97); }
+button[type="submit"]:active {
+    transform: scale(0.97);
+    transition: transform var(--press-in), opacity var(--hover);
+}
 
 .cta-arrow { display: inline-block; transition: transform var(--hover); }
 .cta:hover .cta-arrow,
@@ -505,78 +553,24 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     margin-bottom: 6px;
 }
 
-.js-motion .pitch-item:not(.is-in) { opacity: 0; }
-
-.js-motion .pitch-item.is-in {
-    animation: line-in 0.7s var(--ease) backwards;
-    animation-delay: calc(var(--i, 0) * 60ms);
+/* Enter is a transition, not a keyframe, so a scroll reversal mid-enter is picked
+   up from the live value instead of restarting. */
+.js-motion .pitch-item {
+    opacity: 1;
+    transform: none;
+    transition:
+        opacity 620ms var(--ease) calc(var(--i, 0) * 60ms),
+        transform 620ms var(--ease) calc(var(--i, 0) * 60ms);
 }
 
-@keyframes line-in {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: none; }
-}
-
-/* ---------------------------------------------------------------- how */
-
-.how-rail {
-    list-style: none;
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: clamp(20px, 3vw, 44px);
-    counter-reset: none;
-}
-
-.how-cell {
-    position: relative;
-    padding-top: var(--space-24);
-    border-top: 1px solid var(--rule);
-}
-
-.how-cell::before {
-    content: "";
-    position: absolute;
-    top: -1px;
-    left: 0;
-    width: 34px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.35);
-}
-
-.how-cell.is-ours::before { background: var(--accent); width: 100%; }
-
-.how-num {
-    font-family: var(--mono);
-    font-size: var(--t-meta);
-    font-weight: 700;
-    letter-spacing: 0.2em;
-    color: var(--accent);
-}
-
-.how-cell h3 {
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    margin: 14px 0 10px;
-}
-
-.how-cell p {
-    font-size: 15px;
-    color: var(--muted);
-    max-width: 30ch;
-}
-
-.js-motion .how-cell:not(.is-in) { opacity: 0; }
-
-.js-motion .how-cell.is-in {
-    animation: line-in 0.7s var(--ease) backwards;
-    animation-delay: calc(var(--i, 0) * 80ms);
+.js-motion .pitch-item:not(.is-in) {
+    opacity: 0;
+    transform: translateY(14px);
 }
 
 /* ---------------------------------------------------------------- floor */
 
-.chain-band { position: relative; }
+.floor-band { position: relative; }
 
 .floor-index {
     font-family: var(--mono);
@@ -593,11 +587,11 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     margin: 0 0 var(--space-20);
 }
 
-.frame-2x2 {
+.floor-frame {
     position: relative;
-    border: 1px solid var(--hair);
+    border: 1px solid var(--hairline);
     border-radius: var(--r);
-    padding: 18px;
+    padding: clamp(12px, 1.4vw, 22px);
     margin: 0;
 }
 
@@ -631,188 +625,253 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
 .crop-coord-tl { top: -22px; left: 14px; }
 .crop-coord-br { bottom: -22px; right: 14px; }
 
-/* Hairline mosaic: the gap is the rule. No card gutters, no rounded slabs. */
-.bento {
+/* Capability tiles. Uneven three-column pinwheel: a tall still, a wide still,
+   a tall still, a tall type card, and one statement plate. Real gutters, because
+   air is the point. Never an even 2x2. */
+.cap-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    grid-template-rows: auto auto minmax(220px, 1fr) auto;
-    gap: 1px;
-    background: var(--rule);
-    border: 1px solid var(--rule);
+    grid-template-rows:
+        clamp(240px, 23vw, 320px)
+        clamp(200px, 19vw, 262px)
+        clamp(200px, 19vw, 262px);
+    gap: clamp(12px, 1.4vw, 22px);
     width: 100%;
-    min-height: 720px;
 }
 
-.bento-tile {
+/* Two tall stills, one wide still, one tall statement, one compact catalog card.
+   Every tile carries its copy at its own foot, so the grid reads on one baseline. */
+.cap-procurement { grid-column: 1; grid-row: 1 / 3; }
+.cap-logistics { grid-column: 2 / 4; grid-row: 1; }
+.cap-fulfillment { grid-column: 2; grid-row: 2 / 4; }
+.cap-note { grid-column: 3; grid-row: 2 / 4; }
+.cap-integration { grid-column: 1; grid-row: 3; }
+
+.cap-tile {
     position: relative;
     min-height: 44px;
     min-width: 44px;
-    padding: 28px;
-    background: var(--panel);
-    border: 0;
-    border-radius: 0;
     overflow: hidden;
-    opacity: 1;
+    isolation: isolate;
+    background: var(--panel);
+    border: 1px solid var(--hairline);
+    border-radius: var(--r);
+    transform: scale(1);
     transition:
-        background-color var(--hover),
-        transform var(--hover),
-        box-shadow var(--hover);
+        transform var(--settle),
+        border-color var(--hover),
+        box-shadow var(--hover),
+        background-color var(--hover);
 }
 
-/* Enter is a fade stagger so the mosaic never breaks its rules apart. */
-.js-motion .bento-tile:not(.is-in) { opacity: 0; }
-
-.js-motion .bento-tile.is-in {
-    animation: tile-in 0.8s var(--ease) backwards;
-    animation-delay: calc(var(--i, 0) * 70ms);
+/* Enter is opacity plus a short lift on a transition, so an interrupted scroll
+   resumes from the live value instead of snapping back to the keyframe origin. */
+.js-motion .cap-tile:not(.is-set) {
+    transition:
+        opacity 700ms var(--ease) calc(var(--i, 0) * 70ms),
+        transform 700ms var(--ease) calc(var(--i, 0) * 70ms),
+        border-color var(--hover),
+        box-shadow var(--hover),
+        background-color var(--hover);
 }
 
-@keyframes tile-in {
-    from { opacity: 0; }
-    to { opacity: 1; }
+.js-motion .cap-tile:not(.is-in) {
+    opacity: 0;
+    transform: translateY(18px) scale(0.99);
 }
 
-.bento-tile:not(.bento-photo):hover,
-.bento-tile:not(.bento-photo):focus-visible {
-    background-color: var(--panel-lift);
-    box-shadow: inset 0 -2px 0 var(--accent);
+/* Pointer-down bite on the tile itself. Release hands off to the settle. */
+.cap-tile.is-press {
+    transform: scale(0.97);
+    transition: transform var(--press-in);
 }
 
-.bento-photo:hover,
-.bento-photo:focus-visible,
-.bento-photo:focus-within,
-.still-plate:hover,
-.still-plate:focus-within {
-    box-shadow: inset 0 0 0 1px var(--accent);
-}
-
-.still-plate:hover,
-.still-plate:focus-within { border-color: var(--accent); }
-
-/* Asimov card set: image at rest, 1.06 zoom clipped to the card, copy on an 82% bar, 220ms. */
-.bento-photo .bento-image {
+/* Rest is the still. Nothing else. */
+.cap-still {
     position: absolute;
     inset: 0;
+    z-index: 0;
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
-    transform: none;
+    transform: scale(1);
     transition: transform var(--hover);
 }
 
-.bento-photo:hover .bento-image,
-.bento-photo:focus-visible .bento-image,
-.bento-photo:focus-within .bento-image { transform: scale(1.06); }
-
-.bento-photo:active { transform: scale(0.97); transition-duration: 120ms; }
-
-.bento-caption {
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: 1;
-    padding: 24px;
-    background: rgba(0, 0, 0, 0.82);
-}
-
-.bento-caption .card-body { color: #e8e8e5; }
-.bento-caption .card-title { margin: 10px 0 10px; }
-
-.bento-logistics { grid-column: 1; grid-row: 1 / 4; padding: 0; }
-.bento-location { grid-column: 1; grid-row: 4; }
-.bento-proc { grid-column: 2; grid-row: 1; }
-.bento-fulfill { grid-column: 2; grid-row: 2; }
-.bento-pop { grid-column: 2; grid-row: 3 / 5; }
-.bento-integration { grid-column: 3; grid-row: 1 / 4; padding: 0; }
-.bento-cloud { grid-column: 3; grid-row: 4; }
-
-.bento-small {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-}
-
-.bento-proc {
-    display: grid;
-    grid-template-columns: 72px 1fr;
-    gap: 16px;
-    align-items: start;
-}
-
-.bento-thumb {
-    width: 72px;
-    height: 72px;
-    object-fit: cover;
-    border-radius: var(--r);
-}
-
-/* The one accent tile. Orange stays a corner light, not a full field. */
-.bento-pop {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    background:
-        radial-gradient(78% 50% at 10% 0%, rgba(255, 106, 0, 0.78), transparent 70%),
-        linear-gradient(170deg, rgba(255, 106, 0, 0.14) 0%, rgba(5, 5, 5, 0) 46%);
-    background-color: #050505;
-}
-
-.bento-pop .card-title {
-    text-transform: none;
-    letter-spacing: -0.025em;
-    font-size: clamp(24px, 2.6vw, 34px);
-    line-height: 1.1;
-    text-shadow: 0 1px 2px #000;
-}
-
-.bento-pop .card-body {
-    text-shadow: 0 1px 2px #000;
-    color: #fff;
-}
-
-.bento-pop::after {
-    content: "";
+/* 60% black scrim, dissolved in over 80ms. Hover, press, and Tab focus all open it. */
+.cap-veil {
     position: absolute;
     inset: 0;
-    pointer-events: none;
-    opacity: 0.32;
-    mix-blend-mode: overlay;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-    background-size: 180px 180px;
+    z-index: 1;
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    transition: opacity var(--dissolve) linear;
 }
 
-.bento-cloud .chips { margin-top: 12px; margin-bottom: 14px; }
+.cap-plate {
+    position: relative;
+    z-index: 2;
+    padding: clamp(20px, 2.2vw, 30px);
+}
 
-.card-step {
+/* Caption plate: a bar at the foot of the still, not a wash over it. */
+.cap-photo .cap-plate {
+    position: absolute;
+    inset: auto 0 0 0;
+    opacity: 0;
+    padding-top: clamp(40px, 5vw, 72px);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.82) 0%, rgba(0, 0, 0, 0.6) 55%, rgba(0, 0, 0, 0) 100%);
+    transition: opacity var(--dissolve) linear;
+}
+
+/* The whole tile is the target. The layer sits above the plate and carries the name. */
+.cap-hit {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: block;
+    text-decoration: none;
+}
+
+.cap-photo:hover .cap-veil,
+.cap-photo:hover .cap-plate,
+.cap-photo:focus-within .cap-veil,
+.cap-photo:focus-within .cap-plate,
+.cap-photo.is-press .cap-veil,
+.cap-photo.is-press .cap-plate { opacity: 1; }
+
+.cap-photo:hover .cap-still,
+.cap-photo:focus-within .cap-still,
+.cap-photo.is-press .cap-still { transform: scale(1.06); }
+
+/* The tile clips its own still, so the focus ring has to sit inside the clip. */
+.cap-hit:focus-visible {
+    outline: 3px solid var(--accent);
+    outline-offset: -3px;
+}
+
+/* One accent hairline on the live card. Signal on the border, never a fill. */
+.cap-tile:hover,
+.cap-tile:focus-within,
+.cap-tile.is-press {
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
+}
+
+.cap-type:hover,
+.cap-type:focus-within { background-color: var(--panel-lift); }
+
+/* A coarse pointer has no hover, so the copy sits open at rest instead of hiding.
+   The scrim lightens to match, because the plate is already carrying the contrast. */
+@media (hover: none) {
+    .cap-photo .cap-veil {
+        opacity: 1;
+        background: rgba(0, 0, 0, 0.32);
+    }
+
+    .cap-photo .cap-plate { opacity: 1; }
+}
+
+.cap-code {
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: var(--t-meta);
     font-weight: 700;
     letter-spacing: 0.18em;
+    text-transform: uppercase;
     color: var(--text);
     display: flex;
     align-items: center;
     gap: 12px;
 }
 
-/* Track-list rule: catalog code, then a hairline running out to the edge. */
-.card-step::after {
+/* Caption plate energy: catalog code, then a hairline running out to the edge. */
+.cap-code::after {
     content: "";
     flex: 1;
     height: 1px;
     background: var(--hair);
 }
 
-.card-title {
+.cap-title {
     font-size: 14px;
     font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+    color: var(--white);
     margin: 12px 0 14px;
 }
 
-.card-body { font-size: 15px; color: var(--muted); }
+.cap-body {
+    font-size: 15px;
+    color: var(--muted);
+    max-width: 40ch;
+}
+
+.cap-photo .cap-body { color: var(--near); }
+
+.cap-act { margin-top: var(--space-20); }
+
+/* Outlined at rest. The fill only arrives when the card is under the pointer. */
+.cap-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-height: 36px;
+    padding: 8px 14px;
+    border: 1px solid var(--hair-lift);
+    border-radius: var(--r);
+    font-family: var(--mono);
+    font-size: var(--t-meta);
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--white);
+    background: transparent;
+    transition: background-color var(--hover), border-color var(--hover), color var(--hover);
+}
+
+.cap-tile:hover .cap-chip,
+.cap-tile:focus-within .cap-chip,
+.cap-tile.is-press .cap-chip {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #000000;
+}
+
+.cap-arrow {
+    display: inline-block;
+    transition: transform var(--hover);
+}
+
+.cap-tile:hover .cap-arrow,
+.cap-tile:focus-within .cap-arrow { transform: translateX(4px); }
+
+/* The statement plate. Type only, one accent rule, no orange field. */
+.cap-note .cap-plate,
+.cap-integration .cap-plate {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+}
+
+.note-rule {
+    display: block;
+    width: 34px;
+    height: 2px;
+    background: var(--accent);
+    margin-bottom: var(--space-20);
+}
+
+.note-title {
+    font-size: clamp(23px, 2.6vw, 34px);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin: 0 0 14px;
+}
+
+.cap-note .cap-body { max-width: 26ch; }
 
 /* ---------------------------------------------------------------- why */
 
@@ -907,9 +966,17 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     max-width: 100%;
     margin: 0;
     overflow: hidden;
-    border: 1px solid var(--hair);
+    border: 1px solid var(--hairline);
     border-radius: var(--r);
-    transition: border-color var(--hover), box-shadow var(--hover), transform var(--hover);
+    transform: scale(1);
+    transition: border-color var(--hover), box-shadow var(--hover), transform var(--settle);
+}
+
+.still-plate:hover,
+.still-plate:focus-within,
+.still-plate.is-press {
+    border-color: var(--accent);
+    box-shadow: inset 0 0 0 1px var(--accent);
 }
 
 .why-still {
@@ -923,12 +990,17 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
 .still-plate:hover .why-still,
 .still-plate:focus-within .why-still { transform: scale(1.06); }
 
-.still-plate:active { transform: scale(0.97); transition-duration: 120ms; }
+.still-plate.is-press { transform: scale(0.97); transition: transform var(--press-in); }
 
 /* Cinematic clip reveal: the still wipes open, the frame stays put. */
 .js-motion .why-row .still-plate {
     clip-path: inset(0 0 0 0);
-    transition: clip-path 0.9s var(--ease), border-color var(--hover), box-shadow var(--hover), transform var(--hover);
+    transition: clip-path 0.9s var(--ease), border-color var(--hover), box-shadow var(--hover), transform var(--settle);
+}
+
+.js-motion .why-row .still-plate.is-press {
+    transform: scale(0.97);
+    transition: transform var(--press-in), border-color var(--hover), box-shadow var(--hover);
 }
 
 .js-motion .why-row:not(.is-in) .still-plate {
@@ -980,7 +1052,7 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     font-weight: 400;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #e6e6e3;
+    color: var(--near);
     background: rgba(255, 255, 255, 0.035);
     border: 1px solid var(--hair);
     border-radius: var(--r);
@@ -1151,6 +1223,8 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
 
 .form-pin { padding-top: var(--space-12); }
 
+/* The confirmation is a sheet. It rises on a damping of 1.0, never overshoots,
+   and it leaves along the same path it arrived on. */
 .form-message {
     display: none;
     margin-top: var(--space-24);
@@ -1158,9 +1232,17 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     background: var(--panel);
     border: 1px solid var(--rule);
     border-radius: var(--r);
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 200ms var(--ease), transform var(--settle);
 }
 
 .form-message.show { display: block; }
+
+.form-message.is-open {
+    opacity: 1;
+    transform: none;
+}
 .form-message.success { border-color: var(--accent); }
 .form-message.error { border-left: 3px solid var(--accent); }
 .form-message a { color: var(--accent); text-decoration: underline; }
@@ -1193,6 +1275,15 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
 
 .aside-item a { color: var(--white); text-decoration: none; box-shadow: inset 0 -1px 0 var(--accent); }
 .aside-item a:hover { color: var(--accent); }
+
+.aside-item .aside-note {
+    font-family: var(--mono);
+    font-size: var(--t-meta);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 12px;
+}
 
 /* Contact mosaic. Same hairline logic as the floor. */
 .contact-stack {
@@ -1376,21 +1467,21 @@ footer {
 /* ---------------------------------------------------------------- glass */
 
 @media (max-width: 1200px) {
-    .bento {
+    /* Two columns, still uneven: the truck stays wide, the racks stay tall. */
+    .cap-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        grid-template-rows: auto;
-        min-height: 0;
+        grid-template-rows:
+            clamp(220px, 26vw, 300px)
+            clamp(170px, 20vw, 220px)
+            clamp(170px, 20vw, 220px);
     }
-    .bento-logistics { grid-column: 1; grid-row: 1 / 3; min-height: 360px; }
-    .bento-integration { grid-column: 2; grid-row: 1 / 3; min-height: 360px; }
-    .bento-proc { grid-column: 1; grid-row: 3; }
-    .bento-fulfill { grid-column: 2; grid-row: 3; }
-    .bento-pop { grid-column: 1; grid-row: 4; min-height: 220px; }
-    .bento-cloud { grid-column: 2; grid-row: 4; }
-    .bento-location { grid-column: 1 / 3; grid-row: 5; }
+    .cap-procurement { grid-column: 1; grid-row: 1 / 3; }
+    .cap-logistics { grid-column: 2; grid-row: 1; }
+    .cap-fulfillment { grid-column: 2; grid-row: 2 / 4; }
+    .cap-note { grid-column: 1; grid-row: 3; }
+    .cap-integration { grid-column: 1 / 3; grid-row: 4; min-height: 240px; }
 
     .pitch-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .how-rail { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: clamp(28px, 4vw, 44px); }
 }
 
 @media (max-width: 1024px) {
@@ -1433,24 +1524,24 @@ footer {
     }
 
     .pitch-grid,
-    .how-rail,
     .contact-stack,
     .footer-cols { grid-template-columns: 1fr; }
 
-    .bento { grid-template-columns: 1fr; min-height: 0; }
-    .bento-logistics,
-    .bento-location,
-    .bento-proc,
-    .bento-fulfill,
-    .bento-pop,
-    .bento-integration,
-    .bento-cloud {
+    .cap-grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: none;
+    }
+    .cap-procurement,
+    .cap-logistics,
+    .cap-fulfillment,
+    .cap-integration,
+    .cap-note {
         grid-column: 1;
         grid-row: auto;
-        min-height: 0;
     }
-    .bento-logistics,
-    .bento-integration { min-height: 300px; }
+    .cap-photo { min-height: 0; aspect-ratio: 4 / 3; }
+    .cap-integration,
+    .cap-note { min-height: 240px; }
 
     .why-row,
     .why-row-flip,
@@ -1470,7 +1561,7 @@ footer {
     .hero h1,
     .band h2:not(.visually-hidden) { max-width: none; }
 
-    .frame-2x2 { padding: 10px; }
+    .floor-frame { padding: 10px; }
     .crop-coord-tl { top: -20px; left: 10px; }
     .crop-coord-br { bottom: -20px; right: 10px; }
 
@@ -1499,26 +1590,33 @@ footer {
         stroke-dashoffset: 0 !important;
     }
 
+    /* Scale, lift, wipe, and overshoot all go. */
     .reveal > *,
+    .clip,
+    .clip-in,
     .pitch-item,
-    .how-cell,
-    .bento-tile,
-    .bento-caption,
-    .bento-image,
-    .bento-photo:active,
+    .cap-tile,
+    .cap-tile.is-press,
+    .cap-still,
+    .cap-photo:hover .cap-still,
+    .cap-arrow,
     .contact-cell,
     .still-plate,
-    .still-plate:active,
+    .still-plate.is-press,
     .why-row .still-plate,
+    .why-row .still-plate.is-press,
     .why-row .why-still,
     .why-row .why-copy,
     .why-row .why-num,
     .still-plate:hover .why-still,
-    .bento-photo:hover .bento-image,
     .cta,
+    .cta.is-press,
+    .cta:active,
     .cta-arrow,
     .cta:hover .cta-arrow,
-    button[type="submit"] {
+    button[type="submit"],
+    button[type="submit"].is-press,
+    button[type="submit"]:active {
         transition: none !important;
         transform: none !important;
         animation: none !important;
@@ -1526,35 +1624,53 @@ footer {
     }
 
     .reveal > *,
+    .clip,
+    .clip-in,
     .pitch-item,
-    .how-cell,
-    .bento-tile,
+    .cap-tile,
     .why-row .why-copy,
     .why-row .why-num { opacity: 1 !important; }
 
-    .cta:active,
-    button[type="submit"]:active { transform: none; }
+    .clip { overflow: visible; }
+
+    /* The 80ms card Focus dissolve stays. It is how the copy arrives at all. */
+    .cap-veil,
+    .cap-photo .cap-plate,
+    .form-message {
+        transition: opacity var(--dissolve) linear !important;
+        transform: none !important;
+    }
+
+    .cap-chip {
+        transition: background-color var(--dissolve) linear, border-color var(--dissolve) linear, color var(--dissolve) linear !important;
+    }
 }
 
 @media (prefers-reduced-transparency: reduce) {
-    .bento-caption { background: #000; }
-    .site-head.is-stuck { background: #000; backdrop-filter: none; -webkit-backdrop-filter: none; }
+    /* No wash and no falloff. The plate is a solid black bar under the still. */
+    .cap-veil { display: none; }
+
+    .cap-photo .cap-plate {
+        background: #000000;
+        padding-top: clamp(20px, 2.2vw, 30px);
+    }
+
+    .site-head.is-stuck { background: #000000; }
     .grain::after,
-    .canvas-grain,
-    .bento-pop::after { opacity: 0.08; mix-blend-mode: normal; }
+    .canvas-grain { opacity: 0.08; mix-blend-mode: normal; }
 }
 
 @media (prefers-contrast: more) {
     .ground-grid,
     .canvas-grain { opacity: 0; }
-    .bento,
+    .cap-tile,
     .contact-stack,
     .form-group input,
     .still-plate,
-    .frame-2x2,
+    .floor-frame,
     .waybill { border-color: #fff; }
-    .bento,
     .contact-stack { background: #fff; }
+    .cap-photo .cap-plate { background: #000000; }
     :focus-visible { outline-width: 4px; }
 }
 
