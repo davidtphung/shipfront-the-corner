@@ -112,7 +112,7 @@ nav {
 .logo .mark {
     display: block;
     width: 20px;
-    height: 23px;
+    height: 20px;
     flex: 0 0 20px;
 }
 
@@ -216,7 +216,7 @@ main {
 .hero-mark {
     display: block;
     width: 48px;
-    height: 56px;
+    height: 48px;
     flex: 0 0 48px;
     margin-bottom: 0.12em;
 }
