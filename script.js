@@ -1,72 +1,152 @@
-// THE CORNER - Shipfront Terminal
-// 80ms rest-is-image. Cubic-bezier press 0.97 / 50ms. No spring.
+// THE CORNER - 80ms rest-is-image. Section enter once. No spring. No GSAP.
 
-document.addEventListener('DOMContentLoaded', function() {
-    const quoteForm = document.getElementById('quote-form');
+document.addEventListener("DOMContentLoaded", function () {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    if (quoteForm) {
-        quoteForm.addEventListener('submit', function(e) {
+    if (!reduce) {
+        document.documentElement.classList.add("js-motion");
+    }
+
+    const form = document.getElementById("quote-form");
+    if (form) {
+        form.addEventListener("submit", function (e) {
             e.preventDefault();
+            const box = document.getElementById("form-message");
+            const name = document.getElementById("name");
+            const email = document.getElementById("email");
+            const company = document.getElementById("company");
+            const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
 
-            const formMessage = document.getElementById('form-message');
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const company = document.getElementById('company').value;
+            setFieldError(name, name.value.trim() ? "" : "Enter your name.");
+            setFieldError(email, email.value.trim() ? (emailOk ? "" : "Enter an email with an @ and a domain.") : "Enter your email.");
+            setFieldError(company, company.value.trim() ? "" : "Enter your company.");
 
-            if (name && email && company) {
-                formMessage.className = 'form-message show success';
-                formMessage.innerHTML = `
-                    <strong>This preview does not send.</strong><br><br>
-                    Your request would be sent to <a href="mailto:info@myshipfront.com" style="color: #FF6A00;">info@myshipfront.com</a> with the following details:<br><br>
-                    Name: ${escapeHtml(name)}<br>
-                    Email: ${escapeHtml(email)}<br>
-                    Company: ${escapeHtml(company)}
-                `;
+            const firstBad = [name, email, company].find(function (field) {
+                return field.getAttribute("aria-invalid") === "true";
+            });
 
-                quoteForm.reset();
-            } else {
-                formMessage.className = 'form-message show';
-                formMessage.innerHTML = '<strong>Please fill out all fields.</strong>';
+            if (firstBad) {
+                box.className = "form-message show error";
+                box.removeAttribute("role");
+                box.innerHTML = "<strong>Check the fields above.</strong> Name, email, and company are required.";
+                firstBad.focus();
+                return;
             }
+
+            box.className = "form-message show success";
+            box.setAttribute("role", "status");
+            box.innerHTML =
+                "<strong>This preview does not send.</strong><br><br>" +
+                "Your request would go to <a href=\"mailto:info@myshipfront.com\">info@myshipfront.com</a> with Name: " +
+                escapeHtml(name.value.trim()) + ", Email: " + escapeHtml(email.value.trim()) + ", Company: " +
+                escapeHtml(company.value.trim()) + ".";
+            form.reset();
+            [name, email, company].forEach(function (field) { setFieldError(field, ""); });
+            box.focus();
         });
     }
 
-    const inputs = document.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
+    document.querySelectorAll("input").forEach(function (input) {
+        input.addEventListener("focus", function () {
+            this.parentElement.classList.add("focused");
         });
-
-        input.addEventListener('blur', function() {
-            this.parentElement.classList.remove('focused');
+        input.addEventListener("blur", function () {
+            this.parentElement.classList.remove("focused");
+        });
+        input.addEventListener("input", function () {
+            if (this.getAttribute("aria-invalid") === "true") {
+                setFieldError(this, "");
+            }
         });
     });
+
+    const head = document.querySelector(".site-head");
+    if (head) {
+        const setStuck = function () {
+            head.classList.toggle("is-stuck", window.scrollY > 24);
+        };
+        setStuck();
+        window.addEventListener("scroll", setStuck, { passive: true });
+    }
+
+    const nodes = document.querySelectorAll(".reveal");
+    const tiles = document.querySelectorAll(".bento-tile, .pitch-item, .how-cell");
+    const rows = document.querySelectorAll(".why-row");
+
+    if (reduce || !("IntersectionObserver" in window)) {
+        nodes.forEach(function (node) { node.classList.add("is-in"); });
+        tiles.forEach(function (tile) { tile.classList.add("is-in"); });
+        rows.forEach(function (row) { row.classList.add("is-in"); });
+        return;
+    }
+
+    const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+                entry.target.classList.add("is-in");
+                io.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.01, rootMargin: "0px 0px -8% 0px" });
+
+    nodes.forEach(function (node) { io.observe(node); });
+    rows.forEach(function (row) { io.observe(row); });
+    tiles.forEach(function (tile) {
+        io.observe(tile);
+        const box = tile.getBoundingClientRect();
+        if (box.top < window.innerHeight && box.bottom > 0) {
+            tile.classList.add("is-in");
+            io.unobserve(tile);
+        }
+    });
+
 });
 
-function escapeHtml(text) {
-    const map = {
-        '&': '&amp;',
-        '<': '&lt;',
-        '>': '&gt;',
-        '"': '&quot;',
-        "'": '&#039;'
-    };
-    return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+function setFieldError(input, message) {
+    const err = document.getElementById(input.id + "-error");
+    if (!err) return;
+    if (message) {
+        input.setAttribute("aria-invalid", "true");
+        err.textContent = message;
+    } else {
+        input.removeAttribute("aria-invalid");
+        err.textContent = "";
+    }
 }
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-        if (targetId === '#') return;
+function escapeHtml(text) {
+    return text.replace(/[&<>"']/g, function (m) {
+        return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[m];
+    });
+}
 
-        const target = document.querySelector(targetId);
-        if (target) {
-            e.preventDefault();
-
-            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-            target.scrollIntoView({
-                behavior: prefersReducedMotion ? 'auto' : 'smooth'
-            });
+document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener("click", function (e) {
+        const id = this.getAttribute("href");
+        if (id === "#") return;
+        const target = document.querySelector(id);
+        if (!target) return;
+        e.preventDefault();
+        const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        const header = document.querySelector(".site-head");
+        const offset = header ? header.offsetHeight : 0;
+        const top = target.getBoundingClientRect().top + window.scrollY - offset;
+        target.setAttribute("tabindex", "-1");
+        if (reduce || id !== "#why") {
+            window.scrollTo({ top: top, behavior: reduce ? "auto" : "smooth" });
+            target.focus({ preventScroll: true });
+            return;
         }
+        const start = window.scrollY;
+        const dist = top - start;
+        const dur = 200;
+        const t0 = performance.now();
+        function step(now) {
+            const t = Math.min(1, (now - t0) / dur);
+            window.scrollTo(0, start + dist * t);
+            if (t < 1) requestAnimationFrame(step);
+            else target.focus({ preventScroll: true });
+        }
+        requestAnimationFrame(step);
     });
 });
