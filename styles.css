@@ -189,10 +189,13 @@ nav {
 
 .logo svg {
     display: block;
-    width: 20px;
-    height: 20px;
-    flex: 0 0 20px;
-    transition: transform var(--hover);
+    width: 32px;
+    height: 32px;
+    flex: 0 0 32px;
+    overflow: visible;
+    /* Rest yaw so the 2G cube reads as a cube, not a 20px square. */
+    transform: perspective(420px) rotateY(-8deg);
+    transition: transform 180ms ease-out;
 }
 
 /* Nav mark answers with a short yaw. No spin circus. */
