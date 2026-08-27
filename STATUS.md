@@ -16,7 +16,7 @@ The Shipfront marketing site is **fully built and ready to deploy**. All code is
    - Black (#000000) background
    - White text
    - Orange (#FF6A00) accent
-   - 2G YAW isometric wire cube logo (true isometric, yawed)
+   - 2G YAW isometric wire cube logo (unit cube, true 30° isometric, square viewBox)
    - SHIPFRONT wordmark
    - "You Sell. We Ship." tagline
    - CTA buttons: Orange fill, BLACK text (7.31:1 contrast)

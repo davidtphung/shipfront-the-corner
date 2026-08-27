@@ -23,7 +23,7 @@ The site is deployed on the `gh-pages` branch. To enable GitHub Pages:
 - **Type**: White
 - **Accent**: #FF6A00 (Timetable orange)
 - **Typography**: Grotesque hierarchy (Inter fallback), bold headlines, readable body, mono for labels/nav/buttons
-- **Logo**: THE CORNER 2G YAW - True isometric wire cube, yawed, orange #FF6A00
+- **Logo**: THE CORNER 2G YAW — unit cube, true 30° isometric (vertical corner leads), square viewBox, orange #FF6A00
 - **Wordmark**: SHIPFRONT (white)
 - **Tagline**: You Sell. We Ship.
 
