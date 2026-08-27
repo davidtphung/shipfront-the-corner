@@ -99,7 +99,7 @@ function closeSheet(box) {
 function bindForm() {
     const form = document.getElementById("quote-form");
 
-    document.querySelectorAll("input").forEach(function (input) {
+    document.querySelectorAll("input, textarea").forEach(function (input) {
         input.addEventListener("focus", function () {
             this.parentElement.classList.add("focused");
         });
@@ -122,14 +122,18 @@ function bindForm() {
         const box = document.getElementById("form-message");
         const name = document.getElementById("name");
         const email = document.getElementById("email");
+        const phone = document.getElementById("phone");
         const company = document.getElementById("company");
+        const website = document.getElementById("website");
+        const message = document.getElementById("message");
         const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
+        const phoneOk = phone.value.replace(/\D/g, "").length >= 7;
 
         setFieldError(name, name.value.trim() ? "" : "Enter your name.");
         setFieldError(email, email.value.trim() ? (emailOk ? "" : "Enter an email with an @ and a domain.") : "Enter your email.");
-        setFieldError(company, company.value.trim() ? "" : "Enter your company.");
+        setFieldError(phone, phone.value.trim() ? (phoneOk ? "" : "Enter a phone number.") : "Enter your phone.");
 
-        const firstBad = [name, email, company].find(function (field) {
+        const firstBad = [name, email, phone].find(function (field) {
             return field.getAttribute("aria-invalid") === "true";
         });
 
@@ -139,22 +143,30 @@ function bindForm() {
         if (firstBad) {
             box.className = "form-message error" + open;
             box.removeAttribute("role");
-            box.innerHTML = "<strong>Check the fields above.</strong> Name, email, and company are required.";
+            box.innerHTML = "<strong>Check the fields above.</strong> Name, email, and phone are required.";
             openSheet(box);
             firstBad.focus();
             return;
         }
 
+        const lines = [
+            "Name: " + escapeHtml(name.value.trim()),
+            "Email: " + escapeHtml(email.value.trim()),
+            "Phone: " + escapeHtml(phone.value.trim())
+        ];
+        if (company.value.trim()) lines.push("Company Name: " + escapeHtml(company.value.trim()));
+        if (website.value.trim()) lines.push("Website: " + escapeHtml(website.value.trim()));
+        if (message.value.trim()) lines.push("Message: " + escapeHtml(message.value.trim()));
+
         box.className = "form-message success" + open;
         box.setAttribute("role", "status");
         box.innerHTML =
             "<strong>This preview does not send.</strong><br><br>" +
-            "Your request would go to <a href=\"mailto:info@myshipfront.com\">info@myshipfront.com</a> with Name: " +
-            escapeHtml(name.value.trim()) + ", Email: " + escapeHtml(email.value.trim()) + ", Company: " +
-            escapeHtml(company.value.trim()) + ".";
+            "Your request would go to <a href=\"mailto:info@myshipfront.com\">info@myshipfront.com</a> with " +
+            lines.join(", ") + ".";
         openSheet(box);
         form.reset();
-        [name, email, company].forEach(function (field) { setFieldError(field, ""); });
+        [name, email, phone].forEach(function (field) { setFieldError(field, ""); });
         box.focus();
     });
 }

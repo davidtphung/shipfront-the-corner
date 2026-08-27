@@ -11,7 +11,7 @@ Live site: [https://davidtphung.github.io/shipfront-the-corner/](https://davidtp
 - **Type**: White
 - **Accent**: #FF6A00 (Timetable orange)
 - **Typography**: Grotesque hierarchy (Inter fallback), bold headlines, readable body, mono for labels/nav/buttons
-- **Logo**: THE CORNER 2G YAW - True isometric wire cube, yawed, orange #FF6A00
+- **Logo**: Hard-line isometric box. Faces #000. Stroke #FF6A00. Top + two sides at a front vertical edge.
 - **Wordmark**: SHIPFRONT (white)
 - **Tagline**: You Sell. We Ship.
 
