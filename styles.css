@@ -187,20 +187,14 @@ nav {
     text-decoration: none;
 }
 
+.logo .mark,
 .logo svg {
     display: block;
     width: 32px;
     height: 32px;
     flex: 0 0 32px;
-    overflow: visible;
-    /* Rest yaw so the 2G cube reads as a cube, not a 20px square. */
-    transform: perspective(420px) rotateY(-8deg);
-    transition: transform 180ms ease-out;
+    overflow: hidden;
 }
-
-/* Nav mark answers with a short yaw. No spin circus. */
-.logo:hover svg,
-.logo:focus-visible svg { transform: perspective(420px) rotateY(12deg); }
 
 .wordmark {
     font-weight: 700;
@@ -389,6 +383,13 @@ h1, h2, h3 {
     margin: 0 auto;
 }
 
+@media (min-width: 1100px) {
+    /* Keep type out of the cube. The cube sits in the right gutter. */
+    .hero-copy {
+        padding-right: calc(min(200px, 22vw) + 48px);
+    }
+}
+
 .hero-actions,
 .close-actions {
     display: flex;
@@ -460,29 +461,18 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
 }
 
 .hero-cube-wrap {
+    display: none;
     position: absolute;
-    right: 7%;
+    right: var(--gutter);
     top: 50%;
-    z-index: 2;
-    width: min(280px, 34vw);
-    transform-origin: 50% 50%;
-    margin-top: -140px;
-    transform: perspective(1100px) rotateY(0deg);
+    z-index: 0;
+    width: min(200px, 22vw);
+    margin-top: calc(min(200px, 22vw) / -2);
+    pointer-events: none;
 }
 
-/* CORNER's move: the cube rocks on its yaw. It never completes a spin. */
-.js-motion .hero-cube-wrap {
-    animation: yaw-rock 16s linear infinite alternate;
-}
-
-.js-motion .hero-cube-wrap:hover,
-.js-motion .hero-cube-wrap:focus-within {
-    animation-duration: 4s;
-}
-
-@keyframes yaw-rock {
-    from { transform: perspective(1100px) rotateY(-16deg); }
-    to { transform: perspective(1100px) rotateY(16deg); }
+@media (min-width: 1100px) {
+    .hero-cube-wrap { display: block; }
 }
 
 /* Same paths, same accent. Thin stroke so the large instance reads as wire, not slab. */
@@ -1518,13 +1508,8 @@ footer {
     .nav-links li:nth-child(3) { order: 2; }
 
     .hero { min-height: 0; }
-    .hero-cube-wrap {
-        width: min(150px, 42vw);
-        right: 4%;
-        top: auto;
-        bottom: -8px;
-        margin-top: 0;
-    }
+    .hero-copy { padding-right: 0; }
+    .hero-cube-wrap { display: none; }
 
     .pitch-grid,
     .contact-stack,
