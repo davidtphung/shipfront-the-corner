@@ -9,76 +9,115 @@
     <link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles.css?v=cap1">
+    <meta name="theme-color" content="#000000">
+    <meta name="color-scheme" content="dark">
 </head>
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
+    <div class="ground-grid" aria-hidden="true"></div>
+    <div class="canvas-grain" aria-hidden="true"></div>
 
-    <header role="banner">
-        <nav role="navigation" aria-label="Main navigation">
+    <header class="site-head" role="banner">
+        <nav aria-label="Main navigation">
             <a href="../" class="logo" aria-label="Shipfront home">
-                <svg class="mark" width="20" height="23" viewBox="25 25 70 100" aria-hidden="true">
-                    <g stroke="#FF6A00" stroke-width="1.25" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-                        <path d="M30,45 L60,30 L90,45 L90,75 L60,90 L30,75 Z"/>
-                        <path d="M30,75 L30,105"/>
-                        <path d="M60,90 L60,120"/>
-                        <path d="M90,75 L90,105"/>
-                        <path d="M30,105 L60,120"/>
-                        <path d="M60,120 L90,105"/>
-                        <path d="M90,105 L30,105"/>
-                        <path d="M30,45 L30,75"/>
-                        <path d="M60,30 L60,90"/>
-                        <path d="M90,45 L90,75"/>
-                        <path d="M30,75 L60,90"/>
-                        <path d="M60,90 L90,75"/>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g stroke="#FF6A00" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter">
+                        <path d="M8 8 L15 5 L20 10 L20 16 L13 19 L8 14 Z"/>
+                        <path d="M8 8 L13 11 L20 10"/>
+                        <path d="M13 11 L13 19"/>
+                        <path d="M8 14 L13 11 L20 16"/>
                     </g>
                 </svg>
                 <span class="wordmark">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
-                <li><a href="../#why">Why Shipfront</a></li>
+                <li><a href="../">Home</a></li>
+                <li><a href="../quote/" class="cta" aria-current="page">Get a Quote</a></li>
                 <li><a href="../contact/">Contact</a></li>
-                <li><a href="../quote/" class="cta-button" aria-current="page">Get a Quote</a></li>
             </ul>
         </nav>
     </header>
 
-    <main id="main" role="main">
-        <section class="form-page">
-            <div class="form-container">
-                <p class="eyebrow">QUOTE</p>
-                <h1>GET A QUOTE</h1>
-                <p class="form-intro">Name, email, and company. This preview does not send. Use info@myshipfront.com if you want the note to land.</p>
-
+    <main id="main" class="page-shell" tabindex="-1">
+        <div class="page-head">
+            <div class="band-inner reveal">
+                <p class="eyebrow">Quote</p>
+                <h1 class="clip-line"><span class="clip"><span class="clip-in">Get a quote</span></span></h1>
+                <p class="band-lead">Name, email, and company. That is the whole ask. A person at Shipfront replies.</p>
+            </div>
+        </div>
+        <div class="page-panel">
+            <div class="page-split">
                 <form id="quote-form" class="quote-form" novalidate>
                     <div class="form-group">
-                        <label for="name">NAME</label>
-                        <input type="text" id="name" name="name" required aria-required="true">
+                        <label for="name">Name</label>
+                        <input id="name" name="name" type="text" required aria-required="true" autocomplete="name" spellcheck="false" aria-describedby="name-error">
+                        <p id="name-error" class="field-error"></p>
                     </div>
-
                     <div class="form-group">
-                        <label for="email">EMAIL</label>
-                        <input type="email" id="email" name="email" required aria-required="true">
+                        <label for="email">Email</label>
+                        <input id="email" name="email" type="email" required aria-required="true" autocomplete="email" spellcheck="false" inputmode="email" aria-describedby="email-error">
+                        <p id="email-error" class="field-error"></p>
                     </div>
-
                     <div class="form-group">
-                        <label for="company">COMPANY</label>
-                        <input type="text" id="company" name="company" required aria-required="true">
+                        <label for="company">Company</label>
+                        <input id="company" name="company" type="text" required aria-required="true" autocomplete="organization" spellcheck="false" aria-describedby="company-error">
+                        <p id="company-error" class="field-error"></p>
                     </div>
-
-                    <button type="submit" class="cta-button">SUBMIT REQUEST</button>
+                    <div class="form-pin">
+                        <button type="submit" class="cta">Submit request <span class="cta-arrow" aria-hidden="true">&rarr;</span></button>
+                        <div id="form-message" class="form-message" tabindex="-1"></div>
+                    </div>
                 </form>
 
-                <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
+                <aside class="aside-rail" aria-label="Before you send">
+                    <div class="aside-item">
+                        <h2>Where it lands</h2>
+                        <p>This preview does not send. Use <a href="mailto:info@myshipfront.com">info@myshipfront.com</a> if you want the note to arrive.</p>
+                        <p class="aside-note">Three fields. Email only. No phone.</p>
+                    </div>
+                    <div class="aside-item">
+                        <h2>The floor</h2>
+                        <address>1933 S. Broadway<br>Los Angeles, CA 90007</address>
+                    </div>
+                    <div class="aside-item">
+                        <h2>Hours</h2>
+                        <p>Monday through Friday, 9 am to 5 pm. Saturday and Sunday, appointment only.</p>
+                    </div>
+                    <div class="aside-item">
+                        <h2>Scope</h2>
+                        <p>Warehousing, fulfillment, and eCommerce integrations. Not the port. Not the van.</p>
+                    </div>
+                </aside>
             </div>
-        </section>
+        </div>
     </main>
 
     <footer role="contentinfo">
-        <p>Built by David T Phung</p>
+        <div class="footer-inner">
+            <p class="footer-mark">SHIPFRONT</p>
+            <div class="footer-cols">
+                <div class="footer-col">
+                    <h2>Site</h2>
+                    <a href="../">Home</a>
+                    <a href="../quote/">Get a Quote</a>
+                    <a href="../contact/">Contact</a>
+                </div>
+                <div class="footer-col">
+                    <h2>Visit</h2>
+                    <p class="footer-note">1933 S. Broadway<br>Los Angeles, CA 90007</p>
+                    <p class="footer-note">Monday through Friday, 9 am to 5 pm.</p>
+                </div>
+                <div class="footer-col">
+                    <h2>Contact</h2>
+                    <a href="mailto:info@myshipfront.com">info@myshipfront.com</a>
+                </div>
+            </div>
+        </div>
+        <p class="footer-credit">Built by David T Phung</p>
     </footer>
-
-    <script src="../script.js"></script>
+    <script src="../script.js?v=cap1"></script>
 </body>
 </html>
