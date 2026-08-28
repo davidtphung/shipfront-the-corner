@@ -154,6 +154,7 @@ nav {
     text-underline-offset: 6px;
 }
 
+.nav-links a.cta-button,
 .cta-button {
     background-color: var(--orange);
     color: #000000;
@@ -174,6 +175,7 @@ nav {
     transition: transform var(--press), opacity var(--transition-fast) ease;
 }
 
+.nav-links a.cta-button:hover,
 .cta-button:hover {
     opacity: 0.92;
     color: #000000;
@@ -183,6 +185,8 @@ nav {
     transform: scale(0.97);
 }
 
+.nav-links a.cta-button:visited,
+.nav-links a.cta-button[aria-current="page"],
 .cta-button[aria-current="page"] {
     color: #000000;
 }
