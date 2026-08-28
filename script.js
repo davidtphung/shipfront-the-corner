@@ -1,6 +1,3 @@
-// THE CORNER - Shipfront Terminal
-// 80ms rest-is-image. Cubic-bezier press 0.97 / 50ms. No spring.
-
 document.addEventListener('DOMContentLoaded', function() {
     const quoteForm = document.getElementById('quote-form');
 
@@ -14,14 +11,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const company = document.getElementById('company').value;
 
             if (name && email && company) {
-                formMessage.className = 'form-message show success';
-                formMessage.innerHTML = `
-                    <strong>This preview does not send.</strong><br><br>
-                    Your request would be sent to <a href="mailto:info@myshipfront.com" style="color: #FF6A00;">info@myshipfront.com</a> with the following details:<br><br>
-                    Name: ${escapeHtml(name)}<br>
-                    Email: ${escapeHtml(email)}<br>
-                    Company: ${escapeHtml(company)}
-                `;
+                formMessage.className = 'form-message show';
+                formMessage.innerHTML = [
+                    '<strong>This preview does not send.</strong><br><br>',
+                    'Your request would be sent to <a href="mailto:info@myshipfront.com">info@myshipfront.com</a> with the following details:<br><br>',
+                    'Name: ' + escapeHtml(name) + '<br>',
+                    'Email: ' + escapeHtml(email) + '<br>',
+                    'Company: ' + escapeHtml(company)
+                ].join('');
 
                 quoteForm.reset();
             } else {
@@ -30,17 +27,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
-
-    const inputs = document.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.addEventListener('focus', function() {
-            this.parentElement.classList.add('focused');
-        });
-
-        input.addEventListener('blur', function() {
-            this.parentElement.classList.remove('focused');
-        });
-    });
 });
 
 function escapeHtml(text) {
@@ -54,7 +40,7 @@ function escapeHtml(text) {
     return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
     anchor.addEventListener('click', function(e) {
         const targetId = this.getAttribute('href');
         if (targetId === '#') return;

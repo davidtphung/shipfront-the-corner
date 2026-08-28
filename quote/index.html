@@ -18,23 +18,19 @@
     <header role="banner">
         <nav role="navigation" aria-label="Main navigation">
             <a href="../" class="logo" aria-label="Shipfront home">
-                <svg class="mark" width="20" height="23" viewBox="25 25 70 100" aria-hidden="true">
-                    <g stroke="#FF6A00" stroke-width="1.25" fill="none" stroke-linecap="square" stroke-linejoin="miter">
-                        <path d="M30,45 L60,30 L90,45 L90,75 L60,90 L30,75 Z"/>
-                        <path d="M30,75 L30,105"/>
-                        <path d="M60,90 L60,120"/>
-                        <path d="M90,75 L90,105"/>
-                        <path d="M30,105 L60,120"/>
-                        <path d="M60,120 L90,105"/>
-                        <path d="M90,105 L30,105"/>
-                        <path d="M30,45 L30,75"/>
-                        <path d="M60,30 L60,90"/>
-                        <path d="M90,45 L90,75"/>
-                        <path d="M30,75 L60,90"/>
-                        <path d="M60,90 L90,75"/>
+                <svg class="mark" width="24" height="26" viewBox="0 0 24 26" aria-hidden="true">
+                    <polygon fill="#000000" points="12,6 17,9 12,12 7,9"/>
+                    <polygon fill="#000000" points="7,9 12,12 12,19 7,16"/>
+                    <polygon fill="#000000" points="17,9 12,12 12,19 17,16"/>
+                    <g fill="none" stroke="#FF6A00" stroke-width="1.25" stroke-linecap="square" stroke-linejoin="miter">
+                        <path d="M7 9 L12 6 L17 9 L12 12 Z"/>
+                        <path d="M7 9 L7 16 L12 19 L17 16 L17 9"/>
+                        <path d="M12 12 L12 19"/>
+                        <path d="M12 6 L12 13 L7 16"/>
+                        <path d="M12 13 L17 16"/>
                     </g>
                 </svg>
-                <span class="wordmark">SHIPFRONT</span>
+                <span class="wordmark-bar">SHIPFRONT</span>
             </a>
             <ul class="nav-links">
                 <li><a href="../#why">Why Shipfront</a></li>
@@ -47,27 +43,27 @@
     <main id="main" role="main">
         <section class="form-page">
             <div class="form-container">
-                <p class="eyebrow">QUOTE</p>
-                <h1>GET A QUOTE</h1>
-                <p class="form-intro">Name, email, and company. This preview does not send. Use info@myshipfront.com if you want the note to land.</p>
+                <p class="eyebrow">Get a Quote</p>
+                <h1>Fast &amp; Easy Quotes</h1>
+                <p class="form-intro">Please take a moment to give us some information. We have expert agents standing by to take care of your logistics needs.</p>
 
                 <form id="quote-form" class="quote-form" novalidate>
                     <div class="form-group">
-                        <label for="name">NAME</label>
-                        <input type="text" id="name" name="name" required aria-required="true">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required aria-required="true" autocomplete="name">
                     </div>
 
                     <div class="form-group">
-                        <label for="email">EMAIL</label>
-                        <input type="email" id="email" name="email" required aria-required="true">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required aria-required="true" autocomplete="email">
                     </div>
 
                     <div class="form-group">
-                        <label for="company">COMPANY</label>
-                        <input type="text" id="company" name="company" required aria-required="true">
+                        <label for="company">Company</label>
+                        <input type="text" id="company" name="company" required aria-required="true" autocomplete="organization">
                     </div>
 
-                    <button type="submit" class="cta-button">SUBMIT REQUEST</button>
+                    <button type="submit" class="cta-button">Get a Quote</button>
                 </form>
 
                 <div id="form-message" class="form-message" role="status" aria-live="polite"></div>
