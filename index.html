@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./styles.css?v=iso1">
+    <link rel="stylesheet" href="./styles.css?v=line2">
     <meta name="theme-color" content="#000000">
     <meta name="color-scheme" content="dark">
 </head>
@@ -96,6 +96,47 @@
                     <p class="band-lead">Procurement, logistics, fulfillment, integration. One address, one crew. Every card ends at the same place, a quote.</p>
                 </div>
 
+                <div class="floor-draws" aria-hidden="true">
+                    <figure class="floor-draw">
+                        <svg class="floor-svg" viewBox="0 0 320 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g class="stroke-2" data-job="dock">
+                                <rect x="16" y="28" width="70" height="32"/>
+                                <path d="M16 36H8M16 52H8"/>
+                            </g>
+                            <g class="stroke-1" data-job="route">
+                                <path d="M86 44H164"/>
+                                <path d="M154 38L164 44L154 50"/>
+                            </g>
+                            <g class="stroke-1" data-job="hold">
+                                <rect x="176" y="22" width="84" height="44"/>
+                            </g>
+                            <g class="stroke-2" data-job="rack">
+                                <path d="M188 36H248M188 52H248"/>
+                            </g>
+                        </svg>
+                        <figcaption>Freight arrives</figcaption>
+                    </figure>
+                    <figure class="floor-draw">
+                        <svg class="floor-svg" viewBox="0 0 320 88" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g class="stroke-1" data-job="hold">
+                                <rect x="16" y="22" width="84" height="44"/>
+                            </g>
+                            <g class="stroke-2" data-job="rack">
+                                <path d="M28 36H88M28 52H88"/>
+                            </g>
+                            <g class="stroke-1" data-job="route">
+                                <path d="M100 44H178"/>
+                                <path d="M168 38L178 44L168 50"/>
+                            </g>
+                            <g class="stroke-2" data-job="dock">
+                                <rect x="190" y="28" width="70" height="32"/>
+                                <path d="M260 36H268M260 52H268"/>
+                            </g>
+                        </svg>
+                        <figcaption>Orders leave</figcaption>
+                    </figure>
+                </div>
+
                 <div class="floor-frame">
                     <span class="crop-mark crop-tl" aria-hidden="true"></span>
                     <span class="crop-mark crop-tr" aria-hidden="true"></span>
@@ -109,7 +150,15 @@
                             <img class="cap-still" src="./images/procurement.jpg" width="800" height="1080" loading="lazy" decoding="async" alt="Warehouse interior with orange racking, rows of yellow picking bins, and stacked cartons">
                             <span class="cap-veil" aria-hidden="true"></span>
                             <div class="cap-plate">
-                                <p class="cap-code" aria-hidden="true">SF-01</p>
+                                <p class="cap-code" aria-hidden="true">
+                                    <svg class="code-draw" viewBox="0 0 36 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect class="stroke-2" data-job="dock" x="1" y="3" width="12" height="10"/>
+                                        <path class="stroke-1" data-job="route" d="M13 8H26"/>
+                                        <path class="stroke-1" data-job="route" d="M22 5L26 8L22 11"/>
+                                        <rect class="stroke-1" data-job="hold" x="26" y="2" width="9" height="12"/>
+                                    </svg>
+                                    SF-01
+                                </p>
                                 <h3 class="cap-title">Procurement</h3>
                                 <p class="cap-body">They buy. Freight arrives at our floor. Inbound at 1933 S. Broadway.</p>
                                 <p class="cap-act" aria-hidden="true"><span class="cap-chip">Get a Quote <span class="cap-arrow">&rarr;</span></span></p>
@@ -151,7 +200,14 @@
 
                         <article class="cap-tile cap-type cap-integration" style="--i:4">
                             <div class="cap-plate">
-                                <p class="cap-code" aria-hidden="true">SF-04</p>
+                                <p class="cap-code" aria-hidden="true">
+                                    <svg class="code-draw" viewBox="0 0 36 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect class="stroke-2" data-job="connect" x="1" y="3" width="10" height="10"/>
+                                        <path class="stroke-1" data-job="connect" d="M11 8H25"/>
+                                        <rect class="stroke-1" data-job="hold" x="25" y="3" width="10" height="10"/>
+                                    </svg>
+                                    SF-04
+                                </p>
                                 <h3 class="cap-title">Integration</h3>
                                 <p class="cap-body">The store talks to the floor. Nobody rekeys an order.</p>
                                 <p class="cap-act" aria-hidden="true"><span class="cap-chip">Get a Quote <span class="cap-arrow">&rarr;</span></span></p>
@@ -229,12 +285,39 @@
 
                 <div class="why-scope reveal">
                     <h3 class="scope-title">Port to customer. We sit in warehouse and integration.</h3>
-                    <ol class="waybill" aria-label="Value chain">
-                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">PORT</span></li>
-                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">FREIGHT</span></li>
-                        <li class="waybill-step waybill-ours"><span class="waybill-num">OURS</span><span class="waybill-name">WAREHOUSE</span></li>
-                        <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">CUSTOMER</span></li>
-                    </ol>
+                    <div class="route-plate">
+                        <svg class="route-draw" viewBox="0 0 1120 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <g class="stroke-2" data-job="route">
+                                <path d="M180 40H360"/>
+                                <path d="M480 40H620"/>
+                                <path d="M780 40H960"/>
+                            </g>
+                            <g class="stroke-2" data-job="port">
+                                <path d="M140 22V58"/>
+                                <path d="M128 58H152"/>
+                            </g>
+                            <g class="stroke-2" data-job="route">
+                                <path d="M420 22V58"/>
+                                <path d="M408 58H432"/>
+                            </g>
+                            <g class="stroke-1" data-job="warehouse">
+                                <rect x="628" y="16" width="144" height="48"/>
+                            </g>
+                            <g class="stroke-2" data-job="rack">
+                                <path d="M648 32H752M648 48H752"/>
+                            </g>
+                            <g class="stroke-2" data-job="customer">
+                                <path d="M980 22V58"/>
+                                <path d="M968 58H992"/>
+                            </g>
+                        </svg>
+                        <ol class="waybill" aria-label="Value chain">
+                            <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">PORT</span></li>
+                            <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">FREIGHT</span></li>
+                            <li class="waybill-step waybill-ours"><span class="waybill-num">OURS</span><span class="waybill-name">WAREHOUSE</span></li>
+                            <li class="waybill-step"><span class="waybill-num">OUT</span><span class="waybill-name">CUSTOMER</span></li>
+                        </ol>
+                    </div>
                     <p class="waybill-note">Not the crane. Not the van. Warehouse and integration only.</p>
                 </div>
             </div>
