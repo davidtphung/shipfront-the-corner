@@ -506,29 +506,6 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
 .hero-cube-wrap:hover .hero-cube,
 .hero-cube-wrap:focus-within .hero-cube { opacity: 1; }
 
-/* Strokes draw on load. Faces stay filled so the box never opens into a wire. */
-.logo svg .iso-stroke path,
-.hero-cube .iso-stroke path {
-    stroke-dasharray: 60;
-    stroke-dashoffset: 0;
-}
-
-.js-motion .logo svg .iso-stroke path,
-.js-motion .hero-cube .iso-stroke path {
-    animation: mark-draw 1.1s ease-out backwards;
-}
-
-.js-motion .logo svg .iso-stroke path:nth-child(2),
-.js-motion .hero-cube .iso-stroke path:nth-child(2) { animation-delay: 110ms; }
-
-.js-motion .logo svg .iso-stroke path:nth-child(3),
-.js-motion .hero-cube .iso-stroke path:nth-child(3) { animation-delay: 200ms; }
-
-@keyframes mark-draw {
-    from { stroke-dashoffset: 60; }
-    to { stroke-dashoffset: 0; }
-}
-
 /* ---------------------------------------------------------------- pitch */
 
 .pitch-band { padding-top: clamp(8px, 2vw, 24px); }
@@ -637,6 +614,7 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     stroke-linejoin: miter;
 }
 
+/* Locked. No hover, later, print, contrast, or reduced-motion jump to #fff. */
 .stroke-2 {
     stroke: rgba(255, 255, 255, 0.38);
     stroke-width: 1;
@@ -1702,14 +1680,10 @@ footer {
     .hero-cube-wrap,
     .ground-grid { animation: none; }
 
-    /* Static drawn cube. */
     .logo svg,
-    .logo svg .iso-stroke path,
-    .hero-cube,
-    .hero-cube .iso-stroke path {
+    .hero-cube {
         animation: none !important;
         transform: none !important;
-        stroke-dashoffset: 0 !important;
     }
 
     /* Scale, lift, wipe, and overshoot all go. */
@@ -1791,9 +1765,7 @@ footer {
     .form-group textarea,
     .still-plate,
     .floor-frame,
-    .waybill,
-    .route-draw .stroke-2,
-    .floor-svg .stroke-2 { border-color: #fff; stroke: #fff; }
+    .waybill { border-color: #fff; }
     .contact-stack { background: #fff; }
     .cap-photo .cap-plate { background: #000000; }
     :focus-visible { outline-width: 4px; }
