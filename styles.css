@@ -1,4 +1,6 @@
-/* THE CORNER - capability-tile recut. Black, white type, one accent. Space Grotesk 400/500/700. JetBrains Mono for meta. */
+/* THE CORNER - stroke hierarchy recut. Black, white type, one accent. Space Grotesk 400/500/700. JetBrains Mono for meta.
+   Three tiers: primary carries crate/floor/route. Secondary holds structure. Tertiary is atmosphere and recedes.
+   Cube mark geometry is locked. Stroke weight on the mark may change. Vertices, viewBox, and path data do not. */
 
 :root {
     --black: #000000;
@@ -12,10 +14,17 @@
     --muted: #b4b4b4;
     --dim: #d6d6d6;
     --near: #ebebeb;
-    --rule: rgba(255, 255, 255, 0.14);
-    --hair: rgba(255, 255, 255, 0.1);
-    --hairline: rgba(255, 255, 255, 0.07);
-    --hair-lift: rgba(255, 255, 255, 0.26);
+
+    /* Secondary structure. Was competing with the cube at 0.14 plus a loud grid. */
+    --rule: rgba(255, 255, 255, 0.16);
+    /* Tertiary atmosphere. Hairlines recede so the orange story can read. */
+    --hair: rgba(255, 255, 255, 0.05);
+    --hairline: rgba(255, 255, 255, 0.04);
+    --hair-lift: rgba(255, 255, 255, 0.22);
+
+    --stroke-1: 2px;
+    --stroke-2: 1px;
+    --stroke-3: 1px;
 
     --face: "Space Grotesk", sans-serif;
     --mono: "JetBrains Mono", monospace;
@@ -45,7 +54,8 @@
     --measure: 1240px;
     --gutter: clamp(20px, 6vw, 88px);
     --band-y: clamp(88px, 13vw, 176px);
-    --grid: 48px;
+    /* Dock-floor pitch. 48px graph paper fought the cube. */ 
+    --grid: 72px;
 
     /* Editorial scale. Display drops fast on narrow glass, body never moves. */
     --t-display: clamp(50px, 11.2vw, 132px);
@@ -95,22 +105,23 @@ button, input { font: inherit; }
 .ground-grid,
 .canvas-grain { pointer-events: none; }
 
+/* Tertiary. Job: dock floor. Must recede so the cube and route can read. */
 .ground-grid {
     position: fixed;
     inset: 0;
     z-index: 0;
     background-image:
-        linear-gradient(to right, rgba(255, 255, 255, 0.055) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+        linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
     background-size: var(--grid) var(--grid);
-    opacity: 1;
+    opacity: 0.42;
 }
 
 .canvas-grain {
     position: fixed;
     inset: 0;
     z-index: 1;
-    opacity: 0.1;
+    opacity: 0.035;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 180px 180px;
@@ -248,13 +259,15 @@ nav {
     margin-bottom: clamp(20px, 2.6vw, 34px);
 }
 
-.eyebrow::before,
-.eyebrow::after {
+/* Secondary. Job: dock tick. One rule. A trailing rule had no job. */
+.eyebrow::before {
     content: "";
-    width: 32px;
-    height: 1px;
-    background: rgba(255, 255, 255, 0.55);
+    width: 18px;
+    height: var(--stroke-2);
+    background: var(--rule);
 }
+
+.eyebrow::after { display: none; }
 
 h1, h2, h3 {
     font-family: var(--face);
@@ -346,14 +359,15 @@ h1, h2, h3 {
     position: relative;
 }
 
+/* Secondary. Job: hold. Section start. */
 .band::before {
     content: "";
     position: absolute;
     left: var(--gutter);
     right: var(--gutter);
     top: 0;
-    height: 1px;
-    background: var(--hair);
+    height: var(--stroke-2);
+    background: var(--rule);
 }
 
 .band-inner {
@@ -485,7 +499,9 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     transition: opacity var(--hover);
 }
 
-.hero-cube .iso-stroke { stroke-width: 0.85; }
+/* Weight only. Geometry, yaw, viewBox, and path data stay locked. */
+.logo .iso-stroke { stroke-width: 1.4; }
+.hero-cube .iso-stroke { stroke-width: 1.35; }
 
 .hero-cube-wrap:hover .hero-cube,
 .hero-cube-wrap:focus-within .hero-cube { opacity: 1; }
@@ -577,29 +593,93 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     margin: 0 0 var(--space-20);
 }
 
+/* Primary story drawings. Plan view. Not the cube. Not a cartoon. */
+.floor-draws {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(20px, 4vw, 48px);
+    margin: 0 0 clamp(32px, 5vw, 56px);
+}
+
+.floor-draw {
+    margin: 0;
+    min-width: 0;
+}
+
+.floor-svg,
+.route-draw,
+.code-draw {
+    display: block;
+    overflow: visible;
+}
+
+.floor-svg {
+    width: 100%;
+    height: auto;
+    max-width: 360px;
+}
+
+.floor-draw figcaption {
+    font-family: var(--mono);
+    font-size: var(--t-meta);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 10px;
+}
+
+.stroke-1 {
+    stroke: #FF6A00;
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+}
+
+.stroke-2 {
+    stroke: rgba(255, 255, 255, 0.38);
+    stroke-width: 1;
+    fill: none;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+}
+
+.stroke-3 {
+    stroke: rgba(255, 255, 255, 0.12);
+    stroke-width: 1;
+    fill: none;
+    stroke-linecap: square;
+    stroke-linejoin: miter;
+}
+
+/* Secondary. Job: hold. The floor plate, not a decorative box. */
 .floor-frame {
     position: relative;
-    border: 1px solid var(--hairline);
+    border: var(--stroke-2) solid var(--rule);
     border-radius: var(--r);
     padding: clamp(12px, 1.4vw, 22px);
     margin: 0;
 }
 
+/* Secondary. Job: hold. L-corners register the plate. Filled squares had no job. */
 .crop-mark {
     position: absolute;
-    width: 7px;
-    height: 7px;
-    background: #FF6A00;
+    width: 12px;
+    height: 12px;
+    background: none;
+    border-color: rgba(255, 106, 0, 0.55);
+    border-style: solid;
     z-index: 3;
 }
 
-.crop-tl { top: -4px; left: -4px; }
-.crop-tr { top: -4px; right: -4px; }
-.crop-bl { bottom: -4px; left: -4px; }
-.crop-br { bottom: -4px; right: -4px; }
+.crop-tl { top: -1px; left: -1px; border-width: 1px 0 0 1px; }
+.crop-tr { top: -1px; right: -1px; border-width: 1px 1px 0 0; }
+.crop-bl { bottom: -1px; left: -1px; border-width: 0 0 1px 1px; }
+.crop-br { bottom: -1px; right: -1px; border-width: 0 1px 1px 0; }
 
 .crop-mark,
-.crop-coord { opacity: 0.85; }
+.crop-coord { opacity: 0.7; }
 
 .crop-coord {
     position: absolute;
@@ -607,7 +687,7 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     font-size: 10px;
     font-weight: 400;
     letter-spacing: 0.02em;
-    color: #FF6A00;
+    color: var(--muted);
     z-index: 3;
     white-space: nowrap;
 }
@@ -644,7 +724,7 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     overflow: hidden;
     isolation: isolate;
     background: var(--panel);
-    border: 1px solid var(--hairline);
+    border: var(--stroke-3) solid var(--hairline);
     border-radius: var(--r);
     transform: scale(1);
     transition:
@@ -775,12 +855,14 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     gap: 12px;
 }
 
-/* Caption plate energy: catalog code, then a hairline running out to the edge. */
-.cap-code::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--hair);
+/* Trailing hairline had no job. SF-01 / SF-04 now carry a named drawing. */
+.cap-code::after { display: none; }
+
+.code-draw {
+    width: 36px;
+    height: 16px;
+    flex: 0 0 36px;
+    display: block;
 }
 
 .cap-title {
@@ -846,10 +928,11 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     height: 100%;
 }
 
+/* Primary. Job: hold. One accent rule on the statement plate. */
 .note-rule {
     display: block;
     width: 34px;
-    height: 2px;
+    height: var(--stroke-1);
     background: var(--accent);
     margin-bottom: var(--space-20);
 }
@@ -956,7 +1039,7 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     max-width: 100%;
     margin: 0;
     overflow: hidden;
-    border: 1px solid var(--hairline);
+    border: var(--stroke-3) solid var(--hairline);
     border-radius: var(--r);
     transform: scale(1);
     transition: border-color var(--hover), box-shadow var(--hover), transform var(--settle);
@@ -1044,7 +1127,7 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     text-transform: uppercase;
     color: var(--near);
     background: rgba(255, 255, 255, 0.035);
-    border: 1px solid var(--hair);
+    border: var(--stroke-3) solid var(--hair);
     border-radius: var(--r);
     padding: 9px 13px;
     min-height: 34px;
@@ -1061,25 +1144,36 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     margin: 0 0 var(--space-32);
 }
 
+/* The path is the drawing. Four equal boxes hid that we sit only in the warehouse. */
+.route-plate { margin: 0 0 var(--space-20); }
+
+.route-draw {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 0 8px;
+}
+
 .waybill {
     list-style: none;
-    display: flex;
-    background: var(--panel);
-    border: 1px solid var(--rule);
-    border-radius: var(--r);
-    overflow: hidden;
-    margin: 0 0 var(--space-20);
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    background: none;
+    border: 0;
+    border-radius: 0;
+    overflow: visible;
+    margin: 0;
 }
 
 .waybill-step {
-    flex: 1;
-    padding: clamp(20px, 2.4vw, 30px);
+    flex: none;
+    padding: 12px 8px 0;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
 }
 
-.waybill-step + .waybill-step { border-left: 1px solid var(--rule); }
+.waybill-step + .waybill-step { border-left: 0; }
 
 .waybill-num,
 .waybill-name {
@@ -1093,11 +1187,14 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
 .waybill-name { font-size: 14px; }
 
 .waybill-ours {
-    box-shadow: inset 0 -2px 0 var(--accent);
-    background: rgba(255, 106, 0, 0.05);
+    box-shadow: none;
+    background: none;
 }
 .waybill-ours .waybill-num,
 .waybill-ours .waybill-name { color: var(--text); }
+
+.waybill-step:not(.waybill-ours) .waybill-num,
+.waybill-step:not(.waybill-ours) .waybill-name { color: var(--muted); }
 
 .waybill-note {
     font-family: var(--mono);
@@ -1187,7 +1284,7 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
 .form-group input,
 .form-group textarea {
     background: rgba(255, 255, 255, 0.02);
-    border: 1px solid var(--rule);
+    border: var(--stroke-2) solid var(--rule);
     color: var(--white);
     font-weight: 400;
     font-family: inherit;
@@ -1242,7 +1339,7 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     margin-top: var(--space-24);
     padding: var(--space-24);
     background: var(--panel);
-    border: 1px solid var(--rule);
+    border: var(--stroke-2) solid var(--rule);
     border-radius: var(--r);
     opacity: 0;
     transform: translateY(16px);
@@ -1303,7 +1400,7 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1px;
     background: var(--rule);
-    border: 1px solid var(--rule);
+    border: var(--stroke-2) solid var(--rule);
     border-radius: var(--r);
     overflow: hidden;
     margin-bottom: clamp(40px, 6vw, 72px);
@@ -1353,7 +1450,7 @@ button[type="submit"]:hover .cta-arrow { transform: translateX(4px); }
 /* ---------------------------------------------------------------- footer */
 
 footer {
-    border-top: 1px solid var(--hair);
+    border-top: var(--stroke-2) solid var(--rule);
     padding: clamp(56px, 8vw, 96px) var(--gutter) 40px;
 }
 
@@ -1441,7 +1538,7 @@ footer {
 .footer-inner + .footer-credit {
     margin-top: clamp(40px, 6vw, 72px);
     padding-top: 24px;
-    border-top: 1px solid var(--hair);
+    border-top: var(--stroke-2) solid var(--rule);
 }
 
 /* ---------------------------------------------------------------- reveal */
@@ -1500,10 +1597,8 @@ footer {
     .contact-stack,
     .footer-inner { grid-template-columns: 1fr; }
     .page-split { grid-template-columns: 1fr; }
-    .waybill { flex-wrap: wrap; }
-    .waybill-step { flex: 1 1 44%; }
-    .waybill-step + .waybill-step { border-left: 0; border-top: 1px solid var(--rule); }
-    .waybill-step:nth-child(2) { border-top: 0; border-left: 1px solid var(--rule); }
+    .waybill-step { flex: none; }
+    .waybill-step + .waybill-step { border-left: 0; border-top: 0; }
 
     .why-row,
     .why-row-flip {
@@ -1571,12 +1666,33 @@ footer {
     .crop-coord-tl { top: -20px; left: 10px; }
     .crop-coord-br { bottom: -20px; right: 10px; }
 
-    .waybill { flex-direction: column; }
-    .waybill-step:nth-child(2) { border-left: 0; border-top: 1px solid var(--rule); }
+    .floor-draws { grid-template-columns: 1fr; }
+    .waybill { grid-template-columns: 1fr; position: relative; padding-left: 28px; }
+    .waybill::before {
+        content: "";
+        position: absolute;
+        left: 6px;
+        top: 8px;
+        bottom: 8px;
+        width: var(--stroke-2);
+        background: var(--rule);
+    }
+    .waybill-ours { position: relative; }
+    .waybill-ours::before {
+        content: "";
+        position: absolute;
+        left: -28px;
+        top: 14px;
+        width: 14px;
+        height: 22px;
+        border: var(--stroke-1) solid var(--accent);
+        background: none;
+    }
+    .route-draw { display: none; }
+    .waybill-step:nth-child(2) { border-left: 0; border-top: 0; }
 
     .nav-links a:not(.cta) { font-size: 12px; padding: 0 8px; }
 
-    /* One rule leads the eyebrow. A trailing rule strands itself once the label wraps. */
     .eyebrow::after { display: none; }
 }
 
@@ -1675,7 +1791,9 @@ footer {
     .form-group textarea,
     .still-plate,
     .floor-frame,
-    .waybill { border-color: #fff; }
+    .waybill,
+    .route-draw .stroke-2,
+    .floor-svg .stroke-2 { border-color: #fff; stroke: #fff; }
     .contact-stack { background: #fff; }
     .cap-photo .cap-plate { background: #000000; }
     :focus-visible { outline-width: 4px; }
@@ -1693,7 +1811,7 @@ footer {
     inset: 0;
     pointer-events: none;
     z-index: 2;
-    opacity: 0.28;
+    opacity: 0.1;
     mix-blend-mode: overlay;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
     background-size: 180px 180px;
