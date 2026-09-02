@@ -19,7 +19,7 @@ Live site: [https://davidtphung.github.io/shipfront-the-corner/](https://davidtp
 
 Three-page marketing site:
 1. **Home** (`/`) - Hero, service cards, value chain, logo studies
-2. **Get a Quote** (`/quote/`) - Contact form (preview only)
+2. **Get a Quote** (`/quote/`) - Quote form. Posts to Formsubmit.co for info@myshipfront.com.
 3. **Contact** (`/contact/`) - Location, hours, email
 
 ## CTA Design

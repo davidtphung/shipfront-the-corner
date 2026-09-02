@@ -118,14 +118,10 @@ function bindForm() {
     if (!form) return;
 
     form.addEventListener("submit", function (e) {
-        e.preventDefault();
         const box = document.getElementById("form-message");
         const name = document.getElementById("name");
         const email = document.getElementById("email");
         const phone = document.getElementById("phone");
-        const company = document.getElementById("company");
-        const website = document.getElementById("website");
-        const message = document.getElementById("message");
         const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim());
         const phoneOk = phone.value.replace(/\D/g, "").length >= 7;
 
@@ -137,10 +133,10 @@ function bindForm() {
             return field.getAttribute("aria-invalid") === "true";
         });
 
-        // A panel that is already up swaps its copy in place. It does not blink out.
-        const open = box.classList.contains("is-open") ? " show is-open" : "";
-
         if (firstBad) {
+            e.preventDefault();
+            // A panel that is already up swaps its copy in place. It does not blink out.
+            const open = box.classList.contains("is-open") ? " show is-open" : "";
             box.className = "form-message error" + open;
             box.removeAttribute("role");
             box.innerHTML = "<strong>Check the fields above.</strong> Name, email, and phone are required.";
@@ -149,25 +145,7 @@ function bindForm() {
             return;
         }
 
-        const lines = [
-            "Name: " + escapeHtml(name.value.trim()),
-            "Email: " + escapeHtml(email.value.trim()),
-            "Phone: " + escapeHtml(phone.value.trim())
-        ];
-        if (company.value.trim()) lines.push("Company Name: " + escapeHtml(company.value.trim()));
-        if (website.value.trim()) lines.push("Website: " + escapeHtml(website.value.trim()));
-        if (message.value.trim()) lines.push("Message: " + escapeHtml(message.value.trim()));
-
-        box.className = "form-message success" + open;
-        box.setAttribute("role", "status");
-        box.innerHTML =
-            "<strong>This preview does not send.</strong><br><br>" +
-            "Your request would go to <a href=\"mailto:info@myshipfront.com\">info@myshipfront.com</a> with " +
-            lines.join(", ") + ".";
-        openSheet(box);
-        form.reset();
-        [name, email, phone].forEach(function (field) { setFieldError(field, ""); });
-        box.focus();
+        // Valid. Let the browser POST to Formsubmit. Do not fake a success sheet.
     });
 }
 
@@ -233,12 +211,6 @@ function setFieldError(input, message) {
         input.removeAttribute("aria-invalid");
         err.textContent = "";
     }
-}
-
-function escapeHtml(text) {
-    return text.replace(/[&<>"']/g, function (m) {
-        return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#039;" })[m];
-    });
 }
 
 document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
